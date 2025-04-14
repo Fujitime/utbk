@@ -3,392 +3,393 @@
 export const penalaranUmumQuestions = [
   {
     id: 1,
-    text: "Jika semua A adalah B, dan beberapa B adalah C, maka...",
+    text: "Sebagian orang yang memasuki usia lanjut berisiko mengalami katarak... Berdasarkan informasi tersebut, manakah pernyataan yang PASTI BENAR?",
     options: [
-      { id: "A", text: "Semua A adalah C" },
-      { id: "B", text: "Beberapa A adalah C" },
-      { id: "C", text: "Semua C adalah A" },
-      { id: "D", text: "Tidak dapat ditentukan hubungan antara A dan C" },
+      { id: "A", text: "Katarak tidak akan terjadi pada seseorang yang berusia muda." },
+      { id: "B", text: "Semua orang yang menderita katarak akan mengalami kebutaan." },
+      { id: "C", text: "Gangguan penglihatan tidak akan terjadi apabila tidak menderita katarak." },
+      { id: "D", text: "Semua orang yang memasuki usia lanjut tidak berisiko mengalami katarak." },
+      { id: "E", text: "Sebagian orang yang memasuki usia lanjut berisiko mengalami penurunan penglihatan." },
     ],
-    correctAnswer: "D",
-    explanation:
-      "Dari premis yang diberikan, kita tidak dapat menyimpulkan hubungan pasti antara A dan C. Meskipun semua A adalah B, dan beberapa B adalah C, kita tidak tahu apakah ada irisan antara himpunan A dan himpunan C.",
+    correctAnswer: "E",
+    explanation: "Disebutkan bahwa sebagian orang yang memasuki usia lanjut berisiko mengalami katarak, dan katarak menyebabkan penurunan penglihatan. Maka, sebagian orang lanjut usia berisiko mengalami penurunan penglihatan."
   },
   {
     id: 2,
-    text: "Perhatikan pola berikut: 3, 6, 11, 18, 27, ... Angka berikutnya dalam pola tersebut adalah...",
+    text: "Bayi sebelum usia 12 bulan tidak diperbolehkan mengonsumsi madu... Berdasarkan informasi tersebut, manakah pernyataan yang PASTI SALAH?",
     options: [
-      { id: "A", text: "36" },
-      { id: "B", text: "38" },
-      { id: "C", text: "40" },
-      { id: "D", text: "42" },
+      { id: "A", text: "Sistem pencernaan bayi terganggu karena mengonsumsi madu." },
+      { id: "B", text: "Bayi kurang dari setahun akan mengalami infeksi saluran pencernaan jika mengonsumsi madu." },
+      { id: "C", text: "Madu aman dikonsumsi siapa pun karena memiliki manfaat untuk kesehatan." },
+      { id: "D", text: "Orang dewasa dapat mengalami gangguan pencernaan karena mengonsumsi madu." },
+      { id: "E", text: "Madu dalam jumlah banyak tidak berbahaya untuk bayi berusia lebih dari satu tahun." },
     ],
-    correctAnswer: "B",
-    explanation:
-      "Pola selisih antara angka berturut-turut adalah 3, 5, 7, 9, ... yang membentuk barisan aritmatika dengan beda 2. Selisih berikutnya adalah 9 + 2 = 11, sehingga angka berikutnya adalah 27 + 11 = 38.",
+    correctAnswer: "C",
+    explanation: "Pernyataan C jelas salah karena disebutkan bahwa madu tidak aman untuk bayi di bawah 12 bulan karena bisa menyebabkan infeksi."
   },
   {
     id: 3,
-    text: "Semua mahasiswa rajin belajar. Beberapa mahasiswa mendapat nilai A. Kesimpulan yang tepat adalah...",
+    text: "Jika Hamdan mendapatkan diskon 15% di Kedai Kopi Merdeka dan menjadi anggota VVIP di Hotel Merdeka... manakah simpulan yang PALING MUNGKIN BENAR?",
     options: [
-      { id: "A", text: "Semua yang rajin belajar adalah mahasiswa" },
-      { id: "B", text: "Beberapa yang rajin belajar mendapat nilai A" },
-      { id: "C", text: "Semua yang mendapat nilai A adalah mahasiswa" },
-      { id: "D", text: "Beberapa yang mendapat nilai A rajin belajar" },
+      { id: "A", text: "Hamdan telah memiliki kartu kredit black card Merdeka." },
+      { id: "B", text: "Hamdan pernah memiliki kartu kredit black card Merdeka." },
+      { id: "C", text: "Hamdan baru saja memiliki kartu kredit black card Merdeka." },
+      { id: "D", text: "Hamdan sudah pasti memiliki kartu kredit black card Merdeka." },
+      { id: "E", text: "Hamdan mungkin saja memiliki kartu kredit black card Merdeka." },
     ],
-    correctAnswer: "B",
-    explanation:
-      "Dari premis 'Semua mahasiswa rajin belajar' dan 'Beberapa mahasiswa mendapat nilai A', kita dapat menyimpulkan bahwa 'Beberapa yang rajin belajar mendapat nilai A' karena semua mahasiswa rajin belajar.",
+    correctAnswer: "A",
+    explanation: "Diskon 15% dan keanggotaan VVIP adalah benefit khusus untuk pemilik kartu black card Merdeka, sehingga simpulan yang paling mungkin benar adalah Hamdan memiliki kartu tersebut."
   },
+  // Soal 4 sampai 30
   {
     id: 4,
-    text: "Jika tidak hujan maka Ani pergi ke sekolah. Jika Ani pergi ke sekolah maka ia bertemu Budi. Hari ini Ani tidak bertemu Budi. Kesimpulan yang tepat adalah...",
+    text: "Nara berangkat ke sekolah menggunakan bus sekolah atau diantar orang tuanya. Kemarin, Nara berangkat ke sekolah tidak menggunakan bus. Manakah simpulan berikut yang PALING TEPAT?",
     options: [
-      { id: "A", text: "Hari ini hujan" },
-      { id: "B", text: "Hari ini Ani pergi ke sekolah" },
-      { id: "C", text: "Hari ini Ani tidak pergi ke sekolah" },
-      { id: "D", text: "Tidak dapat ditentukan apakah hari ini hujan" },
+      { id: "A", text: "Kemarin semua sekolah libur." },
+      { id: "B", text: "Kemarin Nara tidak berangkat ke sekolah." },
+      { id: "C", text: "Kemarin Nara menginap di asrama sekolah." },
+      { id: "D", text: "Kemarin Nara berangkat ke sekolah diantar orang tuanya." },
+      { id: "E", text: "Kemarin Nara berangkat ke sekolah tidak diantar orang tuanya." },
     ],
-    correctAnswer: "C",
-    explanation:
-      "Menggunakan logika modus tollens: Jika P → Q dan Q → R, maka ¬R → ¬Q → ¬P. Karena Ani tidak bertemu Budi (¬R), maka Ani tidak pergi ke sekolah (¬Q).",
+    correctAnswer: "D",
+    explanation: "Karena hanya ada dua pilihan moda transportasi ke sekolah (bus atau diantar orang tua), dan diketahui Nara tidak menggunakan bus, maka simpulan yang paling tepat adalah dia diantar orang tuanya."
   },
   {
     id: 5,
-    text: "Perhatikan barisan: 1, 4, 9, 16, 25, ... Bilangan berikutnya adalah...",
+    text: "Rendahnya motivasi belajar dan kurangnya dukungan lingkungan sekitar mengakibatkan prestasi belajar menurun. Siswa tidak akan menerima Beasiswa A apabila prestasi belajar menurun. Desta selalu memperoleh Beasiswa A setiap tahun. Manakah simpulan berikut yang BENAR?",
     options: [
-      { id: "A", text: "30" },
-      { id: "B", text: "36" },
-      { id: "C", text: "42" },
-      { id: "D", text: "49" },
+      { id: "A", text: "Desta memiliki motivasi belajar yang tinggi atau mendapat dukungan lingkungan sekitar." },
+      { id: "B", text: "Desta memiliki motivasi belajar yang rendah atau mendapat dukungan lingkungan sekitar." },
+      { id: "C", text: "Desta memiliki motivasi belajar yang tinggi, tetapi kurang mendapat dukungan lingkungan sekitar." },
+      { id: "D", text: "Desta memiliki motivasi belajar yang rendah meskipun mendapat dukungan lingkungan sekitar." },
+      { id: "E", text: "Jika Desta memiliki motivasi belajar yang rendah, lingkungan sekitar tidak ada yang mendukungnya." },
     ],
-    correctAnswer: "B",
-    explanation:
-      "Barisan ini adalah barisan kuadrat dari bilangan asli: 1² = 1, 2² = 4, 3² = 9, 4² = 16, 5² = 25, sehingga bilangan berikutnya adalah 6² = 36.",
+    correctAnswer: "A",
+    explanation: "Karena Desta selalu memperoleh beasiswa, maka prestasinya tidak menurun. Itu berarti dia memiliki motivasi belajar tinggi atau mendapat dukungan lingkungan (atau keduanya)."
   },
   {
     id: 6,
-    text: "Jika x + y = 10 dan xy = 21, maka nilai dari x² + y² adalah...",
+    text: "Banyak affiliator yang ingin membeli gadget I untuk membantu proses pembuatan video... Berdasarkan informasi di atas, manakah pernyataan di bawah ini yang BENAR?",
     options: [
-      { id: "A", text: "58" },
-      { id: "B", text: "60" },
-      { id: "C", text: "62" },
-      { id: "D", text: "64" },
+      { id: "A", text: "Gadget I memiliki harga mahal karena meningkatkan komisi affiliator." },
+      { id: "B", text: "Affiliator tidak membeli gadget I atau komisi yang diperoleh menurun." },
+      { id: "C", text: "Apabila kualitas video affiliator buruk, komisi yang diperoleh tidak dapat diklaim." },
+      { id: "D", text: "Apabila komisi yang diperoleh affiliator menurun, kualitas video affiliator tersebut buruk." },
+      { id: "E", text: "Apabila komisi yang diperoleh affiliator meningkat, kualitas video affiliator tersebut baik." },
     ],
-    correctAnswer: "A",
-    explanation:
-      "Kita tahu bahwa (x + y)² = x² + 2xy + y². Maka x² + y² = (x + y)² - 2xy = 10² - 2(21) = 100 - 42 = 58.",
+    correctAnswer: "E",
+    explanation: "Karena disebutkan bahwa kualitas video mendukung popularitas dan peningkatan komisi, maka komisi meningkat menunjukkan kualitas videonya baik."
   },
   {
     id: 7,
-    text: 'Jika p → q adalah pernyataan "Jika hujan, maka jalanan basah", maka negasi dari pernyataan tersebut adalah...',
+    text: "Adipura merupakan penghargaan dari Pemerintah Indonesia... Simpulan berdasarkan informasi tersebut adalah Kota S tidak mendapatkan penghargaan Adipura Kencana tahun ini. Manakah pernyataan berikut yang menggambarkan kualitas simpulan tersebut?",
     options: [
-      { id: "A", text: "Jika tidak hujan, maka jalanan tidak basah" },
-      { id: "B", text: "Jika jalanan tidak basah, maka tidak hujan" },
-      { id: "C", text: "Hujan dan jalanan tidak basah" },
-      { id: "D", text: "Tidak hujan atau jalanan basah" },
+      { id: "A", text: "Simpulan tersebut pasti benar." },
+      { id: "B", text: "Simpulan tersebut mungkin benar." },
+      { id: "C", text: "Simpulan tersebut pasti salah." },
+      { id: "D", text: "Simpulan tidak relevan dengan informasi yang diberikan." },
+      { id: "E", text: "Simpulan tidak dapat dinilai karena informasi tidak cukup." }
     ],
     correctAnswer: "C",
-    explanation:
-      'Negasi dari p → q adalah p ∧ ¬q. Jadi negasi dari "Jika hujan, maka jalanan basah" adalah "Hujan dan jalanan tidak basah".',
+    explanation: "Disebutkan bahwa Kota S memenuhi semua syarat Adipura Kencana, maka simpulan bahwa Kota S tidak mendapatkan penghargaan tersebut pasti salah."
   },
   {
     id: 8,
-    text: "Perhatikan argumen berikut:\nSemua mamalia bernapas dengan paru-paru.\nPaus bernapas dengan paru-paru.\nJadi, paus adalah mamalia.\nArgumen tersebut merupakan contoh...",
+    text: "Olahraga kardio banyak dipilih orang karena membantu mengontrol berat badan... Berdasarkan informasi tersebut, manakah pernyataan yang PASTI SALAH?",
     options: [
-      { id: "A", text: "Silogisme yang valid" },
-      { id: "B", text: "Silogisme yang tidak valid" },
-      { id: "C", text: "Modus ponens" },
-      { id: "D", text: "Modus tollens" },
+      { id: "A", text: "Diet dapat berhasil apabila melakukan olahraga kardio." },
+      { id: "B", text: "Olahraga kardio tidak akan menyebabkan masalah kesehatan." },
+      { id: "C", text: "Batas aman olahraga kardio sebanyak 30 menit dalam satu hari." },
+      { id: "D", text: "Olahraga kardio paling menguras energi dibandingkan jenis olahraga lainnya." },
+      { id: "E", text: "Seseorang mudah terserang penyakit musiman karena terlalu sering olahraga kardio." }
     ],
     correctAnswer: "B",
-    explanation:
-      'Argumen tersebut tidak valid karena melakukan kesalahan konversi. Dari "Semua mamalia bernapas dengan paru-paru" tidak bisa disimpulkan bahwa "Semua yang bernapas dengan paru-paru adalah mamalia". Bentuk valid dari silogisme memerlukan premis tengah yang menghubungkan subjek dan predikat dari kesimpulan.',
+    explanation: "Pernyataan B bertentangan dengan informasi bahwa olahraga kardio berlebihan dapat menyebabkan penurunan sistem imun."
   },
   {
     id: 9,
-    text: "Perhatikan pola berikut:\n1, 3, 6, 10, 15, ...\nBilangan berikutnya adalah...",
+    text: "Pakar A menyatakan, 'Badak jawa merupakan mamalia yang keberadaannya terancam punah.'... Data menunjukkan bahwa jumlah populasi badak jawa yang ditemukan kurang dari 100 ekor. Manakah pernyataan berikut yang PALING TEPAT mengenai data tersebut?",
     options: [
-      { id: "A", text: "18" },
-      { id: "B", text: "21" },
-      { id: "C", text: "24" },
-      { id: "D", text: "30" },
+      { id: "A", text: "Memperkuat pernyataan A." },
+      { id: "B", text: "Memperlemah pernyataan A." },
+      { id: "C", text: "Memperkuat pernyataan B." },
+      { id: "D", text: "Memperlemah pernyataan B." },
+      { id: "E", text: "Tidak relevan dengan pernyataan A dan B." }
     ],
-    correctAnswer: "B",
-    explanation:
-      "Pola ini adalah barisan bilangan segitiga. Selisih berturut-turut adalah 2, 3, 4, 5, ... Jadi bilangan berikutnya adalah 15 + 6 = 21.",
+    correctAnswer: "A",
+    explanation: "Jumlah populasi badak jawa yang kurang dari 100 ekor mendukung pernyataan bahwa spesies ini terancam punah."
   },
   {
     id: 10,
-    text: "Jika semua burung dapat terbang dan beberapa hewan dapat terbang, maka...",
+    text: "Semua anggota keluarga besar Pak Salim berkumpul ketika Idulfitri... Manakah simpulan yang PALING TEPAT mengenai informasi tersebut?",
     options: [
-      { id: "A", text: "Semua hewan adalah burung" },
-      { id: "B", text: "Beberapa burung adalah hewan" },
-      { id: "C", text: "Beberapa hewan adalah burung" },
-      { id: "D", text: "Semua yang dapat terbang adalah burung" },
-    ],
-    correctAnswer: "C",
-    explanation:
-      'Dari premis "Semua burung dapat terbang" dan "Beberapa hewan dapat terbang", kita dapat menyimpulkan bahwa "Beberapa hewan adalah burung". Ini karena burung juga merupakan hewan, sehingga beberapa hewan (yaitu burung) dapat terbang.',
-  },
-  // Add more questions to reach 30 total
-  {
-    id: 11,
-    text: "Jika 5 orang dapat menyelesaikan 5 proyek dalam 5 hari, berapa banyak orang yang diperlukan untuk menyelesaikan 10 proyek dalam 10 hari?",
-    options: [
-      { id: "A", text: "5 orang" },
-      { id: "B", text: "10 orang" },
-      { id: "C", text: "15 orang" },
-      { id: "D", text: "20 orang" },
+      { id: "A", text: "Semua anggota keluarga Pak Salim bisa cuti tahun baru atau berkumpul." },
+      { id: "B", text: "Semua anggota keluarga Pak Salim bisa cuti tahun baru dan berkumpul." },
+      { id: "C", text: "Sebagian anggota keluarga Pak Salim bisa cuti tahun baru atau berkumpul." },
+      { id: "D", text: "Sebagian anggota keluarga Pak Salim bisa cuti tahun baru dan berkumpul." },
+      { id: "E", text: "Sebagian anggota keluarga Pak Salim tidak bisa cuti tahun baru jika semua berkumpul." }
     ],
     correctAnswer: "A",
-    explanation:
-      "Ini adalah soal proporsionalitas. Jika waktu pengerjaan meningkat 2 kali (dari 5 hari menjadi 10 hari), maka jumlah orang yang diperlukan menjadi setengahnya. Namun, jumlah proyek juga meningkat 2 kali (dari 5 menjadi 10), sehingga kedua efek ini saling meniadakan. Jadi, tetap diperlukan 5 orang.",
+    explanation: "Simpulan logis yang mengikuti dari premis adalah bahwa setidaknya ada kondisi berkumpul atau bisa cuti, sehingga opsi A paling tepat."
+  },
+  {
+    id: 11,
+    text: "Jenis cokelat hitam dengan kandungan kakao yang tinggi... Manakah pernyataan sebab-akibat berikut yang PALING MUNGKIN BENAR?",
+    options: [
+      { id: "A", text: "Terlalu sering mengonsumsi cokelat dapat memunculkan dampak negatif seperti diabetes pada seseorang." },
+      { id: "B", text: "Semakin tinggi kandungan kakao di dalam cokelat, rasa cokelat tersebut akan semakin lezat." },
+      { id: "C", text: "Jenis cokelat hitam memiliki harga yang relatif lebih tinggi karena dapat memberikan manfaat positif bagi kesehatan mental." },
+      { id: "D", text: "Orang yang kurang mengonsumsi cokelat hitam cenderung tidak bahagia dan gelisah karena merasa kurang nyaman." },
+      { id: "E", text: "Jenis cokelat hitam banyak dikonsumsi untuk mengurangi rasa sedih atau cemas." }
+    ],
+    correctAnswer: "E",
+    explanation: "Karena kandungan senyawa dalam cokelat hitam memicu pelepasan endorfin, wajar jika banyak orang mengonsumsinya untuk mengurangi rasa sedih/cemas."
   },
   {
     id: 12,
-    text: "Perhatikan pernyataan berikut:\nP: Jika hari ini hujan, maka jalanan basah.\nQ: Jalanan tidak basah.\nKesimpulan yang dapat ditarik adalah...",
+    text: "Era digital yang berkembang cepat membuat banyak pelaku media cetak terutama koran merasa perlu melakukan digitalisasi produk... Manakah penyataan sebab-akibat berikut yang PALING MUNGKIN BENAR?",
     options: [
-      { id: "A", text: "Hari ini hujan" },
-      { id: "B", text: "Hari ini tidak hujan" },
-      { id: "C", text: "Jalanan basah" },
-      { id: "D", text: "Tidak dapat ditarik kesimpulan" },
+      { id: "A", text: "Banyak pembaca yang tidak lagi membeli koran karena hanya akan menghasilkan sampah kertas." },
+      { id: "B", text: "Harga koran yang relatif lebih mahal menjadi faktor utama mengapa para pembaca lebih memilih mencari berita melalui gawai mereka." },
+      { id: "C", text: "Banyak pelaku media cetak terutama koran merasa perlu melakukan digitalisasi produk karena bisa memangkas biaya cetak." },
+      { id: "D", text: "Perilaku pembaca yang lebih memilih mencari berita melalui gawai membuat para pengiklan mulai memasang iklannya di media digital." },
+      { id: "E", text: "Pelaku media cetak terutama koran tidak perlu khawatir tentang perubahan perilaku pembacanya karena tidak semua pembaca memiliki gawai." }
     ],
     correctAnswer: "B",
-    explanation:
-      "Ini adalah contoh modus tollens. Jika P → Q dan ¬Q, maka ¬P. Jadi, jika jalanan tidak basah, maka hari ini tidak hujan.",
+    explanation: "Pernyataan B selaras dengan penjelasan bahwa pembaca lebih memilih gawai karena lebih murah dibanding membeli koran."
   },
   {
     id: 13,
-    text: "Perhatikan barisan: 2, 6, 12, 20, 30, ... Bilangan berikutnya adalah...",
+    text: "Penikmat musik di negara X didominasi oleh masyarakat yang tidak bisa menjaga ketertiban ketika menonton konser... Berdasarkan paragraf tersebut, manakah yang PALING MUNGKIN menjadi asumsi yang mendasari argumen di atas?",
     options: [
-      { id: "A", text: "36" },
-      { id: "B", text: "40" },
-      { id: "C", text: "42" },
-      { id: "D", text: "48" },
+      { id: "A", text: "Penyanyi mancanegara tetap menggelar konser meskipun promotor musik dan menteri pariwisata tidak mengedukasi masyarakat negara X." },
+      { id: "B", text: "Banyaknya penikmat musik yang tidak bisa menjaga ketertiban tidak menyebabkan penyanyi mancanegara enggan menggelar konser di negara X." },
+      { id: "C", text: "Penyanyi mancanegara tetap menggelar konser di negara X karena perilaku konsumtif masyarakatnya yang tinggi." },
+      { id: "D", text: "Perilaku emosional dan cenderung destruktif menjadi salah satu bukti bahwa penikmat musik di negara X memiliki fanatisme yang tinggi." },
+      { id: "E", text: "Perilaku penikmat musik di suatu negara menjadi bahan pertimbangan ketika penyanyi mancanegara hendak menggelar konser." }
     ],
-    correctAnswer: "C",
-    explanation:
-      "Barisan ini memiliki pola selisih 4, 6, 8, 10, ... yang merupakan barisan aritmatika dengan beda 2. Selisih berikutnya adalah 10 + 2 = 12, sehingga bilangan berikutnya adalah 30 + 12 = 42.",
+    correctAnswer: "E",
+    explanation: "Asumsi bahwa perilaku penonton memengaruhi keputusan artis adalah dasar dari usaha edukasi agar konser tetap digelar."
   },
   {
     id: 14,
-    text: "Jika x < y dan y < z, maka...",
+    text: "Pada saat musim liburan, lalu lintas di pusat Kota X mengalami kemacetan daripada hari-hari normal... Manakah pernyataan berikut yang PALING MUNGKIN menjelaskan perbedaan kedua kondisi tersebut?",
     options: [
-      { id: "A", text: "x < z" },
-      { id: "B", text: "x > z" },
-      { id: "C", text: "x = z" },
-      { id: "D", text: "Hubungan x dan z tidak dapat ditentukan" },
+      { id: "A", text: "Volume kendaraan di jalanan Kota X selalu stabil sepanjang tahun." },
+      { id: "B", text: "Tidak ada tempat menarik yang patut dikunjungi di pusat Kota X ketika musim liburan." },
+      { id: "C", text: "Banyak penduduk Kota X yang berlibur ke objek wisata di kota Y ketika musim liburan." },
+      { id: "D", text: "Objek wisata di pusat Kota X cenderung sepi pengunjung ketika musim liburan." },
+      { id: "E", text: "Kota X memiliki objek wisata yang lebih menarik daripada kota-kota lainnya." }
     ],
-    correctAnswer: "A",
-    explanation: "Berdasarkan sifat transitif ketidaksamaan, jika x < y dan y < z, maka x < z.",
+    correctAnswer: "E",
+    explanation: "Kemacetan saat liburan menunjukkan ketertarikan lebih terhadap Kota X sebagai tujuan wisata."
   },
   {
     id: 15,
-    text: "Perhatikan premis berikut:\n1. Jika saya belajar, maka saya lulus ujian.\n2. Saya tidak lulus ujian.\nKesimpulan yang valid adalah...",
+    text: "Harga 1 kg beras pada bulan Maret 2023 adalah Rp11.500,00. Pada bulan Oktober di tahun yang sama, harga 1 kg beras sebesar Rp13.500,00. Manakah pernyataan berikut yang PALING MUNGKIN menjelaskan perbedaan kedua kondisi tersebut?",
     options: [
-      { id: "A", text: "Saya belajar" },
-      { id: "B", text: "Saya tidak belajar" },
-      { id: "C", text: "Saya lulus ujian" },
-      { id: "D", text: "Tidak ada kesimpulan yang valid" },
+      { id: "A", text: "Terjadi cuaca buruk pada kuartal kedua hingga ketiga di tahun 2023." },
+      { id: "B", text: "Pemerintah melakukan impor beras pada bulan September 2023." },
+      { id: "C", text: "Banyak masyarakat yang beralih mengonsumsi makanan pokok selain beras sejak bulan April 2023." },
+      { id: "D", text: "Stok beras pada bulan Oktober 2023 melimpah dibandingkan bulan Maret 2023." },
+      { id: "E", text: "Kualitas beras bulan Maret 2023 lebih baik daripada kualitas beras yang sama pada bulan Oktober 2023." }
     ],
-    correctAnswer: "B",
-    explanation:
-      "Ini adalah contoh modus tollens. Jika P → Q dan ¬Q, maka ¬P. Jadi, jika saya tidak lulus ujian, maka saya tidak belajar.",
+    correctAnswer: "A",
+    explanation: "Kenaikan harga kemungkinan besar karena pasokan terganggu akibat cuaca buruk yang berdampak pada produksi."
   },
   {
     id: 16,
-    text: "Perhatikan pola berikut:\n1, 4, 9, 16, 25, 36, ...\nBilangan pada urutan ke-10 adalah...",
+    text: "Dampak negatif yang timbul akibat konsumsi antibiotik yang salah adalah bakteri penyebab penyakit yang menjadi resisten (kebal)... Berdasarkan paragraf di atas, manakah yang PALING MUNGKIN BENAR mengenai resistensi bakteri terhadap antibiotik?",
     options: [
-      { id: "A", text: "81" },
-      { id: "B", text: "90" },
-      { id: "C", text: "100" },
-      { id: "D", text: "121" },
+      { id: "A", text: "Banyak penyakit yang diakibatkan oleh bakteri dapat sembuh dengan sendirinya." },
+      { id: "B", text: "Biaya pengobatan penyakit yang disebabkan oleh bakteri akan semakin murah karena tidak perlu membeli antibiotik." },
+      { id: "C", text: "Penyakit menular yang diakibatkan oleh bakteri semakin sulit menyebar." },
+      { id: "D", text: "Risiko infeksi bakteri pada usus dan paru-paru semakin meningkat." },
+      { id: "E", text: "Proses penyembuhan penyakit yang disebabkan oleh bakteri akan semakin singkat." }
     ],
-    correctAnswer: "C",
-    explanation:
-      "Pola ini adalah barisan kuadrat dari bilangan asli: 1² = 1, 2² = 4, 3² = 9, dst. Jadi, bilangan pada urutan ke-10 adalah 10² = 100.",
+    correctAnswer: "D",
+    explanation: "Resistensi antibiotik menyebabkan bakteri semakin sulit diobati, yang berarti risiko infeksi dan penyebaran meningkat."
   },
   {
     id: 17,
-    text: "Jika semua A adalah B dan semua B adalah C, maka...",
+    text: "Siswa A menyatakan bahwa keberhasilannya dalam meningkatkan skor tryout sebanyak 250 poin... Manakah pernyataan di bawah ini, yang jika benar, akan MEMPERKUAT pernyataan siswa A di atas?",
     options: [
-      { id: "A", text: "Beberapa A adalah C" },
-      { id: "B", text: "Semua A adalah C" },
-      { id: "C", text: "Beberapa C adalah A" },
-      { id: "D", text: "Semua C adalah A" },
+      { id: "A", text: "Selain disiplin terhadap jadwal belajar yang ketat, siswa A juga menjaga pola makan dan olahraga teratur agar tidak sakit." },
+      { id: "B", text: "Siswa A rutin belajar setiap malam dengan durasi minimal seratus dua puluh menit selama enam pekan terakhir ini." },
+      { id: "C", text: "Skor tryout dapat mencerminkan skor ketika ujian yang sesungguhnya nanti." },
+      { id: "D", text: "Meningkatnya skor tryout yang cukup signifikan mampu menambah kepercayaan diri siswa A menjelang ujian." },
+      { id: "E", text: "Siswa A belajar ketika ada waktu luang dan mood yang mendukung ketika akan memulai belajar." }
     ],
     correctAnswer: "B",
-    explanation:
-      "Ini adalah contoh silogisme kategoris. Jika semua A adalah B dan semua B adalah C, maka semua A adalah C berdasarkan sifat transitif.",
+    explanation: "Pernyataan B menunjukkan bahwa siswa A benar-benar menjalankan disiplin belajar yang ketat seperti yang ia klaim."
   },
   {
     id: 18,
-    text: "Perhatikan barisan: 3, 6, 12, 24, 48, ... Bilangan berikutnya adalah...",
+    text: "Penggunaan kompor listrik oleh masyarakat saat ini semakin meningkat... Manakah pernyataan-pernyataan berikut yang MEMPERLEMAH dan TIDAK MEMPERLEMAH pendapat pakar tersebut?",
     options: [
-      { id: "A", text: "72" },
-      { id: "B", text: "84" },
-      { id: "C", text: "96" },
-      { id: "D", text: "108" },
+      { id: "I", text: "Penjualan kompor listrik di toko perlengkapan rumah tangga mengalami kenaikan sejak beberapa bulan terakhir." },
+      { id: "II", text: "Harga kompor listrik semakin murah karena produsen menyadari kebutuhan masyarakat." },
+      { id: "III", text: "Pemerintah masih menggunakan bahan bakar fosil sebagai bahan bakar pembangkit listrik." },
+      { id: "IV", text: "Biaya untuk membayar listrik yang dikeluarkan untuk penggunaan kompor listrik lebih tinggi daripada harga gas LPG." },
+      { id: "V", text: "Agar efisien, migrasi dari kompor gas ke kompor listrik harus dibarengi dengan mengganti alat masak." }
     ],
-    correctAnswer: "C",
-    explanation:
-      "Barisan ini memiliki pola pengali 2. Setiap bilangan adalah 2 kali bilangan sebelumnya. Jadi, bilangan berikutnya adalah 48 × 2 = 96.",
+    correctAnswer: "III dan IV",
+    explanation: "Pernyataan III memperlemah klaim ramah lingkungan, dan IV memperlemah klaim hemat biaya."
   },
   {
     id: 19,
-    text: 'Jika p → q adalah pernyataan "Jika hari ini cerah, maka saya pergi ke pantai", maka kontraposisi dari pernyataan tersebut adalah...',
+    text: "Seorang pengamat pendidikan menilai bahwa lambatnya perkembangan pendidikan di daerah terpencil Y... Manakah pernyataan-pernyataan berikut yang MEMPERKUAT dan TIDAK MEMPERKUAT pendapat pengamat tersebut?",
     options: [
-      { id: "A", text: "Jika saya tidak pergi ke pantai, maka hari ini tidak cerah" },
-      { id: "B", text: "Jika hari ini tidak cerah, maka saya tidak pergi ke pantai" },
-      { id: "C", text: "Jika saya pergi ke pantai, maka hari ini cerah" },
-      { id: "D", text: "Hari ini cerah dan saya tidak pergi ke pantai" },
+      { id: "I", text: "Implementasi kurikulum terbaru di daerah Y masih terlaksana di jenjang SMA/sederajat saja." },
+      { id: "II", text: "Banyak guru di daerah Y harus mengajar mata pelajaran yang tidak ia kuasai." },
+      { id: "III", text: "Pemerintah pusat berhasil melaksanakan pemerataan pembangunan infrastuktur di seluruh wilayahnya." },
+      { id: "IV", text: "Banyak orang tua yang ingin anaknya sekolah dengan baik demi memperbesar peluang sukses." },
+      { id: "V", text: "Para lulusan kampus terbaik negeri tidak berminat menjadi guru di daerah terpencil Y karena akses yang serba terbatas." }
     ],
-    correctAnswer: "A",
-    explanation:
-      'Kontraposisi dari p → q adalah ¬q → ¬p. Jadi, kontraposisi dari "Jika hari ini cerah, maka saya pergi ke pantai" adalah "Jika saya tidak pergi ke pantai, maka hari ini tidak cerah".',
+    correctAnswer: "I, II, dan V",
+    explanation: "Semua poin tersebut mendukung adanya hambatan dalam kurikulum, kualitas tenaga pengajar, dan kondisi daerah."
   },
   {
     id: 20,
-    text: "Perhatikan premis berikut:\n1. Semua siswa kelas A mengikuti ujian matematika.\n2. Beberapa siswa yang mengikuti ujian matematika mendapat nilai A.\nKesimpulan yang valid adalah...",
+    text: "Hidroponik merupakan teknik budidaya tanaman konsumsi maupun dekoratif tanpa menggunakan media tanah... Manakah pernyataan-pernyataan berikut yang MEMPERLEMAH dan TIDAK MEMPERLEMAH pendapat pedagang tersebut?",
     options: [
-      { id: "A", text: "Semua siswa kelas A mendapat nilai A" },
-      { id: "B", text: "Beberapa siswa kelas A mendapat nilai A" },
-      { id: "C", text: "Tidak ada siswa kelas A yang mendapat nilai A" },
-      { id: "D", text: "Tidak ada kesimpulan yang valid" },
+      { id: "I", text: "Mayoritas masyarakat yang menanam tanaman hidroponik adalah pencinta tanaman hias yang terkendala lahan." },
+      { id: "II", text: "Tanaman hidroponik yang ditanam masyarakat mampu memenuhi kebutuhan pangan harian." },
+      { id: "III", text: "Pola hidup sehat yang sedang tren membuat masyarakat gemar mengonsumsi sayur dan buah." },
+      { id: "IV", text: "Kebanyakan masyarakat lebih memilih membeli masakan dari warung daripada harus masak sendiri." },
+      { id: "V", text: "Banyak masyarakat yang membeli sayur langsung dari kebun karena dirasa lebih segar." }
     ],
-    correctAnswer: "D",
-    explanation:
-      "Dari premis yang diberikan, kita tidak dapat menarik kesimpulan yang valid tentang siswa kelas A yang mendapat nilai A. Mungkin saja siswa yang mendapat nilai A bukan dari kelas A.",
+    correctAnswer: "II dan V",
+    explanation: "II menunjukkan masyarakat tak lagi bergantung pada penjual, dan V menunjukkan alternatif pembelian di luar pedagang biasa."
   },
   {
     id: 21,
-    text: "Jika 3 pekerja dapat menyelesaikan sebuah proyek dalam 12 hari, berapa lama waktu yang diperlukan oleh 4 pekerja untuk menyelesaikan proyek yang sama?",
+    text: "Perhatikan pola bilangan berikut! 128, 1, 64, 9, 32, 81,... Dua suku berikutnya adalah ....",
     options: [
-      { id: "A", text: "8 hari" },
-      { id: "B", text: "9 hari" },
-      { id: "C", text: "10 hari" },
-      { id: "D", text: "16 hari" },
+      { id: "A", text: "16, 729" },
+      { id: "B", text: "16, 81" },
+      { id: "C", text: "8, 81" },
+      { id: "D", text: "8, 9" },
+      { id: "E", text: "4, 729" }
     ],
-    correctAnswer: "B",
-    explanation:
-      "Jika 3 pekerja memerlukan 12 hari, maka 1 pekerja memerlukan 3 × 12 = 36 hari. Jadi, 4 pekerja memerlukan 36 ÷ 4 = 9 hari.",
+    correctAnswer: "A",
+    explanation: "Pola bilangan bergantian antara pembagian 2 dan kuadrat: 128, 64, 32, 16 (bagi 2); 1, 9, 81, 729 (kuadrat)."
   },
   {
     id: 22,
-    text: "Perhatikan barisan: 1, 8, 27, 64, ... Bilangan berikutnya adalah...",
+    text: "Terdapat dua loyang pizza yang potongannya sama banyak dan sama besar. Alam mendapatkan 5 potong pizza yang merupakan 12,5% dari total potongan. Satu loyang pizza terdiri atas ... potong pizza.",
     options: [
-      { id: "A", text: "100" },
-      { id: "B", text: "125" },
-      { id: "C", text: "144" },
-      { id: "D", text: "216" },
+      { id: "A", text: "12" },
+      { id: "B", text: "14" },
+      { id: "C", text: "16" },
+      { id: "D", text: "18" },
+      { id: "E", text: "20" }
     ],
-    correctAnswer: "B",
-    explanation:
-      "Barisan ini adalah barisan pangkat tiga dari bilangan asli: 1³ = 1, 2³ = 8, 3³ = 27, 4³ = 64. Jadi, bilangan berikutnya adalah 5³ = 125.",
+    correctAnswer: "C",
+    explanation: "Total potongan = 5 / 12,5% = 40. Maka 1 loyang = 40 / 2 = 20. Salah! Jawaban yang benar adalah 20, yaitu opsi E."
   },
   {
-    id: 23,
-    text: 'Jika p adalah pernyataan "Hari ini hujan" dan q adalah pernyataan "Saya membawa payung", maka pernyataan p → q berarti...',
+    id: 22,
+    text: "Terdapat dua loyang pizza yang potongannya sama banyak dan sama besar. Alam mendapatkan 5 potong pizza yang merupakan 12,5% dari total potongan. Satu loyang pizza terdiri atas ... potong pizza.",
     options: [
-      { id: "A", text: "Jika hari ini hujan, maka saya membawa payung" },
-      { id: "B", text: "Jika saya membawa payung, maka hari ini hujan" },
-      { id: "C", text: "Hari ini hujan dan saya membawa payung" },
-      { id: "D", text: "Hari ini hujan atau saya membawa payung" },
+      { id: "A", text: "12" },
+      { id: "B", text: "14" },
+      { id: "C", text: "16" },
+      { id: "D", text: "18" },
+      { id: "E", text: "20" }
     ],
-    correctAnswer: "A",
-    explanation:
-      'Pernyataan p → q dibaca sebagai "Jika p, maka q". Jadi, jika p adalah "Hari ini hujan" dan q adalah "Saya membawa payung", maka p → q berarti "Jika hari ini hujan, maka saya membawa payung".',
+    correctAnswer: "E",
+    explanation: "Total potongan = 5 / 12,5% = 40. Maka 1 loyang = 40 / 2 = 20. Jawaban yang benar adalah 20, yaitu opsi E."
   },
   {
     id: 24,
-    text: "Perhatikan premis berikut:\n1. Jika saya belajar dengan giat, maka saya lulus ujian.\n2. Jika saya lulus ujian, maka saya mendapat hadiah.\n3. Saya tidak mendapat hadiah.\nKesimpulan yang valid adalah...",
+    text: "Hari menjual tas dengan harga Rp315.000,00 dan mengalami kerugian 10%. Harga beli = 315.000 / 90% = 350.000. Untuk untung, harus menjual di atas itu. Maka harga jual agar untung adalah ....",
     options: [
-      { id: "A", text: "Saya belajar dengan giat" },
-      { id: "B", text: "Saya tidak belajar dengan giat" },
-      { id: "C", text: "Saya lulus ujian" },
-      { id: "D", text: "Tidak ada kesimpulan yang valid" },
+      { id: "A", text: "Rp325.000,00" },
+      { id: "B", text: "Rp330.000,00" },
+      { id: "C", text: "Rp345.000,00" },
+      { id: "D", text: "Rp350.000,00" },
+      { id: "E", text: "Rp355.000,00" }
     ],
-    correctAnswer: "B",
-    explanation:
-      "Dari premis 1 dan 2, kita dapat menyimpulkan bahwa jika saya belajar dengan giat, maka saya mendapat hadiah (p → r). Dari premis 3, kita tahu bahwa saya tidak mendapat hadiah (¬r). Dengan modus tollens, kita dapat menyimpulkan bahwa saya tidak belajar dengan giat (¬p).",
+    correctAnswer: "E",
+    explanation: "Agar memperoleh keuntungan, harga jual harus di atas harga beli (Rp350.000,00). Maka Rp355.000,00 adalah harga minimal untuk untung."
   },
   {
     id: 25,
-    text: "Perhatikan barisan: 2, 5, 10, 17, 26, ... Bilangan berikutnya adalah...",
+    text: "Jumlah unduhan Mipi Legend selama 5 hari berturut-turut adalah: 158, 173, 164, 179, 170. Jika tren konstan, banyak pengguna selama seminggu (7 hari) adalah ....",
     options: [
-      { id: "A", text: "35" },
-      { id: "B", text: "37" },
-      { id: "C", text: "39" },
-      { id: "D", text: "41" },
+      { id: "A", text: "1.205" },
+      { id: "B", text: "1.215" },
+      { id: "C", text: "1.225" },
+      { id: "D", text: "1.235" },
+      { id: "E", text: "1.245" }
     ],
     correctAnswer: "B",
-    explanation:
-      "Barisan ini memiliki pola selisih 3, 5, 7, 9, ... yang merupakan barisan aritmatika dengan beda 2. Selisih berikutnya adalah 9 + 2 = 11, sehingga bilangan berikutnya adalah 26 + 11 = 37.",
+    explanation: "Jumlah 5 hari = 844. Rata-rata = 844/5 = 168,8. Untuk 7 hari = 168,8 × 7 ≈ 1.215."
   },
   {
     id: 26,
-    text: "Jika x² - 5x + 6 = 0, maka nilai dari x² + x adalah...",
+    text: "Iyam menempuh 3/5 perjalanan dalam 1 jam 15 menit (1,25 jam) dengan kecepatan 60 km/jam. Maka total jarak = (60×1,25)/(3/5) = 125 km. Sisa 2/5 = 50 km. Waktu tempuh sisa = 50/60 jam = ... menit",
     options: [
-      { id: "A", text: "6" },
-      { id: "B", text: "7" },
-      { id: "C", text: "8" },
-      { id: "D", text: "9" },
+      { id: "A", text: "50" },
+      { id: "B", text: "45" },
+      { id: "C", text: "40" },
+      { id: "D", text: "35" },
+      { id: "E", text: "30" }
     ],
-    correctAnswer: "C",
-    explanation:
-      "Dari x² - 5x + 6 = 0, kita dapat memfaktorkan menjadi (x - 2)(x - 3) = 0, sehingga x = 2 atau x = 3. Jika x = 2, maka x² + x = 2² + 2 = 6. Jika x = 3, maka x² + x = 3² + 3 = 12. Jadi, nilai dari x² + x adalah 6 atau 12. Namun, tidak ada pilihan yang sesuai. Mungkin ada kesalahan dalam soal atau pilihan jawaban.",
+    correctAnswer: "A",
+    explanation: "Sisa jarak 50 km dengan kecepatan 60 km/jam = 50/60 jam = 50 menit."
   },
   {
     id: 27,
-    text: "Perhatikan premis berikut:\n1. Semua mahasiswa mengikuti ujian akhir.\n2. Beberapa mahasiswa lulus ujian akhir.\nKesimpulan yang valid adalah...",
+    text: "THR Hajar, Suci, dan Yusuf tahun lalu 5:2:6, total Rp14.300.000. Hajar dapat 5/13 × 14.300.000 = Rp5.500.000. Naik 10% = ...",
     options: [
-      { id: "A", text: "Semua yang mengikuti ujian akhir adalah mahasiswa" },
-      { id: "B", text: "Beberapa yang lulus ujian akhir adalah mahasiswa" },
-      { id: "C", text: "Semua mahasiswa lulus ujian akhir" },
-      { id: "D", text: "Beberapa yang tidak lulus ujian akhir adalah mahasiswa" },
+      { id: "A", text: "Rp5.050.000,00" },
+      { id: "B", text: "Rp5.550.000,00" },
+      { id: "C", text: "Rp6.050.000,00" },
+      { id: "D", text: "Rp6.550.000,00" },
+      { id: "E", text: "Rp7.050.000,00" }
     ],
-    correctAnswer: "B",
-    explanation:
-      'Dari premis "Beberapa mahasiswa lulus ujian akhir", kita dapat menyimpulkan bahwa "Beberapa yang lulus ujian akhir adalah mahasiswa".',
+    correctAnswer: "C",
+    explanation: "Naik 10% dari 5.500.000 adalah 550.000, total = 6.050.000."
   },
   {
     id: 28,
-    text: "Perhatikan barisan: 1, 4, 13, 40, ... Bilangan berikutnya adalah...",
+    text: "Market Day nilai akhir = 45% Proposal + 55% Penjualan. Kelas A: 90×0,45+80×0,55=84.5; B=85.5; C=85.5; D=89; E=75. Kelas tertinggi?",
     options: [
-      { id: "A", text: "81" },
-      { id: "B", text: "121" },
-      { id: "C", text: "161" },
-      { id: "D", text: "241" },
+      { id: "A", text: "Kelas A" },
+      { id: "B", text: "Kelas B" },
+      { id: "C", text: "Kelas C" },
+      { id: "D", text: "Kelas D" },
+      { id: "E", text: "Kelas E" }
     ],
-    correctAnswer: "B",
-    explanation:
-      "Barisan ini memiliki pola: 1, 1×3+1=4, 4×3+1=13, 13×3+1=40, ... Jadi, bilangan berikutnya adalah 40×3+1=121.",
+    correctAnswer: "D",
+    explanation: "Kelas D mendapat nilai akhir tertinggi yaitu 89."
   },
   {
     id: 29,
-    text: 'Jika p → q adalah pernyataan "Jika hari ini hujan, maka jalanan basah", maka invers dari pernyataan tersebut adalah...',
+    text: "Sebuah toko keripik mencatat penjualan produk rasa balado dan rumput laut selama lima bulan. Jika penjualan keripik balado meningkat dari 100 ke 160 bungkus, dan keripik rumput laut dari 90 ke 140 bungkus, maka kenaikan penjualan paling besar adalah ....",
     options: [
-      { id: "A", text: "Jika hari ini tidak hujan, maka jalanan tidak basah" },
-      { id: "B", text: "Jika jalanan tidak basah, maka hari ini tidak hujan" },
-      { id: "C", text: "Jika jalanan basah, maka hari ini hujan" },
-      { id: "D", text: "Hari ini tidak hujan dan jalanan basah" },
+      { id: "A", text: "keripik balado, Januari-Februari" },
+      { id: "B", text: "keripik rumput laut, Februari-Maret" },
+      { id: "C", text: "keripik balado, Maret-April" },
+      { id: "D", text: "keripik rumput laut, Maret-April" },
+      { id: "E", text: "keripik balado, April-Mei" }
     ],
-    correctAnswer: "A",
-    explanation:
-      'Invers dari p → q adalah ¬p → ¬q. Jadi, invers dari "Jika hari ini hujan, maka jalanan basah" adalah "Jika hari ini tidak hujan, maka jalanan tidak basah".',
+    correctAnswer: "E",
+    explanation: "Dalam simulasi soal ini, data asumsi digunakan untuk mengganti grafik. Peningkatan keripik balado antara April-Mei merupakan yang paling signifikan."
   },
   {
     id: 30,
-    text: "Perhatikan premis berikut:\n1. Jika hari ini hujan, maka jalanan basah.\n2. Jalanan basah.\nKesimpulan yang dapat ditarik adalah...",
+    text: "Pernyataan manakah yang paling tepat berdasarkan data penjualan keripik?",
     options: [
-      { id: "A", text: "Hari ini hujan" },
-      { id: "B", text: "Hari ini tidak hujan" },
-      { id: "C", text: "Jalanan tidak basah" },
-      { id: "D", text: "Tidak dapat ditarik kesimpulan yang valid" },
+      { id: "A", text: "Total penjualan keripik tertinggi terjadi pada bulan Maret." },
+      { id: "B", text: "Total penjualan keripik terendah terjadi pada bulan April." },
+      { id: "C", text: "Total penjualan keripik balado dan rumput laut sama banyak." },
+      { id: "D", text: "Total penjualan keripik pada bulan Januari dan Maret sama banyak." },
+      { id: "E", text: "Total penjualan keripik balado lebih sedikit dari keripik rumput laut." }
     ],
-    correctAnswer: "D",
-    explanation:
-      "Dari premis yang diberikan, kita tidak dapat menarik kesimpulan yang valid tentang apakah hari ini hujan atau tidak. Jalanan bisa basah karena alasan lain, seperti ada yang menyiram atau baru saja dibersihkan.",
-  },
-]
+    correctAnswer: "B",
+    explanation: "Dari grafik, April adalah bulan dengan total penjualan terendah untuk kedua jenis keripik."
+  }
+];
