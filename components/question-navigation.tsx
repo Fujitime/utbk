@@ -106,7 +106,18 @@ export function QuestionNavigation({
                   disabled={!allowJumpSubtests && subtest !== currentSubtest}
                 >
                   {subtest.split(" ")[0]}
-                  {subtest.includes("Pengetahuan") && !subtest.includes("Kuantitatif") ? " & Pemahaman" : ""}
+                  {
+                  subtest.includes("Penalaran Umum")
+                    ? "PU"
+                    : subtest.includes("Kemampuan Memahami Bacaan dan Menulis")
+                    ? "PBM"
+                    : subtest.includes("Pengetahuan Kuantitatif")
+                    ? "PK"
+                    : subtest.includes("Pengetahuan dan Pemahaman Umum")
+                    ? "PPU"
+                    : ""
+                }
+
                 </TabsTrigger>
               ))}
             </TabsList>
@@ -121,6 +132,7 @@ export function QuestionNavigation({
                   >
                     {subtest.split(" ")[0]}
                     {subtest === "Literasi dalam Bahasa Indonesia" ? " B.Indo" : ""}
+                    {subtest === "Penalaran Matematika" ? " Mtk" : ""}
                     {subtest === "Literasi dalam Bahasa Inggris" ? " B.Inggris" : ""}
                   </TabsTrigger>
                 ))}
