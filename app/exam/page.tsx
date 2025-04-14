@@ -10,8 +10,8 @@ import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Clock, AlertTriangle, Flag } from "lucide-react"
 import { useMobile } from "@/hooks/use-mobile"
 import { ExamTimer } from "@/components/exam-timer"
-import { mockQuestions } from "@/lib/mock-questions"
 import { Progress } from "@/components/ui/progress"
+import { QuestionNavigation } from "@/components/question-navigation"
 
 export default function ExamPage() {
   const router = useRouter()
@@ -26,6 +26,9 @@ export default function ExamPage() {
   const [idleTimer, setIdleTimer] = useState<NodeJS.Timeout | null>(null)
   const [currentQuestion, setCurrentQuestion] = useState<any>(null)
   const [loading, setLoading] = useState(true)
+  const [questionsLoaded, setQuestionsLoaded] = useState(false)
+  const [lastIdleCheck, setLastIdleCheck] = useState(Date.now())
+  const [availableQuestions, setAvailableQuestions] = useState<Record<string, number>>({})
 
   // Load session from localStorage
   useEffect(() => {
@@ -40,8 +43,20 @@ export default function ExamPage() {
     setCurrentSubtest(parsedSession.currentSubtest)
     setCurrentQuestionIndex(parsedSession.currentQuestion)
 
+    // Check if questions are generated
+    const questionsGenerated = localStorage.getItem("questionsGenerated")
+    if (questionsGenerated !== "true") {
+      router.push("/generate-questions")
+      return
+    }
+
+    setQuestionsLoaded(true)
+
     // Load the current question
     loadQuestion(parsedSession.currentSubtest, parsedSession.currentQuestion)
+
+    // Count available questions for each subtest
+    countAvailableQuestions()
 
     setLoading(false)
 
@@ -78,42 +93,118 @@ export default function ExamPage() {
     }
   }, [])
 
-  // Load question data (in a real app, this would fetch from an API or generate with AI)
+  // Count available questions for each subtest
+  const countAvailableQuestions = () => {
+    const subtests = [
+      "Penalaran Umum",
+      "Pengetahuan dan Pemahaman Umum",
+      "Kemampuan Memahami Bacaan dan Menulis",
+      "Pengetahuan Kuantitatif",
+      "Literasi dalam Bahasa Indonesia",
+      "Literasi dalam Bahasa Inggris",
+      "Penalaran Matematika",
+    ]
+
+    const counts: Record<string, number> = {}
+
+    subtests.forEach((subtest) => {
+      const questionsJson = localStorage.getItem(`questions_${subtest}`)
+      if (questionsJson) {
+        const questions = JSON.parse(questionsJson)
+        counts[subtest] = questions.length
+      } else {
+        counts[subtest] = 0
+      }
+    })
+
+    setAvailableQuestions(counts)
+  }
+
+  // Load question data from localStorage
   const loadQuestion = (subtest: string, questionNumber: number) => {
     setLoading(true)
 
-    // For this demo, we'll use mock questions
-    const subtestQuestions = mockQuestions[subtest] || []
+    try {
+      // Get questions for this subtest from localStorage
+      const questionsJson = localStorage.getItem(`questions_${subtest}`)
 
-    // If question doesn't exist, generate a placeholder with proper numbering
-    const question = subtestQuestions[questionNumber - 1] || {
-      id: questionNumber,
-      text: `Soal ${questionNumber} untuk ${subtest} sedang dimuat...`,
-      options: [
-        { id: "A", text: "Opsi A" },
-        { id: "B", text: "Opsi B" },
-        { id: "C", text: "Opsi C" },
-        { id: "D", text: "Opsi D" },
-      ],
+      if (!questionsJson) {
+        throw new Error(`Soal untuk ${subtest} tidak ditemukan`)
+      }
+
+      const questions = JSON.parse(questionsJson)
+
+      // Find the question by ID
+      const question = questions.find((q: any) => q.id === questionNumber)
+
+      if (!question) {
+        // If question with exact ID not found, try to find the closest available question
+        if (questions.length > 0) {
+          // Sort questions by ID and find the closest one
+          const sortedQuestions = [...questions].sort((a, b) => a.id - b.id)
+          const closestQuestion = sortedQuestions.reduce((prev, curr) => {
+            return Math.abs(curr.id - questionNumber) < Math.abs(prev.id - questionNumber) ? curr : prev
+          })
+
+          // Update current question index to match the found question
+          setCurrentQuestionIndex(closestQuestion.id)
+
+          // Update session
+          if (session) {
+            const updatedSession = { ...session }
+            updatedSession.currentQuestion = closestQuestion.id
+            localStorage.setItem("tryoutSession", JSON.stringify(updatedSession))
+            setSession(updatedSession)
+          }
+
+          setCurrentQuestion(closestQuestion)
+
+          // Load saved answer if exists
+          if (session && session.subtes[subtest].soalJawaban[closestQuestion.id]) {
+            setSelectedAnswer(session.subtes[subtest].soalJawaban[closestQuestion.id])
+          } else {
+            setSelectedAnswer("")
+          }
+
+          // Load flagged status
+          const flaggedQuestions = JSON.parse(localStorage.getItem("flaggedQuestions") || "{}")
+          setFlagged(flaggedQuestions[`${subtest}-${closestQuestion.id}`] || false)
+
+          setLoading(false)
+          return
+        }
+
+        throw new Error(`Soal nomor ${questionNumber} untuk ${subtest} tidak ditemukan`)
+      }
+
+      setCurrentQuestion(question)
+
+      // Load saved answer if exists
+      if (session && session.subtes[subtest].soalJawaban[questionNumber]) {
+        setSelectedAnswer(session.subtes[subtest].soalJawaban[questionNumber])
+      } else {
+        setSelectedAnswer("")
+      }
+
+      // Load flagged status
+      const flaggedQuestions = JSON.parse(localStorage.getItem("flaggedQuestions") || "{}")
+      setFlagged(flaggedQuestions[`${subtest}-${questionNumber}`] || false)
+    } catch (error) {
+      console.error("Error loading question:", error)
+      // Set a placeholder question
+      setCurrentQuestion({
+        id: questionNumber,
+        text: `Terjadi kesalahan saat memuat soal ${questionNumber} untuk ${subtest}. Silakan coba refresh halaman.`,
+        options: [
+          { id: "A", text: "Opsi A" },
+          { id: "B", text: "Opsi B" },
+          { id: "C", text: "Opsi C" },
+          { id: "D", text: "Opsi D" },
+        ],
+      })
     }
-
-    setCurrentQuestion(question)
-
-    // Load saved answer if exists
-    if (session && session.subtes[subtest].soalJawaban[questionNumber]) {
-      setSelectedAnswer(session.subtes[subtest].soalJawaban[questionNumber])
-    } else {
-      setSelectedAnswer("")
-    }
-
-    // Load flagged status
-    const flaggedQuestions = JSON.parse(localStorage.getItem("flaggedQuestions") || "{}")
-    setFlagged(flaggedQuestions[`${subtest}-${questionNumber}`] || false)
 
     setLoading(false)
-
-    // In a real app, this would be where you'd call the API to generate a question
-    // if it doesn't exist in the cache
   }
 
   // Handle visibility change (tab switching)
@@ -128,13 +219,22 @@ export default function ExamPage() {
     const resetIdleTimer = () => {
       if (idleTimer) clearTimeout(idleTimer)
 
-      // Only set idle timer if user is not actively answering or reading
-      if (!document.activeElement || !document.activeElement.classList.contains("question-interaction")) {
-        setIdleTimer(
-          setTimeout(() => {
-            setIdleWarning(true)
-          }, 60000), // Increased to 60 seconds
-        )
+      const now = Date.now()
+      // Only check for idle every 5 minutes instead of 60 seconds
+      if (now - lastIdleCheck > 5 * 60 * 1000) {
+        setLastIdleCheck(now)
+
+        // Only set idle timer if user is not actively answering or reading
+        if (!document.activeElement || !document.activeElement.classList.contains("question-interaction")) {
+          setIdleTimer(
+            setTimeout(
+              () => {
+                setIdleWarning(true)
+              },
+              5 * 60 * 1000,
+            ), // Changed to 5 minutes
+          )
+        }
       }
     }
 
@@ -177,13 +277,31 @@ export default function ExamPage() {
   const handleNextQuestion = () => {
     // Get the current subtest's question count
     const subtestInfo: Record<string, { count: number; nextSubtest: string | null }> = {
-      "Penalaran Umum": { count: 30, nextSubtest: "Pengetahuan dan Pemahaman Umum" },
-      "Pengetahuan dan Pemahaman Umum": { count: 20, nextSubtest: "Kemampuan Memahami Bacaan dan Menulis" },
-      "Kemampuan Memahami Bacaan dan Menulis": { count: 20, nextSubtest: "Pengetahuan Kuantitatif" },
-      "Pengetahuan Kuantitatif": { count: 20, nextSubtest: "Literasi dalam Bahasa Indonesia" },
-      "Literasi dalam Bahasa Indonesia": { count: 30, nextSubtest: "Literasi dalam Bahasa Inggris" },
-      "Literasi dalam Bahasa Inggris": { count: 20, nextSubtest: "Penalaran Matematika" },
-      "Penalaran Matematika": { count: 20, nextSubtest: null },
+      "Penalaran Umum": {
+        count: availableQuestions["Penalaran Umum"] || 5,
+        nextSubtest: "Pengetahuan dan Pemahaman Umum",
+      },
+      "Pengetahuan dan Pemahaman Umum": {
+        count: availableQuestions["Pengetahuan dan Pemahaman Umum"] || 5,
+        nextSubtest: "Kemampuan Memahami Bacaan dan Menulis",
+      },
+      "Kemampuan Memahami Bacaan dan Menulis": {
+        count: availableQuestions["Kemampuan Memahami Bacaan dan Menulis"] || 5,
+        nextSubtest: "Pengetahuan Kuantitatif",
+      },
+      "Pengetahuan Kuantitatif": {
+        count: availableQuestions["Pengetahuan Kuantitatif"] || 5,
+        nextSubtest: "Literasi dalam Bahasa Indonesia",
+      },
+      "Literasi dalam Bahasa Indonesia": {
+        count: availableQuestions["Literasi dalam Bahasa Indonesia"] || 5,
+        nextSubtest: "Literasi dalam Bahasa Inggris",
+      },
+      "Literasi dalam Bahasa Inggris": {
+        count: availableQuestions["Literasi dalam Bahasa Inggris"] || 5,
+        nextSubtest: "Penalaran Matematika",
+      },
+      "Penalaran Matematika": { count: availableQuestions["Penalaran Matematika"] || 5, nextSubtest: null },
     }
 
     const currentInfo = subtestInfo[currentSubtest]
@@ -224,13 +342,31 @@ export default function ExamPage() {
   const handlePrevQuestion = () => {
     // Get the previous subtest's info
     const subtestInfo: Record<string, { count: number; prevSubtest: string | null }> = {
-      "Penalaran Umum": { count: 30, prevSubtest: null },
-      "Pengetahuan dan Pemahaman Umum": { count: 20, prevSubtest: "Penalaran Umum" },
-      "Kemampuan Memahami Bacaan dan Menulis": { count: 20, prevSubtest: "Pengetahuan dan Pemahaman Umum" },
-      "Pengetahuan Kuantitatif": { count: 20, prevSubtest: "Kemampuan Memahami Bacaan dan Menulis" },
-      "Literasi dalam Bahasa Indonesia": { count: 30, prevSubtest: "Pengetahuan Kuantitatif" },
-      "Literasi dalam Bahasa Inggris": { count: 20, prevSubtest: "Literasi dalam Bahasa Indonesia" },
-      "Penalaran Matematika": { count: 20, prevSubtest: "Literasi dalam Bahasa Inggris" },
+      "Penalaran Umum": { count: availableQuestions["Penalaran Umum"] || 5, prevSubtest: null },
+      "Pengetahuan dan Pemahaman Umum": {
+        count: availableQuestions["Pengetahuan dan Pemahaman Umum"] || 5,
+        prevSubtest: "Penalaran Umum",
+      },
+      "Kemampuan Memahami Bacaan dan Menulis": {
+        count: availableQuestions["Kemampuan Memahami Bacaan dan Menulis"] || 5,
+        prevSubtest: "Pengetahuan dan Pemahaman Umum",
+      },
+      "Pengetahuan Kuantitatif": {
+        count: availableQuestions["Pengetahuan Kuantitatif"] || 5,
+        prevSubtest: "Kemampuan Memahami Bacaan dan Menulis",
+      },
+      "Literasi dalam Bahasa Indonesia": {
+        count: availableQuestions["Literasi dalam Bahasa Indonesia"] || 5,
+        prevSubtest: "Pengetahuan Kuantitatif",
+      },
+      "Literasi dalam Bahasa Inggris": {
+        count: availableQuestions["Literasi dalam Bahasa Inggris"] || 5,
+        prevSubtest: "Literasi dalam Bahasa Indonesia",
+      },
+      "Penalaran Matematika": {
+        count: availableQuestions["Penalaran Matematika"] || 5,
+        prevSubtest: "Literasi dalam Bahasa Inggris",
+      },
     }
 
     const currentInfo = subtestInfo[currentSubtest]
@@ -266,6 +402,21 @@ export default function ExamPage() {
     }
   }
 
+  // Navigate to specific question
+  const handleNavigate = (subtest: string, questionIndex: number) => {
+    setCurrentSubtest(subtest)
+    setCurrentQuestionIndex(questionIndex)
+
+    // Update session
+    const updatedSession = { ...session }
+    updatedSession.currentSubtest = subtest
+    updatedSession.currentQuestion = questionIndex
+    localStorage.setItem("tryoutSession", JSON.stringify(updatedSession))
+
+    // Load the question
+    loadQuestion(subtest, questionIndex)
+  }
+
   // Toggle flag for current question
   const toggleFlag = () => {
     const newFlaggedState = !flagged
@@ -291,7 +442,7 @@ export default function ExamPage() {
     router.push("/confirm")
   }
 
-  if (loading) {
+  if (loading && !questionsLoaded) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
@@ -338,7 +489,7 @@ export default function ExamPage() {
         <Alert className="m-4 bg-yellow-50 border-yellow-200">
           <AlertTriangle className="h-4 w-4 text-yellow-600" />
           <AlertDescription className="text-yellow-600">
-            Tidak ada aktivitas selama 60 detik. Apakah Anda masih mengerjakan ujian?
+            Tidak ada aktivitas selama 5 menit. Apakah Anda masih mengerjakan ujian?
             <Button
               variant="outline"
               size="sm"
@@ -355,78 +506,104 @@ export default function ExamPage() {
       )}
 
       <main className="container mx-auto p-4">
-        {/* Question card */}
-        <Card className="p-6">
-          <CardContent className="p-0">
-            <div className="mb-6">
-              <div className="flex justify-between items-start mb-4">
-                <h2 className="text-xl font-semibold">Soal {currentQuestionIndex}</h2>
-                <Button
-                  variant={flagged ? "destructive" : "outline"}
-                  size="sm"
-                  onClick={toggleFlag}
-                  className="flex items-center gap-1"
-                >
-                  <Flag className="h-4 w-4" />
-                  {flagged ? "Ditandai" : "Tandai Ragu"}
-                </Button>
-              </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Question content */}
+          <div className="md:col-span-2">
+            {/* Question card */}
+            <Card className="p-6">
+              <CardContent className="p-0">
+                <div className="mb-6">
+                  <div className="flex justify-between items-start mb-4">
+                    <h2 className="text-xl font-semibold">Soal {currentQuestionIndex}</h2>
+                    <Button
+                      variant={flagged ? "destructive" : "outline"}
+                      size="sm"
+                      onClick={toggleFlag}
+                      className="flex items-center gap-1"
+                    >
+                      <Flag className="h-4 w-4" />
+                      {flagged ? "Ditandai" : "Tandai Ragu"}
+                    </Button>
+                  </div>
 
-              {currentQuestion && (
-                <div className="space-y-6">
-                  <p className="text-gray-800">{currentQuestion.text}</p>
+                  {currentQuestion && (
+                    <div className="space-y-6">
+                      <p className="text-gray-800">{currentQuestion.text}</p>
 
-                  <RadioGroup value={selectedAnswer} onValueChange={handleAnswerSelect} className="space-y-3">
-                    {currentQuestion.options.map((option: any) => (
-                      <div
-                        key={option.id}
-                        onClick={() => handleAnswerSelect(option.id)}
-                        className={`flex items-center rounded-lg border p-4 transition-colors duration-300 question-interaction ${
-                          selectedAnswer === option.id
-                            ? "bg-blue-50 border-blue-200 dark:bg-blue-950 dark:border-blue-800"
-                            : ""
-                        }`}
-                        data-state={selectedAnswer === option.id ? "selected" : "unselected"}
-                      >
-                        <RadioGroupItem
-                          value={option.id}
-                          id={`option-${option.id}`}
-                          className="mr-3 question-interaction"
-                        />
-                        <Label htmlFor={`option-${option.id}`} className="w-full cursor-pointer question-interaction">
-                          <span className="font-semibold mr-2">{option.id}.</span> {option.text}
-                        </Label>
-                      </div>
-                    ))}
-                  </RadioGroup>
+                      <RadioGroup value={selectedAnswer} onValueChange={handleAnswerSelect} className="space-y-3">
+                        {currentQuestion.options.map((option: any) => (
+                          <div
+                            key={option.id}
+                            onClick={() => handleAnswerSelect(option.id)}
+                            className={`flex items-center rounded-lg border p-4 transition-colors duration-300 question-interaction ${
+                              selectedAnswer === option.id
+                                ? "bg-blue-50 border-blue-200 dark:bg-blue-950 dark:border-blue-800"
+                                : ""
+                            }`}
+                            data-state={selectedAnswer === option.id ? "selected" : "unselected"}
+                          >
+                            <RadioGroupItem
+                              value={option.id}
+                              id={`option-${option.id}`}
+                              className="mr-3 question-interaction"
+                            />
+                            <Label
+                              htmlFor={`option-${option.id}`}
+                              className="w-full cursor-pointer question-interaction"
+                            >
+                              <span className="font-semibold mr-2">{option.id}.</span> {option.text}
+                            </Label>
+                          </div>
+                        ))}
+                      </RadioGroup>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
 
-            <div className="flex justify-between mt-8">
-              <Button
-                variant="outline"
-                onClick={handlePrevQuestion}
-                disabled={currentSubtest === "Penalaran Umum" && currentQuestionIndex === 1}
-              >
-                Sebelumnya
-              </Button>
-              <Button onClick={handleNextQuestion}>
-                {isLastQuestion(currentSubtest, currentQuestionIndex) ? "Selesai" : "Selanjutnya"}
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+                <div className="flex justify-between mt-8">
+                  <Button
+                    variant="outline"
+                    onClick={handlePrevQuestion}
+                    disabled={currentSubtest === "Penalaran Umum" && currentQuestionIndex === 1}
+                  >
+                    Sebelumnya
+                  </Button>
+                  <Button onClick={handleNextQuestion}>
+                    {isLastQuestion(currentSubtest, currentQuestionIndex, availableQuestions)
+                      ? "Selesai"
+                      : "Selanjutnya"}
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
 
-        {/* Progress indicator */}
-        <div className="mt-4 p-4 bg-gray-50 rounded-lg">
-          <div className="flex justify-between items-center mb-2">
-            <span className="text-sm font-medium">{currentSubtest}</span>
-            <span className="text-sm text-gray-500">
-              {currentQuestionIndex} dari {getSubtestQuestionCount(currentSubtest)}
-            </span>
+            {/* Progress indicator */}
+            <div className="mt-4 p-4 bg-gray-50 rounded-lg">
+              <div className="flex justify-between items-center mb-2">
+                <span className="text-sm font-medium">{currentSubtest}</span>
+                <span className="text-sm text-gray-500">
+                  {currentQuestionIndex} dari {availableQuestions[currentSubtest] || 5}
+                </span>
+              </div>
+              <Progress
+                value={(currentQuestionIndex / (availableQuestions[currentSubtest] || 5)) * 100}
+                className="h-2"
+              />
+            </div>
           </div>
-          <Progress value={(currentQuestionIndex / getSubtestQuestionCount(currentSubtest)) * 100} className="h-2" />
+
+          {/* Question navigation sidebar - only visible on desktop */}
+          <div className="hidden md:block">
+            {session && (
+              <QuestionNavigation
+                session={session}
+                currentSubtest={currentSubtest}
+                currentQuestionIndex={currentQuestionIndex}
+                onNavigate={handleNavigate}
+                availableQuestions={availableQuestions}
+              />
+            )}
+          </div>
         </div>
       </main>
     </div>
@@ -434,19 +611,6 @@ export default function ExamPage() {
 }
 
 // Helper function to check if this is the last question of the exam
-function isLastQuestion(subtest: string, questionIndex: number): boolean {
-  return subtest === "Penalaran Matematika" && questionIndex === 20
-}
-
-function getSubtestQuestionCount(subtest: string): number {
-  const subtestCounts: Record<string, number> = {
-    "Penalaran Umum": 30,
-    "Pengetahuan dan Pemahaman Umum": 20,
-    "Kemampuan Memahami Bacaan dan Menulis": 20,
-    "Pengetahuan Kuantitatif": 20,
-    "Literasi dalam Bahasa Indonesia": 30,
-    "Literasi dalam Bahasa Inggris": 20,
-    "Penalaran Matematika": 20,
-  }
-  return subtestCounts[subtest] || 20
+function isLastQuestion(subtest: string, questionIndex: number, availableQuestions: Record<string, number>): boolean {
+  return subtest === "Penalaran Matematika" && questionIndex === (availableQuestions["Penalaran Matematika"] || 5)
 }

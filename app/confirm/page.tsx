@@ -27,6 +27,7 @@ export default function ConfirmPage() {
     total: 160,
   })
   const [showConfirmDialog, setShowConfirmDialog] = useState(false)
+  const [showEmergencyDialog, setShowEmergencyDialog] = useState(false)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -70,7 +71,13 @@ export default function ConfirmPage() {
   }, [])
 
   const handleSubmit = () => {
-    setShowConfirmDialog(true)
+    // If there are unanswered questions, show emergency dialog
+    if (stats.unanswered > 0) {
+      setShowEmergencyDialog(true)
+    } else {
+      // Otherwise show regular confirm dialog
+      setShowConfirmDialog(true)
+    }
   }
 
   const confirmSubmit = () => {
@@ -161,6 +168,7 @@ export default function ConfirmPage() {
         </CardContent>
       </Card>
 
+      {/* Regular confirmation dialog */}
       <AlertDialog open={showConfirmDialog} onOpenChange={setShowConfirmDialog}>
         <AlertDialogContent>
           <AlertDialogHeader>
@@ -176,6 +184,33 @@ export default function ConfirmPage() {
           <AlertDialogFooter>
             <AlertDialogCancel>Batal</AlertDialogCancel>
             <AlertDialogAction onClick={confirmSubmit}>Ya, Kumpulkan Ujian</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      {/* Emergency dialog for unanswered questions */}
+      <AlertDialog open={showEmergencyDialog} onOpenChange={setShowEmergencyDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle className="text-red-600">Peringatan: Soal Belum Terjawab!</AlertDialogTitle>
+            <AlertDialogDescription>
+              <div className="space-y-2">
+                <div className="text-red-500 font-semibold">
+                  Anda masih memiliki {stats.unanswered} soal yang belum terjawab.
+                </div>
+                <div>
+                  Sebaiknya kembali ke ujian dan jawab semua soal yang tersisa. Soal yang tidak dijawab akan dianggap
+                  salah dan akan mempengaruhi nilai akhir Anda.
+                </div>
+                <div className="font-semibold">Apakah Anda tetap ingin mengumpulkan ujian?</div>
+              </div>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Kembali ke Ujian</AlertDialogCancel>
+            <AlertDialogAction onClick={confirmSubmit} className="bg-red-600 hover:bg-red-700">
+              Tetap Kumpulkan
+            </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

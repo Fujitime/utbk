@@ -10,6 +10,7 @@ interface QuestionNavigationProps {
   currentSubtest: string
   currentQuestionIndex: number
   onNavigate: (subtest: string, questionIndex: number) => void
+  availableQuestions: Record<string, number>
 }
 
 export function QuestionNavigation({
@@ -17,27 +18,12 @@ export function QuestionNavigation({
   currentSubtest,
   currentQuestionIndex,
   onNavigate,
+  availableQuestions,
 }: QuestionNavigationProps) {
   const [activeTab, setActiveTab] = useState(currentSubtest)
 
   // Get flagged questions
   const flaggedQuestions = JSON.parse(localStorage.getItem("flaggedQuestions") || "{}")
-
-  // Subtest info
-  const subtestInfo: Record<string, number> = {
-    "Penalaran Umum": 30,
-    "Pengetahuan dan Pemahaman Umum": 20,
-    "Kemampuan Memahami Bacaan dan Menulis": 20,
-    "Pengetahuan Kuantitatif": 20,
-    "Literasi dalam Bahasa Indonesia": 30,
-    "Literasi dalam Bahasa Inggris": 20,
-    "Penalaran Matematika": 20,
-  }
-
-  // Handle tab change
-  const handleTabChange = (value: string) => {
-    setActiveTab(value)
-  }
 
   // Check if a question is answered
   const isAnswered = (subtest: string, questionIndex: number) => {
@@ -73,6 +59,11 @@ export function QuestionNavigation({
     return answered ? "bg-green-100 border-green-300 hover:bg-green-200" : "bg-white hover:bg-gray-100"
   }
 
+  // Handle tab change
+  const handleTabChange = (value: string) => {
+    setActiveTab(value)
+  }
+
   return (
     <Card className="sticky top-20">
       <CardHeader className="p-4">
@@ -81,7 +72,7 @@ export function QuestionNavigation({
       <CardContent className="p-4">
         <Tabs defaultValue={currentSubtest} value={activeTab} onValueChange={handleTabChange}>
           <TabsList className="grid grid-cols-2 h-auto mb-4">
-            {Object.keys(subtestInfo)
+            {Object.keys(availableQuestions)
               .slice(0, 4)
               .map((subtest) => (
                 <TabsTrigger key={subtest} value={subtest} className="text-xs py-1 px-2 h-auto">
@@ -90,7 +81,7 @@ export function QuestionNavigation({
               ))}
           </TabsList>
           <TabsList className="grid grid-cols-3 h-auto mb-4">
-            {Object.keys(subtestInfo)
+            {Object.keys(availableQuestions)
               .slice(4)
               .map((subtest) => (
                 <TabsTrigger key={subtest} value={subtest} className="text-xs py-1 px-2 h-auto">
@@ -99,10 +90,10 @@ export function QuestionNavigation({
               ))}
           </TabsList>
 
-          {Object.keys(subtestInfo).map((subtest) => (
+          {Object.keys(availableQuestions).map((subtest) => (
             <TabsContent key={subtest} value={subtest} className="mt-0">
               <div className="grid grid-cols-5 gap-2">
-                {Array.from({ length: subtestInfo[subtest] }, (_, i) => i + 1).map((questionIndex) => (
+                {Array.from({ length: availableQuestions[subtest] || 5 }, (_, i) => i + 1).map((questionIndex) => (
                   <Button
                     key={questionIndex}
                     variant="outline"

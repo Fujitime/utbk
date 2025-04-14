@@ -6,9 +6,11 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Progress } from "@/components/ui/progress"
-import { CheckCircle, XCircle } from "lucide-react"
+import { CheckCircle, XCircle, AlertTriangle } from "lucide-react"
 import { mockEvaluations } from "@/lib/mock-evaluations"
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts"
+import { Alert, AlertDescription } from "@/components/ui/alert"
+import { Pagination } from "@/components/ui/pagination"
 
 export default function ResultsPage() {
   const router = useRouter()
@@ -16,6 +18,13 @@ export default function ResultsPage() {
   const [results, setResults] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const [activeTab, setActiveTab] = useState("overview")
+  const [error, setError] = useState<string | null>(null)
+  const [useAI, setUseAI] = useState(false)
+
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1)
+  const [questionsPerPage] = useState(5)
+  const [paginatedQuestions, setPaginatedQuestions] = useState<any[]>([])
 
   useEffect(() => {
     const savedSession = localStorage.getItem("tryoutSession")
@@ -34,17 +43,127 @@ export default function ResultsPage() {
 
     setSession(parsedSession)
 
-    // In a real app, we would fetch results from the API
-    // For this demo, we'll use mock evaluations
-    setResults(mockEvaluations)
+    // Check if using AI
+    const useAIQuestions = localStorage.getItem("useAIQuestions") === "true"
+    setUseAI(useAIQuestions)
+
+    try {
+      // In a real app with AI, we would evaluate answers here
+      // For this demo, we'll calculate results based on stored questions and answers
+
+      // Initialize results structure
+      const evaluationResults = {
+        totalScore: 0,
+        subtests: {} as Record<string, { score: number; total: number }>,
+        questions: [] as any[],
+      }
+
+      // Process each subtest
+      let totalCorrect = 0
+      let totalQuestions = 0
+
+      for (const subtest of Object.keys(parsedSession.subtes)) {
+        const subtestAnswers = parsedSession.subtes[subtest].soalJawaban || {}
+        const questionsJson = localStorage.getItem(`questions_${subtest}`)
+
+        if (!questionsJson) {
+          throw new Error(`Soal untuk ${subtest} tidak ditemukan`)
+        }
+
+        const questions = JSON.parse(questionsJson)
+        const subtestTotal = questions.length
+        let subtestCorrect = 0
+
+        // Check each answer
+        for (let i = 0; i < subtestTotal; i++) {
+          const question = questions[i]
+          const userAnswer = subtestAnswers[question.id]
+
+          if (question) {
+            // Add to questions array for detailed view
+            evaluationResults.questions.push({
+              id: question.id,
+              text: question.text,
+              options: question.options,
+              userAnswer: userAnswer || "",
+              correctAnswer: question.correctAnswer,
+              correct: userAnswer === question.correctAnswer,
+              explanation: question.explanation || "Tidak ada penjelasan tersedia.",
+              subtest: subtest,
+            })
+
+            // Count correct answers
+            if (userAnswer === question.correctAnswer) {
+              subtestCorrect++
+              totalCorrect++
+            }
+          }
+
+          totalQuestions++
+        }
+
+        // Add subtest results
+        evaluationResults.subtests[subtest] = {
+          score: subtestCorrect,
+          total: subtestTotal,
+        }
+      }
+
+      // Set total score
+      evaluationResults.totalScore = totalCorrect
+
+      // Set results
+      setResults(evaluationResults)
+
+      // Set initial paginated questions
+      updatePaginatedQuestions(evaluationResults.questions, 1, questionsPerPage)
+    } catch (err: any) {
+      console.error("Error evaluating answers:", err)
+      setError(err.message || "Terjadi kesalahan saat mengevaluasi jawaban.")
+
+      // Fallback to mock evaluations
+      setResults(mockEvaluations)
+      updatePaginatedQuestions(mockEvaluations.questions, 1, questionsPerPage)
+    }
 
     setLoading(false)
   }, [])
+
+  // Update paginated questions when page changes
+  const updatePaginatedQuestions = (allQuestions: any[], page: number, perPage: number) => {
+    const startIndex = (page - 1) * perPage
+    const endIndex = startIndex + perPage
+    setPaginatedQuestions(allQuestions.slice(startIndex, endIndex))
+  }
+
+  // Handle page change
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page)
+    if (results && results.questions) {
+      updatePaginatedQuestions(results.questions, page, questionsPerPage)
+    }
+  }
 
   const handleRetry = () => {
     // Clear session and start a new one
     localStorage.removeItem("tryoutSession")
     localStorage.removeItem("flaggedQuestions")
+    localStorage.removeItem("questionsGenerated")
+
+    // Clear all questions
+    const subtests = [
+      "Penalaran Umum",
+      "Pengetahuan dan Pemahaman Umum",
+      "Kemampuan Memahami Bacaan dan Menulis",
+      "Pengetahuan Kuantitatif",
+      "Literasi dalam Bahasa Indonesia",
+      "Literasi dalam Bahasa Inggris",
+      "Penalaran Matematika",
+    ]
+
+    subtests.forEach((subtest) => {
+      localStorage.removeItem(`questions_${subtest}`)
+    })
 
     // Navigate to instructions page
     router.push("/instructions")
@@ -94,6 +213,31 @@ export default function ResultsPage() {
     )
   }
 
+  if (error) {
+    return (
+      <div className="container mx-auto px-4 py-12 max-w-4xl">
+        <Alert variant="destructive" className="mb-4">
+          <AlertTriangle className="h-4 w-4" />
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
+
+        <Card>
+          <CardContent className="p-8">
+            <div className="flex flex-col items-center justify-center gap-4">
+              <XCircle className="h-12 w-12 text-red-500" />
+              <p className="text-center text-gray-500">
+                Terjadi kesalahan saat mengevaluasi jawaban Anda.
+                <br />
+                <span className="text-sm">Menggunakan data evaluasi cadangan.</span>
+              </p>
+              <Button onClick={handleRetry}>Coba Lagi</Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    )
+  }
+
   if (!results) {
     return (
       <div className="container mx-auto px-4 py-12 max-w-4xl">
@@ -113,6 +257,9 @@ export default function ResultsPage() {
       </div>
     )
   }
+
+  // Calculate total pages for pagination
+  const totalPages = Math.ceil(results.questions.length / questionsPerPage)
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-6xl">
@@ -201,7 +348,7 @@ export default function ResultsPage() {
 
             <TabsContent value="questions" className="space-y-6">
               <div className="grid gap-6">
-                {results.questions.slice(0, 5).map((question: any) => (
+                {paginatedQuestions.map((question: any) => (
                   <Card key={question.id}>
                     <CardContent className="p-6">
                       <div className="flex items-start gap-4">
@@ -242,10 +389,12 @@ export default function ResultsPage() {
                 ))}
               </div>
 
-              <div className="text-center text-gray-500 mt-8">
-                <p>Menampilkan 5 dari 160 soal</p>
-                <p className="text-sm">Dalam aplikasi sebenarnya, semua soal akan ditampilkan dengan paginasi</p>
-              </div>
+              {/* Pagination */}
+              {totalPages > 1 && (
+                <div className="flex justify-center mt-6">
+                  <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+                </div>
+              )}
             </TabsContent>
 
             <TabsContent value="analysis" className="space-y-6">

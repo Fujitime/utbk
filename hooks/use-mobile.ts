@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 
-export const useMobile = () => {
+export function useMobile() {
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
@@ -13,13 +13,11 @@ export const useMobile = () => {
     // Set initial value
     handleResize()
 
-    // Listen for window resize events
+    // Add event listener
     window.addEventListener("resize", handleResize)
 
-    // Clean up event listener on unmount
-    return () => {
-      window.removeEventListener("resize", handleResize)
-    }
+    // Remove event listener on cleanup
+    return () => window.removeEventListener("resize", handleResize)
   }, [])
 
   return isMobile

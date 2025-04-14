@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -11,6 +11,9 @@ import { InfoIcon, CheckCircle } from "lucide-react"
 
 export default function InstructionsPage() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const mode = searchParams.get("mode") || "ai"
+
   const [apiKey, setApiKey] = useState("")
   const [agreed, setAgreed] = useState(false)
   const [error, setError] = useState("")
@@ -23,21 +26,24 @@ export default function InstructionsPage() {
       setApiKey(storedApiKey)
       setSavedApiKey(storedApiKey)
     }
+
+    // Clear any previous question generation state
+    localStorage.removeItem("questionsGenerated")
   }, [])
 
   const handleStartExam = () => {
-    if (!apiKey) {
-      setError("API key ChatGPT diperlukan untuk melanjutkan")
-      return
-    }
-
     if (!agreed) {
       setError("Anda harus menyetujui syarat dan ketentuan")
       return
     }
 
-    // Store API key in localStorage
-    localStorage.setItem("chatgpt-api-key", apiKey)
+    // Store API key in localStorage if provided
+    if (apiKey) {
+      localStorage.setItem("chatgpt-api-key", apiKey)
+    }
+
+    // Store the selected mode
+    localStorage.setItem("questionMode", mode)
 
     // Initialize a new exam session
     const examSession = {
@@ -81,8 +87,8 @@ export default function InstructionsPage() {
 
     localStorage.setItem("tryoutSession", JSON.stringify(examSession))
 
-    // Navigate to exam page
-    router.push("/exam")
+    // Navigate to question generation page instead of directly to exam
+    router.push("/generate-questions")
   }
 
   return (
@@ -154,31 +160,32 @@ export default function InstructionsPage() {
             <Alert className="bg-blue-50 dark:bg-blue-950">
               <InfoIcon className="h-4 w-4" />
               <AlertDescription>
-                Soal dihasilkan dengan basis data soal tahun sebelumnya dan didongkrak dengan AI agar 100% mirip UTBK
-                asli.
+                Anda memilih mode: <strong>{mode === "ai" ? "Soal AI" : "Soal Bawaan"}</strong>
               </AlertDescription>
             </Alert>
 
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold">API Key ChatGPT</h3>
-              <p className="text-sm text-gray-500">
-                Aplikasi ini memerlukan API key ChatGPT Anda untuk menghasilkan soal dan menilai jawaban secara
-                real-time. API key Anda hanya disimpan di perangkat Anda (localStorage) dan tidak dikirim ke server
-                manapun.
-              </p>
-              <Input
-                type="password"
-                placeholder="Masukkan API key ChatGPT Anda"
-                value={apiKey}
-                onChange={(e) => setApiKey(e.target.value)}
-                className="max-w-md"
-              />
-              {savedApiKey && (
-                <p className="text-sm text-green-600">
-                  <CheckCircle className="h-4 w-4 inline mr-1" /> API key sudah tersimpan di perangkat ini
+            {mode === "ai" && (
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold">API Key ChatGPT (Opsional)</h3>
+                <p className="text-sm text-gray-500">
+                  Jika Anda ingin menggunakan soal yang dihasilkan dengan AI, masukkan API key ChatGPT Anda. API key
+                  Anda hanya disimpan di perangkat Anda (localStorage) dan tidak dikirim ke server manapun. Jika tidak
+                  diisi, aplikasi akan menggunakan soal bawaan.
                 </p>
-              )}
-            </div>
+                <Input
+                  type="password"
+                  placeholder="Masukkan API key ChatGPT Anda (opsional)"
+                  value={apiKey}
+                  onChange={(e) => setApiKey(e.target.value)}
+                  className="max-w-md"
+                />
+                {savedApiKey && (
+                  <p className="text-sm text-green-600">
+                    <CheckCircle className="h-4 w-4 inline mr-1" /> API key sudah tersimpan di perangkat ini
+                  </p>
+                )}
+              </div>
+            )}
 
             <div className="flex items-center space-x-2">
               <Checkbox id="terms" checked={agreed} onCheckedChange={(checked) => setAgreed(checked === true)} />
@@ -197,7 +204,7 @@ export default function InstructionsPage() {
             )}
 
             <Button onClick={handleStartExam} className="w-full md:w-auto bg-blue-600 hover:bg-blue-700">
-              Saya Mengerti, Mulai Ujian
+              Saya Mengerti, Lanjutkan
             </Button>
           </div>
         </CardContent>
