@@ -1,140 +1,122 @@
+"use client"
+
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, CheckCircle, Sparkles, BookOpen, Clock, BarChart3 } from "lucide-react"
+import { motion } from "framer-motion"
 
 export default function LandingPage() {
   const currentYear = 2025
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <main className="flex-1">
-        <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48 bg-gradient-to-b from-blue-50 to-white">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center space-y-4 text-center">
-              <div className="inline-block rounded-lg bg-blue-100 px-3 py-1 text-sm text-blue-700">
-                100% GRATIS - Tanpa Biaya Apapun
-              </div>
-              <div className="space-y-2">
-                <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
-                  Simulasi Cerdas UTBK {currentYear}
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500 rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse"></div>
+        <div
+          className="absolute top-1/2 right-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse"
+          style={{ animationDelay: "1s" }}
+        ></div>
+        <div
+          className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-cyan-500 rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse"
+          style={{ animationDelay: "2s" }}
+        ></div>
+      </div>
+
+      <main className="relative z-10">
+        {/* Hero Section */}
+        <section className="w-full py-20 md:py-32">
+          <div className="container px-4 md:px-6 mx-auto">
+            <motion.div
+              className="flex flex-col items-center text-center space-y-10"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="relative">
+                <h1 className="text-5xl md:text-7xl font-bold tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600">
+                  Simulasi UTBK {currentYear}
                 </h1>
-                <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-                  Tryout UTBK GRATIS dengan soal dinamis berbasis AI dan analisis hasil real-time
-                </p>
+                <div className="absolute -inset-1 bg-gradient-to-r from-blue-400 to-purple-600 rounded-lg blur opacity-30 -z-10"></div>
               </div>
-              <div className="space-y-4 mt-8">
-                <div className="bg-blue-50 dark:bg-blue-950 p-6 rounded-lg max-w-3xl mx-auto">
-                  <h2 className="text-xl font-semibold mb-3 flex items-center">
-                    <Sparkles className="h-5 w-5 mr-2 text-blue-600" />
-                    Fitur Utama:
-                  </h2>
-                  <ul className="space-y-2 text-left grid md:grid-cols-2 gap-2">
-                    <li className="flex items-center">
-                      <CheckCircle className="h-5 w-5 mr-2 text-green-500" />
-                      <span>Simulasi lengkap 7 subtes (160 soal)</span>
-                    </li>
-                    <li className="flex items-center">
-                      <CheckCircle className="h-5 w-5 mr-2 text-green-500" />
-                      <span>Soal dinamis berbasis AI</span>
-                    </li>
-                    <li className="flex items-center">
-                      <CheckCircle className="h-5 w-5 mr-2 text-green-500" />
-                      <span>Tampilan menyerupai ujian resmi</span>
-                    </li>
-                    <li className="flex items-center">
-                      <CheckCircle className="h-5 w-5 mr-2 text-green-500" />
-                      <span>Penilaian real-time dengan AI</span>
-                    </li>
-                    <li className="flex items-center">
-                      <CheckCircle className="h-5 w-5 mr-2 text-green-500" />
-                      <span>Progress tersimpan otomatis</span>
-                    </li>
-                    <li className="flex items-center">
-                      <CheckCircle className="h-5 w-5 mr-2 text-green-500" />
-                      <span>Analisis hasil komprehensif</span>
-                    </li>
-                  </ul>
-                </div>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <div className="flex flex-col gap-3">
-                    <h3 className="font-semibold flex items-center">
-                      <BookOpen className="h-5 w-5 mr-2 text-blue-600" />
-                      Tryout Lengkap
-                    </h3>
-                    <div className="flex flex-col sm:flex-row gap-3">
-                      <Link href="/instructions?mode=ai" passHref>
-                        <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8">
-                          Dengan Soal AI
-                        </Button>
-                      </Link>
-                      <Link href="/instructions?mode=builtin" passHref>
-                        <Button size="lg" variant="outline" className="px-8">
-                          Dengan Soal Bawaan
-                        </Button>
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="flex flex-col gap-3 mt-4 sm:mt-0">
-                    <h3 className="font-semibold flex items-center">
-                      <Clock className="h-5 w-5 mr-2 text-blue-600" />
-                      Latihan Mini
-                    </h3>
-                    <Link href="/mini-practice" passHref>
-                      <Button size="lg" variant="outline" className="px-8">
-                        Latihan Mini
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
+
+              <p className="text-xl text-gray-300 max-w-[600px] mx-auto">
+                Latihan UTBK gratis dengan soal berkualitas dan analisis hasil real-time
+              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-2xl">
+                <Link href="/instructions?mode=builtin" passHref>
+                  <Button
+                    size="lg"
+                    className="w-full h-16 text-lg bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white border-0 shadow-lg shadow-blue-900/30 transition-all duration-300 hover:shadow-blue-900/50 hover:scale-[1.02]"
+                  >
+                    Coba Tryout Lengkap
+                  </Button>
+                </Link>
+
+                <Link href="/mini-practice?mode=builtin" passHref>
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="w-full h-16 text-lg border-2 border-blue-500 text-blue-400 hover:bg-blue-950/30 shadow-lg shadow-blue-900/20 transition-all duration-300 hover:shadow-blue-900/40 hover:scale-[1.02]"
+                  >
+                    Coba Latihan Mini
+                  </Button>
+                </Link>
               </div>
-            </div>
+            </motion.div>
           </div>
         </section>
 
-        <section className="w-full py-12 md:py-24 bg-white">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-                  Mengapa Menggunakan Simulasi UTBK {currentYear}?
-                </h2>
-                <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl">
-                  Platform simulasi UTBK GRATIS terlengkap dengan teknologi AI untuk persiapan optimal
-                </p>
+        {/* AI Mode Section (Beta) */}
+        <section className="w-full py-16 relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-900/30 to-blue-900/30"></div>
+          <div className="container px-4 md:px-6 mx-auto relative z-10">
+            <motion.div
+              className="flex flex-col items-center text-center space-y-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            >
+              <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white text-sm font-medium shadow-lg shadow-purple-900/30 animate-pulse">
+                BETA
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
-                <div className="flex flex-col items-center p-6 bg-blue-50 rounded-lg">
-                  <Sparkles className="h-12 w-12 text-blue-600 mb-4" />
-                  <h3 className="text-xl font-semibold mb-2">Soal Berbasis AI</h3>
-                  <p className="text-gray-500 text-center">
-                    Soal dinamis yang dihasilkan oleh AI dengan tingkat kesulitan menyerupai UTBK asli
-                  </p>
-                </div>
-                <div className="flex flex-col items-center p-6 bg-blue-50 rounded-lg">
-                  <Clock className="h-12 w-12 text-blue-600 mb-4" />
-                  <h3 className="text-xl font-semibold mb-2">Simulasi Realistis</h3>
-                  <p className="text-gray-500 text-center">
-                    Pengalaman ujian yang menyerupai UTBK asli dengan timer dan navigasi soal
-                  </p>
-                </div>
-                <div className="flex flex-col items-center p-6 bg-blue-50 rounded-lg">
-                  <BarChart3 className="h-12 w-12 text-blue-600 mb-4" />
-                  <h3 className="text-xl font-semibold mb-2">Analisis Mendalam</h3>
-                  <p className="text-gray-500 text-center">
-                    Laporan hasil komprehensif dengan analisis kekuatan dan kelemahan per subtes
-                  </p>
-                </div>
+
+              <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-purple-600">
+                Coba dengan AI
+              </h2>
+
+              <p className="text-gray-300 max-w-[600px]">
+                Soal dinamis yang dihasilkan oleh AI dengan tingkat kesulitan yang dapat disesuaikan
+              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-md">
+                <Link href="/instructions?mode=ai" passHref>
+                  <Button
+                    size="lg"
+                    className="w-full bg-gradient-to-r from-pink-600 to-purple-700 hover:from-pink-700 hover:to-purple-800 shadow-lg shadow-purple-900/30 transition-all duration-300 hover:shadow-purple-900/50 hover:scale-[1.02]"
+                  >
+                    Tryout dengan AI
+                  </Button>
+                </Link>
+
+                <Link href="/mini-practice?mode=ai" passHref>
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="w-full border-2 border-purple-500 text-purple-400 hover:bg-purple-950/30 shadow-lg shadow-purple-900/20 transition-all duration-300 hover:shadow-purple-900/40 hover:scale-[1.02]"
+                  >
+                    Latihan Mini AI
+                  </Button>
+                </Link>
               </div>
-            </div>
+            </motion.div>
           </div>
         </section>
       </main>
-      <footer className="border-t py-6 md:py-0 bg-gray-50">
-        <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
-          <p className="text-center text-sm leading-loose text-gray-500 md:text-left">
-            © {currentYear} Simulasi Cerdas UTBK. 100% GRATIS untuk semua pelajar Indonesia.
-          </p>
+
+      <footer className="border-t border-gray-800 py-6 relative z-10">
+        <div className="container px-4 md:px-6 mx-auto">
+          <p className="text-center text-sm text-gray-500">© {currentYear} UTBK Simulasi. Dibuat oleh Waltahh</p>
         </div>
       </footer>
     </div>

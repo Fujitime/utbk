@@ -13,11 +13,13 @@ export function useMobile() {
     // Set initial value
     handleResize()
 
-    // Add event listener
+    // Listen for window resize events
     window.addEventListener("resize", handleResize)
 
-    // Remove event listener on cleanup
-    return () => window.removeEventListener("resize", handleResize)
+    // Clean up event listener on unmount
+    return () => {
+      window.removeEventListener("resize", handleResize)
+    }
   }, [])
 
   return isMobile

@@ -7,7 +7,10 @@ import { Input } from "@/components/ui/input"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { InfoIcon, CheckCircle } from "lucide-react"
+import { InfoIcon, CheckCircle, Shuffle } from "lucide-react"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Switch } from "@/components/ui/switch"
+import { Label } from "@/components/ui/label"
 
 export default function InstructionsPage() {
   const router = useRouter()
@@ -18,6 +21,16 @@ export default function InstructionsPage() {
   const [agreed, setAgreed] = useState(false)
   const [error, setError] = useState("")
   const [savedApiKey, setSavedApiKey] = useState("")
+  const [allowJumpSubtests, setAllowJumpSubtests] = useState(true)
+  const [difficultyLevel, setDifficultyLevel] = useState("medium")
+  const [randomizeQuestions, setRandomizeQuestions] = useState(false)
+
+  // Default public API key
+  const DEFAULT_API_KEY =
+    "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"
+
+  // Add state for question mode
+  const [questionMode, setQuestionMode] = useState(mode)
 
   useEffect(() => {
     // Check if API key exists in localStorage
@@ -31,19 +44,32 @@ export default function InstructionsPage() {
     localStorage.removeItem("questionsGenerated")
   }, [])
 
+  // Update the handleStartExam function to handle both modes
   const handleStartExam = () => {
     if (!agreed) {
       setError("Anda harus menyetujui syarat dan ketentuan")
       return
     }
 
-    // Store API key in localStorage if provided
-    if (apiKey) {
-      localStorage.setItem("chatgpt-api-key", apiKey)
+    // Use default API key if none provided for AI mode
+    const finalApiKey = questionMode === "ai" && !apiKey ? DEFAULT_API_KEY : apiKey
+
+    // Store API key in localStorage if provided or using default
+    if (finalApiKey) {
+      localStorage.setItem("chatgpt-api-key", finalApiKey)
     }
 
     // Store the selected mode
-    localStorage.setItem("questionMode", mode)
+    localStorage.setItem("questionMode", questionMode)
+
+    // Store the difficulty level
+    localStorage.setItem("difficultyLevel", difficultyLevel)
+
+    // Store the jump subtests preference
+    localStorage.setItem("allowJumpSubtests", allowJumpSubtests.toString())
+
+    // Store the randomize questions preference
+    localStorage.setItem("randomizeQuestions", randomizeQuestions.toString())
 
     // Initialize a new exam session
     const examSession = {
@@ -87,25 +113,27 @@ export default function InstructionsPage() {
 
     localStorage.setItem("tryoutSession", JSON.stringify(examSession))
 
-    // Navigate to question generation page instead of directly to exam
+    // Navigate to question generation page
     router.push("/generate-questions")
   }
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
-      <Card className="mb-8">
-        <CardHeader>
-          <CardTitle className="text-2xl font-bold">Petunjuk & Verifikasi</CardTitle>
+      <Card className="mb-8 border-0 shadow-lg bg-gradient-to-b from-gray-50 to-white">
+        <CardHeader className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-t-lg">
+          <CardTitle className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
+            Petunjuk & Verifikasi
+          </CardTitle>
           <CardDescription>Silakan baca petunjuk berikut dengan seksama sebelum memulai ujian</CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-6">
           <div className="space-y-6">
             <div>
               <h3 className="text-lg font-semibold mb-2">Rincian Ujian UTBK SNBT 2025</h3>
               <div className="overflow-x-auto">
                 <table className="w-full border-collapse">
                   <thead>
-                    <tr className="bg-blue-50 dark:bg-blue-950">
+                    <tr className="bg-gradient-to-r from-blue-50 to-purple-50">
                       <th className="border p-2 text-left">Subtes</th>
                       <th className="border p-2 text-left">Jumlah Soal</th>
                       <th className="border p-2 text-left">Durasi</th>
@@ -147,7 +175,7 @@ export default function InstructionsPage() {
                       <td className="border p-2">20 soal</td>
                       <td className="border p-2">20 menit</td>
                     </tr>
-                    <tr className="bg-blue-50 dark:bg-blue-950 font-semibold">
+                    <tr className="bg-gradient-to-r from-blue-50 to-purple-50 font-semibold">
                       <td className="border p-2">Total:</td>
                       <td className="border p-2">160 soal</td>
                       <td className="border p-2">195 menit</td>
@@ -157,24 +185,54 @@ export default function InstructionsPage() {
               </div>
             </div>
 
-            <Alert className="bg-blue-50 dark:bg-blue-950">
-              <InfoIcon className="h-4 w-4" />
+            <Alert className="bg-gradient-to-r from-blue-50 to-purple-50 border-0 shadow-sm">
+              <InfoIcon className="h-4 w-4 text-blue-600" />
               <AlertDescription>
                 Anda memilih mode: <strong>{mode === "ai" ? "Soal AI" : "Soal Bawaan"}</strong>
               </AlertDescription>
             </Alert>
 
+            <div className="space-y-4 p-4 bg-gradient-to-r from-gray-50 to-blue-50 rounded-lg">
+              <h3 className="text-lg font-semibold">Pengaturan Ujian</h3>
+
+              <div className="flex items-center justify-between">
+                <div className="space-y-1">
+                  <Label htmlFor="jumpSubtests" className="font-medium">
+                    Izinkan Loncat Antar Subtes
+                  </Label>
+                  <p className="text-sm text-gray-500">Jika diaktifkan, Anda dapat berpindah antar subtes</p>
+                </div>
+                <Switch id="jumpSubtests" checked={allowJumpSubtests} onCheckedChange={setAllowJumpSubtests} />
+              </div>
+
+              {mode === "builtin" && (
+                <div className="flex items-center justify-between">
+                  <div className="space-y-1">
+                    <Label htmlFor="randomizeQuestions" className="font-medium flex items-center">
+                      <Shuffle className="h-4 w-4 mr-1 text-blue-600" />
+                      Acak Urutan Soal
+                    </Label>
+                    <p className="text-sm text-gray-500">Mengacak urutan soal dalam setiap subtes</p>
+                  </div>
+                  <Switch
+                    id="randomizeQuestions"
+                    checked={randomizeQuestions}
+                    onCheckedChange={setRandomizeQuestions}
+                  />
+                </div>
+              )}
+            </div>
+
             {mode === "ai" && (
-              <div className="space-y-4">
-                <h3 className="text-lg font-semibold">API Key ChatGPT (Opsional)</h3>
+              <div className="space-y-4 p-4 bg-gradient-to-r from-gray-50 to-purple-50 rounded-lg">
+                <h3 className="text-lg font-semibold">Pengaturan AI</h3>
                 <p className="text-sm text-gray-500">
-                  Jika Anda ingin menggunakan soal yang dihasilkan dengan AI, masukkan API key ChatGPT Anda. API key
-                  Anda hanya disimpan di perangkat Anda (localStorage) dan tidak dikirim ke server manapun. Jika tidak
-                  diisi, aplikasi akan menggunakan soal bawaan.
+                  Untuk mode AI, diperlukan API key ChatGPT. Jika tidak diisi, akan menggunakan API key publik. API key
+                  Anda hanya disimpan di perangkat Anda (localStorage) dan tidak dikirim ke server manapun.
                 </p>
                 <Input
                   type="password"
-                  placeholder="Masukkan API key ChatGPT Anda (opsional)"
+                  placeholder="Masukkan API key ChatGPT Anda"
                   value={apiKey}
                   onChange={(e) => setApiKey(e.target.value)}
                   className="max-w-md"
@@ -184,6 +242,22 @@ export default function InstructionsPage() {
                     <CheckCircle className="h-4 w-4 inline mr-1" /> API key sudah tersimpan di perangkat ini
                   </p>
                 )}
+
+                <div className="space-y-2">
+                  <label htmlFor="difficulty" className="text-sm font-medium">
+                    Tingkat Kesulitan Soal
+                  </label>
+                  <Select value={difficultyLevel} onValueChange={setDifficultyLevel}>
+                    <SelectTrigger id="difficulty" className="max-w-md">
+                      <SelectValue placeholder="Pilih tingkat kesulitan" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="easy">Mudah</SelectItem>
+                      <SelectItem value="medium">Sedang</SelectItem>
+                      <SelectItem value="hard">Sulit</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
               </div>
             )}
 
@@ -203,7 +277,10 @@ export default function InstructionsPage() {
               </Alert>
             )}
 
-            <Button onClick={handleStartExam} className="w-full md:w-auto bg-blue-600 hover:bg-blue-700">
+            <Button
+              onClick={handleStartExam}
+              className="w-full md:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-md hover:shadow-lg transition-all duration-300"
+            >
               Saya Mengerti, Lanjutkan
             </Button>
           </div>

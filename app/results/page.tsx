@@ -10,7 +10,6 @@ import { CheckCircle, XCircle, AlertTriangle } from "lucide-react"
 import { mockEvaluations } from "@/lib/mock-evaluations"
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Pagination } from "@/components/ui/pagination"
 
 export default function ResultsPage() {
   const router = useRouter()
@@ -62,7 +61,12 @@ export default function ResultsPage() {
       let totalCorrect = 0
       let totalQuestions = 0
 
-      for (const subtest of Object.keys(parsedSession.subtes)) {
+      // Check if this is a mini practice session
+      const isPracticeMode = parsedSession.isPracticeMode === true
+
+      if (isPracticeMode) {
+        // For mini practice, only evaluate the current subtest
+        const subtest = parsedSession.currentSubtest
         const subtestAnswers = parsedSession.subtes[subtest].soalJawaban || {}
         const questionsJson = localStorage.getItem(`questions_${subtest}`)
 
@@ -107,6 +111,54 @@ export default function ResultsPage() {
           score: subtestCorrect,
           total: subtestTotal,
         }
+      } else {
+        // For full exam, evaluate all subtests
+        for (const subtest of Object.keys(parsedSession.subtes)) {
+          const subtestAnswers = parsedSession.subtes[subtest].soalJawaban || {}
+          const questionsJson = localStorage.getItem(`questions_${subtest}`)
+
+          if (!questionsJson) {
+            throw new Error(`Soal untuk ${subtest} tidak ditemukan`)
+          }
+
+          const questions = JSON.parse(questionsJson)
+          const subtestTotal = questions.length
+          let subtestCorrect = 0
+
+          // Check each answer
+          for (let i = 0; i < subtestTotal; i++) {
+            const question = questions[i]
+            const userAnswer = subtestAnswers[question.id]
+
+            if (question) {
+              // Add to questions array for detailed view
+              evaluationResults.questions.push({
+                id: question.id,
+                text: question.text,
+                options: question.options,
+                userAnswer: userAnswer || "",
+                correctAnswer: question.correctAnswer,
+                correct: userAnswer === question.correctAnswer,
+                explanation: question.explanation || "Tidak ada penjelasan tersedia.",
+                subtest: subtest,
+              })
+
+              // Count correct answers
+              if (userAnswer === question.correctAnswer) {
+                subtestCorrect++
+                totalCorrect++
+              }
+            }
+
+            totalQuestions++
+          }
+
+          // Add subtest results
+          evaluationResults.subtests[subtest] = {
+            score: subtestCorrect,
+            total: subtestTotal,
+          }
+        }
       }
 
       // Set total score
@@ -145,6 +197,9 @@ export default function ResultsPage() {
   }
 
   const handleRetry = () => {
+    // Check if this was a mini practice session
+    const isPracticeMode = session?.isPracticeMode === true
+
     // Clear session and start a new one
     localStorage.removeItem("tryoutSession")
     localStorage.removeItem("flaggedQuestions")
@@ -165,8 +220,14 @@ export default function ResultsPage() {
       localStorage.removeItem(`questions_${subtest}`)
     })
 
-    // Navigate to instructions page
-    router.push("/instructions")
+    // Navigate to appropriate page based on session type
+    if (isPracticeMode) {
+      const mode = localStorage.getItem("questionMode") || "builtin"
+      router.push(`/mini-practice?mode=${mode}`)
+    } else {
+      // Navigate to instructions page
+      router.push("/instructions")
+    }
   }
 
   const generateAnalysis = () => {
@@ -261,6 +322,53 @@ export default function ResultsPage() {
   // Calculate total pages for pagination
   const totalPages = Math.ceil(results.questions.length / questionsPerPage)
 
+  // Custom pagination component
+  const Pagination = ({
+    currentPage,
+    totalPages,
+    onPageChange,
+  }: {
+    currentPage: number
+    totalPages: number
+    onPageChange: (page: number) => void
+  }) => {
+    return (
+      <div className="flex items-center justify-center space-x-2">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => onPageChange(Math.max(1, currentPage - 1))}
+          disabled={currentPage === 1}
+        >
+          Sebelumnya
+        </Button>
+
+        <div className="flex items-center space-x-1">
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+            <Button
+              key={page}
+              variant={currentPage === page ? "default" : "outline"}
+              size="sm"
+              onClick={() => onPageChange(page)}
+              className="w-8 h-8 p-0"
+            >
+              {page}
+            </Button>
+          ))}
+        </div>
+
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
+          disabled={currentPage === totalPages}
+        >
+          Selanjutnya
+        </Button>
+      </div>
+    )
+  }
+
   return (
     <div className="container mx-auto px-4 py-12 max-w-6xl">
       <Card className="mb-8">
@@ -279,7 +387,10 @@ export default function ResultsPage() {
             <TabsContent value="overview" className="space-y-6">
               <div className="text-center mb-8">
                 <h2 className="text-3xl font-bold mb-2">Skor Total: {results.totalScore}</h2>
-                <p className="text-gray-500">Dari total 160 soal</p>
+                <p className="text-gray-500">
+                  Dari total{" "}
+                  {Object.values(results.subtests).reduce((sum: any, subtest: any) => sum + subtest.total, 0)} soal
+                </p>
               </div>
 
               <div className="grid gap-6">

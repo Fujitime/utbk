@@ -29,6 +29,7 @@ export default function ExamPage() {
   const [questionsLoaded, setQuestionsLoaded] = useState(false)
   const [lastIdleCheck, setLastIdleCheck] = useState(Date.now())
   const [availableQuestions, setAvailableQuestions] = useState<Record<string, number>>({})
+  const [allowJumpSubtests, setAllowJumpSubtests] = useState(true)
 
   // Load session from localStorage
   useEffect(() => {
@@ -57,6 +58,10 @@ export default function ExamPage() {
 
     // Count available questions for each subtest
     countAvailableQuestions()
+
+    // Check if jumping between subtests is allowed
+    const allowJump = localStorage.getItem("allowJumpSubtests") === "true"
+    setAllowJumpSubtests(allowJump)
 
     setLoading(false)
 
@@ -93,7 +98,9 @@ export default function ExamPage() {
     }
   }, [])
 
-  // Count available questions for each subtest
+  // Fix the navigation between subtests and ensure all questions are loaded
+
+  // Update the countAvailableQuestions function to properly count questions
   const countAvailableQuestions = () => {
     const subtests = [
       "Penalaran Umum",
@@ -273,35 +280,62 @@ export default function ExamPage() {
     saveAnswer(value)
   }
 
-  // Navigate to next question
+  // Update the handleNextQuestion function to properly navigate between subtests
   const handleNextQuestion = () => {
+    // Check if this is a mini practice session
+    const isPracticeMode = session?.isPracticeMode === true
+
+    if (isPracticeMode) {
+      // In practice mode, only navigate within the current subtest
+      const subtestQuestionCount = availableQuestions[currentSubtest] || 0
+
+      if (currentQuestionIndex < subtestQuestionCount) {
+        // Move to next question in current subtest
+        const nextIndex = currentQuestionIndex + 1
+        setCurrentQuestionIndex(nextIndex)
+
+        // Update session
+        const updatedSession = { ...session }
+        updatedSession.currentQuestion = nextIndex
+        localStorage.setItem("tryoutSession", JSON.stringify(updatedSession))
+
+        // Load the next question
+        loadQuestion(currentSubtest, nextIndex)
+      } else {
+        // End of practice, navigate to confirmation page
+        router.push("/confirm")
+      }
+      return
+    }
+
+    // Regular exam mode
     // Get the current subtest's question count
     const subtestInfo: Record<string, { count: number; nextSubtest: string | null }> = {
       "Penalaran Umum": {
-        count: availableQuestions["Penalaran Umum"] || 5,
+        count: availableQuestions["Penalaran Umum"] || 30,
         nextSubtest: "Pengetahuan dan Pemahaman Umum",
       },
       "Pengetahuan dan Pemahaman Umum": {
-        count: availableQuestions["Pengetahuan dan Pemahaman Umum"] || 5,
+        count: availableQuestions["Pengetahuan dan Pemahaman Umum"] || 20,
         nextSubtest: "Kemampuan Memahami Bacaan dan Menulis",
       },
       "Kemampuan Memahami Bacaan dan Menulis": {
-        count: availableQuestions["Kemampuan Memahami Bacaan dan Menulis"] || 5,
+        count: availableQuestions["Kemampuan Memahami Bacaan dan Menulis"] || 20,
         nextSubtest: "Pengetahuan Kuantitatif",
       },
       "Pengetahuan Kuantitatif": {
-        count: availableQuestions["Pengetahuan Kuantitatif"] || 5,
+        count: availableQuestions["Pengetahuan Kuantitatif"] || 20,
         nextSubtest: "Literasi dalam Bahasa Indonesia",
       },
       "Literasi dalam Bahasa Indonesia": {
-        count: availableQuestions["Literasi dalam Bahasa Indonesia"] || 5,
+        count: availableQuestions["Literasi dalam Bahasa Indonesia"] || 30,
         nextSubtest: "Literasi dalam Bahasa Inggris",
       },
       "Literasi dalam Bahasa Inggris": {
-        count: availableQuestions["Literasi dalam Bahasa Inggris"] || 5,
+        count: availableQuestions["Literasi dalam Bahasa Inggris"] || 20,
         nextSubtest: "Penalaran Matematika",
       },
-      "Penalaran Matematika": { count: availableQuestions["Penalaran Matematika"] || 5, nextSubtest: null },
+      "Penalaran Matematika": { count: availableQuestions["Penalaran Matematika"] || 20, nextSubtest: null },
     }
 
     const currentInfo = subtestInfo[currentSubtest]
@@ -338,33 +372,55 @@ export default function ExamPage() {
     }
   }
 
-  // Navigate to previous question
+  // Update the handlePrevQuestion function to properly navigate between subtests
   const handlePrevQuestion = () => {
+    // Check if this is a mini practice session
+    const isPracticeMode = session?.isPracticeMode === true
+
+    if (isPracticeMode) {
+      // In practice mode, only navigate within the current subtest
+      if (currentQuestionIndex > 1) {
+        // Move to previous question in current subtest
+        const prevIndex = currentQuestionIndex - 1
+        setCurrentQuestionIndex(prevIndex)
+
+        // Update session
+        const updatedSession = { ...session }
+        updatedSession.currentQuestion = prevIndex
+        localStorage.setItem("tryoutSession", JSON.stringify(updatedSession))
+
+        // Load the previous question
+        loadQuestion(currentSubtest, prevIndex)
+      }
+      return
+    }
+
+    // Regular exam mode
     // Get the previous subtest's info
     const subtestInfo: Record<string, { count: number; prevSubtest: string | null }> = {
-      "Penalaran Umum": { count: availableQuestions["Penalaran Umum"] || 5, prevSubtest: null },
+      "Penalaran Umum": { count: availableQuestions["Penalaran Umum"] || 30, prevSubtest: null },
       "Pengetahuan dan Pemahaman Umum": {
-        count: availableQuestions["Pengetahuan dan Pemahaman Umum"] || 5,
+        count: availableQuestions["Pengetahuan dan Pemahaman Umum"] || 20,
         prevSubtest: "Penalaran Umum",
       },
       "Kemampuan Memahami Bacaan dan Menulis": {
-        count: availableQuestions["Kemampuan Memahami Bacaan dan Menulis"] || 5,
+        count: availableQuestions["Kemampuan Memahami Bacaan dan Menulis"] || 20,
         prevSubtest: "Pengetahuan dan Pemahaman Umum",
       },
       "Pengetahuan Kuantitatif": {
-        count: availableQuestions["Pengetahuan Kuantitatif"] || 5,
+        count: availableQuestions["Pengetahuan Kuantitatif"] || 20,
         prevSubtest: "Kemampuan Memahami Bacaan dan Menulis",
       },
       "Literasi dalam Bahasa Indonesia": {
-        count: availableQuestions["Literasi dalam Bahasa Indonesia"] || 5,
+        count: availableQuestions["Literasi dalam Bahasa Indonesia"] || 30,
         prevSubtest: "Pengetahuan Kuantitatif",
       },
       "Literasi dalam Bahasa Inggris": {
-        count: availableQuestions["Literasi dalam Bahasa Inggris"] || 5,
+        count: availableQuestions["Literasi dalam Bahasa Inggris"] || 20,
         prevSubtest: "Literasi dalam Bahasa Indonesia",
       },
       "Penalaran Matematika": {
-        count: availableQuestions["Penalaran Matematika"] || 5,
+        count: availableQuestions["Penalaran Matematika"] || 20,
         prevSubtest: "Literasi dalam Bahasa Inggris",
       },
     }
@@ -383,7 +439,8 @@ export default function ExamPage() {
 
       // Load the previous question
       loadQuestion(currentSubtest, prevIndex)
-    } else if (currentInfo.prevSubtest) {
+    } else if (currentInfo.prevSubtest && allowJumpSubtests) {
+      // Only allow jumping to previous subtest if allowed
       // Move to last question of previous subtest
       const prevSubtest = currentInfo.prevSubtest
       const prevSubtestCount = subtestInfo[prevSubtest].count
@@ -564,12 +621,20 @@ export default function ExamPage() {
                   <Button
                     variant="outline"
                     onClick={handlePrevQuestion}
-                    disabled={currentSubtest === "Penalaran Umum" && currentQuestionIndex === 1}
+                    disabled={
+                      (currentSubtest === "Penalaran Umum" && currentQuestionIndex === 1) ||
+                      (session?.isPracticeMode && currentQuestionIndex === 1)
+                    }
                   >
                     Sebelumnya
                   </Button>
                   <Button onClick={handleNextQuestion}>
-                    {isLastQuestion(currentSubtest, currentQuestionIndex, availableQuestions)
+                    {isLastQuestion(
+                      currentSubtest,
+                      currentQuestionIndex,
+                      availableQuestions,
+                      session?.isPracticeMode === true,
+                    )
                       ? "Selesai"
                       : "Selanjutnya"}
                   </Button>
@@ -582,11 +647,11 @@ export default function ExamPage() {
               <div className="flex justify-between items-center mb-2">
                 <span className="text-sm font-medium">{currentSubtest}</span>
                 <span className="text-sm text-gray-500">
-                  {currentQuestionIndex} dari {availableQuestions[currentSubtest] || 5}
+                  {currentQuestionIndex} dari {availableQuestions[currentSubtest] || 0}
                 </span>
               </div>
               <Progress
-                value={(currentQuestionIndex / (availableQuestions[currentSubtest] || 5)) * 100}
+                value={(currentQuestionIndex / (availableQuestions[currentSubtest] || 1)) * 100}
                 className="h-2"
               />
             </div>
@@ -601,6 +666,8 @@ export default function ExamPage() {
                 currentQuestionIndex={currentQuestionIndex}
                 onNavigate={handleNavigate}
                 availableQuestions={availableQuestions}
+                isPracticeMode={session.isPracticeMode === true}
+                allowJumpSubtests={allowJumpSubtests}
               />
             )}
           </div>
@@ -610,7 +677,15 @@ export default function ExamPage() {
   )
 }
 
-// Helper function to check if this is the last question of the exam
-function isLastQuestion(subtest: string, questionIndex: number, availableQuestions: Record<string, number>): boolean {
-  return subtest === "Penalaran Matematika" && questionIndex === (availableQuestions["Penalaran Matematika"] || 5)
+// Update the isLastQuestion function to check against actual question count
+function isLastQuestion(
+  subtest: string,
+  questionIndex: number,
+  availableQuestions: Record<string, number>,
+  isPracticeMode: boolean,
+): boolean {
+  if (isPracticeMode) {
+    return questionIndex === (availableQuestions[subtest] || 0)
+  }
+  return subtest === "Penalaran Matematika" && questionIndex === (availableQuestions["Penalaran Matematika"] || 20)
 }

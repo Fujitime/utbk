@@ -43,14 +43,26 @@ export default function ConfirmPage() {
     // Calculate stats
     let answered = 0
     let flagged = 0
+    let totalQuestions = 0
 
     // Get flagged questions
     const flaggedQuestions = JSON.parse(localStorage.getItem("flaggedQuestions") || "{}")
 
-    // Count answered and flagged questions
-    Object.keys(parsedSession.subtes).forEach((subtest) => {
-      const subtestAnswers = parsedSession.subtes[subtest].soalJawaban
-      answered += Object.keys(subtestAnswers).length
+    // Check if this is a mini practice session
+    const isPracticeMode = parsedSession.isPracticeMode === true
+
+    if (isPracticeMode) {
+      // For mini practice, only count questions for the current subtest
+      const subtest = parsedSession.currentSubtest
+      const subtestAnswers = parsedSession.subtes[subtest].soalJawaban || {}
+
+      // Get the question count for this subtest
+      const questionsJson = localStorage.getItem(`questions_${subtest}`)
+      const questions = questionsJson ? JSON.parse(questionsJson) : []
+      totalQuestions = questions.length
+
+      // Count answered and flagged questions
+      answered = Object.keys(subtestAnswers).length
 
       // Count flagged in this subtest
       Object.keys(subtestAnswers).forEach((questionNumber) => {
@@ -58,13 +70,29 @@ export default function ConfirmPage() {
           flagged++
         }
       })
-    })
+    } else {
+      // For full exam, count all subtests
+      totalQuestions = 160
+
+      // Count answered and flagged questions
+      Object.keys(parsedSession.subtes).forEach((subtest) => {
+        const subtestAnswers = parsedSession.subtes[subtest].soalJawaban || {}
+        answered += Object.keys(subtestAnswers).length
+
+        // Count flagged in this subtest
+        Object.keys(subtestAnswers).forEach((questionNumber) => {
+          if (flaggedQuestions[`${subtest}-${questionNumber}`]) {
+            flagged++
+          }
+        })
+      })
+    }
 
     setStats({
       answered,
-      unanswered: 160 - answered,
+      unanswered: totalQuestions - answered,
       flagged,
-      total: 160,
+      total: totalQuestions,
     })
 
     setLoading(false)

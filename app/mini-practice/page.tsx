@@ -1,34 +1,59 @@
 "use client"
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { useState, useEffect } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Slider } from "@/components/ui/slider"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { Switch } from "@/components/ui/switch"
+import { Shuffle } from "lucide-react"
+import { getSubtestQuestions } from "@/lib/mock-questions"
 
 export default function MiniPracticePage() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const defaultMode = searchParams.get("mode") || "ai"
+
   const [selectedSubtest, setSelectedSubtest] = useState("Penalaran Umum")
   const [questionCount, setQuestionCount] = useState(10)
   const [timeLimit, setTimeLimit] = useState(15)
   const [apiKey, setApiKey] = useState("")
+  const [questionMode, setQuestionMode] = useState(defaultMode)
+  const [apiKeyExists, setApiKeyExists] = useState(false)
+  const [randomizeQuestions, setRandomizeQuestions] = useState(false)
 
   // Check if API key exists in localStorage
-  useState(() => {
+  useEffect(() => {
     const storedApiKey = localStorage.getItem("chatgpt-api-key")
     if (storedApiKey) {
       setApiKey(storedApiKey)
+      setApiKeyExists(true)
     }
-  })
+
+    // Set default question mode based on URL parameter and API key
+    if (defaultMode === "ai" && !storedApiKey) {
+      setQuestionMode("builtin")
+    } else {
+      setQuestionMode(defaultMode)
+    }
+  }, [defaultMode])
 
   const handleStartPractice = () => {
     // Store API key if provided
     if (apiKey) {
       localStorage.setItem("chatgpt-api-key", apiKey)
+      setApiKeyExists(true)
     }
+
+    // Store the selected mode
+    localStorage.setItem("questionMode", questionMode)
+
+    // Store the randomize questions preference
+    localStorage.setItem("randomizeQuestions", randomizeQuestions.toString())
 
     // Initialize a new mini practice session
     const practiceSession = {
@@ -49,27 +74,53 @@ export default function MiniPracticePage() {
         subtest: selectedSubtest,
         questionCount,
         timeLimit,
+        questionMode,
       },
     }
 
     localStorage.setItem("tryoutSession", JSON.stringify(practiceSession))
 
-    // Navigate to exam page
-    router.push("/exam")
+    // Navigate to question generation page if using AI, otherwise directly to exam
+    if (questionMode === "ai" && (apiKey || apiKeyExists)) {
+      localStorage.setItem("questionsGenerated", "false")
+      router.push("/generate-questions")
+    } else {
+      // For built-in questions, generate them now and go directly to exam
+      const questions = getSubtestQuestions(selectedSubtest, questionCount)
+
+      // Randomize questions if enabled
+      if (randomizeQuestions && questions.length >= 2) {
+        const shuffled = [...questions].sort(() => Math.random() - 0.5)
+        // Ensure IDs are sequential after shuffling
+        const reindexed = shuffled.map((q, index) => ({
+          ...q,
+          id: index + 1,
+        }))
+        localStorage.setItem(`questions_${selectedSubtest}`, JSON.stringify(reindexed))
+      } else {
+        localStorage.setItem(`questions_${selectedSubtest}`, JSON.stringify(questions))
+      }
+
+      localStorage.setItem("questionsGenerated", "true")
+      localStorage.setItem("useAIQuestions", "false")
+      router.push("/exam")
+    }
   }
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-2xl">
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-2xl font-bold">Latihan Mini</CardTitle>
+      <Card className="border-0 shadow-lg bg-gradient-to-b from-gray-50 to-white">
+        <CardHeader className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-t-lg">
+          <CardTitle className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
+            Latihan Mini
+          </CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-6">
           <div className="space-y-6">
             <div className="space-y-2">
               <Label htmlFor="subtest">Pilih Subtes</Label>
               <Select value={selectedSubtest} onValueChange={setSelectedSubtest}>
-                <SelectTrigger id="subtest">
+                <SelectTrigger id="subtest" className="bg-white">
                   <SelectValue placeholder="Pilih subtes" />
                 </SelectTrigger>
                 <SelectContent>
@@ -98,6 +149,7 @@ export default function MiniPracticePage() {
                 step={1}
                 value={[questionCount]}
                 onValueChange={(value) => setQuestionCount(value[0])}
+                className="bg-gradient-to-r from-blue-100 to-purple-100"
               />
             </div>
 
@@ -113,10 +165,45 @@ export default function MiniPracticePage() {
                 step={5}
                 value={[timeLimit]}
                 onValueChange={(value) => setTimeLimit(value[0])}
+                className="bg-gradient-to-r from-blue-100 to-purple-100"
               />
             </div>
 
-            {!localStorage.getItem("chatgpt-api-key") && (
+            <div className="space-y-2">
+              <Label>Mode Soal</Label>
+              <div className="flex space-x-4">
+                <RadioGroup value={questionMode} onValueChange={setQuestionMode}>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="ai" id="ai" disabled={!apiKeyExists && !apiKey} />
+                    <Label htmlFor="ai" className={!apiKeyExists && !apiKey ? "opacity-50" : ""}>
+                      Soal AI
+                      {!apiKeyExists && !apiKey && (
+                        <span className="text-xs text-red-500 block">Memerlukan API key</span>
+                      )}
+                    </Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="builtin" id="builtin" />
+                    <Label htmlFor="builtin">Soal Bawaan</Label>
+                  </div>
+                </RadioGroup>
+              </div>
+            </div>
+
+            {questionMode === "builtin" && (
+              <div className="flex items-center justify-between p-3 bg-gradient-to-r from-gray-50 to-blue-50 rounded-lg">
+                <div className="space-y-1">
+                  <Label htmlFor="randomizeQuestions" className="font-medium flex items-center">
+                    <Shuffle className="h-4 w-4 mr-1 text-blue-600" />
+                    Acak Urutan Soal
+                  </Label>
+                  <p className="text-sm text-gray-500">Mengacak urutan soal dalam subtes</p>
+                </div>
+                <Switch id="randomizeQuestions" checked={randomizeQuestions} onCheckedChange={setRandomizeQuestions} />
+              </div>
+            )}
+
+            {!apiKeyExists && questionMode === "ai" && (
               <div className="space-y-2">
                 <Label htmlFor="api-key">API Key ChatGPT</Label>
                 <Input
@@ -134,8 +221,8 @@ export default function MiniPracticePage() {
 
             <Button
               onClick={handleStartPractice}
-              className="w-full bg-blue-600 hover:bg-blue-700"
-              disabled={!localStorage.getItem("chatgpt-api-key") && !apiKey}
+              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-md hover:shadow-lg transition-all duration-300"
+              disabled={questionMode === "ai" && !apiKeyExists && !apiKey}
             >
               Mulai Latihan
             </Button>

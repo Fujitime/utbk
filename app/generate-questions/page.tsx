@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Checkbox } from "@/components/ui/checkbox"
-import { InfoIcon, AlertTriangle, CheckCircle } from "lucide-react"
+import { InfoIcon, AlertTriangle, CheckCircle, Shuffle } from "lucide-react"
 import { getSubtestQuestions } from "@/lib/mock-questions"
 
 export default function GenerateQuestionsPage() {
@@ -22,6 +22,7 @@ export default function GenerateQuestionsPage() {
   const [apiKeyExists, setApiKeyExists] = useState(false)
   const [questionMode, setQuestionMode] = useState("ai")
   const [availableQuestionCounts, setAvailableQuestionCounts] = useState<Record<string, number>>({})
+  const [randomizeQuestions, setRandomizeQuestions] = useState(false)
 
   // Subtest info
   const subtestInfo: Record<string, number> = {
@@ -44,6 +45,10 @@ export default function GenerateQuestionsPage() {
     setQuestionMode(mode)
     setUseAI(mode === "ai")
 
+    // Get randomize questions preference
+    const shouldRandomize = localStorage.getItem("randomizeQuestions") === "true"
+    setRandomizeQuestions(shouldRandomize)
+
     // Load session from localStorage
     const savedSession = localStorage.getItem("tryoutSession")
     if (!savedSession) {
@@ -53,6 +58,13 @@ export default function GenerateQuestionsPage() {
 
     const parsedSession = JSON.parse(savedSession)
     setSession(parsedSession)
+
+    // If using built-in mode, generate questions now and skip to exam
+    if (mode === "builtin") {
+      generateBuiltInQuestions(parsedSession, shouldRandomize).then(() => {
+        router.push("/exam")
+      })
+    }
 
     // Check if questions are already generated
     const questionsGenerated = localStorage.getItem("questionsGenerated")
@@ -64,6 +76,98 @@ export default function GenerateQuestionsPage() {
       countAvailableQuestions()
     }
   }, [])
+
+  // Function to shuffle an array
+  const shuffleArray = (array: any[]) => {
+    // Only shuffle if there are at least 2 items
+    if (array.length < 2) return array
+
+    const shuffled = [...array]
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+    }
+    return shuffled
+  }
+
+  // Add a function to generate built-in questions
+  const generateBuiltInQuestions = async (sessionData: any, shouldRandomize: boolean) => {
+    if (!sessionData) return false
+
+    try {
+      // Check if this is a mini practice session
+      const isPracticeMode = sessionData.isPracticeMode
+
+      if (isPracticeMode) {
+        // For mini practice, only generate questions for the selected subtest
+        const subtest = sessionData.currentSubtest
+        const count = sessionData.practiceConfig?.questionCount || 5
+
+        // Get built-in questions for this subtest
+        let questions = getSubtestQuestions(subtest, count)
+
+        // Randomize questions if enabled
+        if (shouldRandomize && questions.length >= 2) {
+          questions = shuffleArray(questions)
+
+          // Ensure IDs are sequential after shuffling
+          questions = questions.map((q, index) => ({
+            ...q,
+            id: index + 1,
+          }))
+        }
+
+        // Store questions in localStorage
+        localStorage.setItem(`questions_${subtest}`, JSON.stringify(questions))
+
+        // Store the count
+        const questionCounts: Record<string, number> = {}
+        questionCounts[subtest] = questions.length
+        setAvailableQuestionCounts(questionCounts)
+        localStorage.setItem("availableQuestionCounts", JSON.stringify(questionCounts))
+      } else {
+        // Get all subtests
+        const subtests = Object.keys(subtestInfo)
+        const questionCounts: Record<string, number> = {}
+
+        // Generate questions for each subtest
+        for (const subtest of subtests) {
+          // Get built-in questions for this subtest
+          let questions = getSubtestQuestions(subtest, subtestInfo[subtest])
+
+          // Randomize questions if enabled
+          if (shouldRandomize && questions.length >= 2) {
+            questions = shuffleArray(questions)
+
+            // Ensure IDs are sequential after shuffling
+            questions = questions.map((q, index) => ({
+              ...q,
+              id: index + 1,
+            }))
+          }
+
+          // Store questions in localStorage
+          localStorage.setItem(`questions_${subtest}`, JSON.stringify(questions))
+
+          // Store the count
+          questionCounts[subtest] = questions.length
+        }
+
+        // Store available question counts
+        setAvailableQuestionCounts(questionCounts)
+        localStorage.setItem("availableQuestionCounts", JSON.stringify(questionCounts))
+      }
+
+      // Mark questions as generated
+      localStorage.setItem("questionsGenerated", "true")
+      localStorage.setItem("useAIQuestions", "false")
+
+      return true
+    } catch (err) {
+      console.error("Error generating built-in questions:", err)
+      return false
+    }
+  }
 
   // Count available questions for each subtest
   const countAvailableQuestions = () => {
@@ -93,39 +197,62 @@ export default function GenerateQuestionsPage() {
     setError(null)
 
     try {
-      // Get all subtests
-      const subtests = Object.keys(subtestInfo)
-      let totalProgress = 0
-      const totalQuestions = subtests.reduce((sum, subtest) => sum + subtestInfo[subtest], 0)
-      let questionsGenerated = 0
-      const questionCounts: Record<string, number> = {}
+      // Check if this is a mini practice session
+      const isPracticeMode = session.isPracticeMode
 
-      // Generate questions for each subtest
-      for (const subtest of subtests) {
+      if (isPracticeMode) {
+        // For mini practice, only generate questions for the selected subtest
+        const subtest = session.currentSubtest
+        const count = session.practiceConfig?.questionCount || 5
+
         setCurrentSubtest(subtest)
 
-        // If using built-in questions or AI is disabled
-        if (!useAI || questionMode === "builtin") {
-          // Get built-in questions for this subtest
-          // Don't force a specific count - use what's available
-          const questions = getSubtestQuestions(subtest, 5)
+        // Check if API key exists
+        if (!apiKeyExists) {
+          throw new Error("API key tidak ditemukan. Silakan masukkan API key ChatGPT di halaman instruksi.")
+        }
 
-          // Store questions in localStorage
-          localStorage.setItem(`questions_${subtest}`, JSON.stringify(questions))
+        // Simulate generating questions one by one
+        for (let i = 1; i <= count; i++) {
+          // Simulate API call delay
+          await new Promise((resolve) => setTimeout(resolve, 200))
 
-          // Store the count
-          questionCounts[subtest] = questions.length
+          // Update progress
+          setProgress(Math.round((i / count) * 100))
+        }
 
-          // Update progress based on the actual number of questions
-          questionsGenerated += questions.length
-          totalProgress = Math.round((questionsGenerated / totalQuestions) * 100)
-          setProgress(totalProgress)
+        // Store mock questions for now
+        let questions = getSubtestQuestions(subtest, count)
 
-          // Simulate some delay to show progress
-          await new Promise((resolve) => setTimeout(resolve, 500))
-        } else {
-          // Simulate AI question generation with a delay
-          // In a real implementation, this would make API calls to generate questions
+        // Randomize questions if enabled
+        if (randomizeQuestions && questions.length >= 2) {
+          questions = shuffleArray(questions)
+
+          // Ensure IDs are sequential after shuffling
+          questions = questions.map((q, index) => ({
+            ...q,
+            id: index + 1,
+          }))
+        }
+
+        localStorage.setItem(`questions_${subtest}`, JSON.stringify(questions))
+
+        // Store the count
+        const questionCounts: Record<string, number> = {}
+        questionCounts[subtest] = questions.length
+        setAvailableQuestionCounts(questionCounts)
+        localStorage.setItem("availableQuestionCounts", JSON.stringify(questionCounts))
+      } else {
+        // Get all subtests
+        const subtests = Object.keys(subtestInfo)
+        let totalProgress = 0
+        const totalQuestions = subtests.reduce((sum, subtest) => sum + subtestInfo[subtest], 0)
+        let questionsGenerated = 0
+        const questionCounts: Record<string, number> = {}
+
+        // Generate questions for each subtest
+        for (const subtest of subtests) {
+          setCurrentSubtest(subtest)
 
           // Check if API key exists
           if (!apiKeyExists) {
@@ -144,17 +271,29 @@ export default function GenerateQuestionsPage() {
           }
 
           // Store mock questions for now
-          const questions = getSubtestQuestions(subtest, 5)
+          let questions = getSubtestQuestions(subtest, subtestInfo[subtest])
+
+          // Randomize questions if enabled
+          if (randomizeQuestions && questions.length >= 2) {
+            questions = shuffleArray(questions)
+
+            // Ensure IDs are sequential after shuffling
+            questions = questions.map((q, index) => ({
+              ...q,
+              id: index + 1,
+            }))
+          }
+
           localStorage.setItem(`questions_${subtest}`, JSON.stringify(questions))
 
           // Store the count
           questionCounts[subtest] = questions.length
         }
-      }
 
-      // Store available question counts
-      setAvailableQuestionCounts(questionCounts)
-      localStorage.setItem("availableQuestionCounts", JSON.stringify(questionCounts))
+        // Store available question counts
+        setAvailableQuestionCounts(questionCounts)
+        localStorage.setItem("availableQuestionCounts", JSON.stringify(questionCounts))
+      }
 
       // Mark questions as generated
       localStorage.setItem("questionsGenerated", "true")
@@ -178,16 +317,18 @@ export default function GenerateQuestionsPage() {
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-4xl">
-      <Card className="mb-8">
-        <CardHeader>
-          <CardTitle className="text-2xl font-bold">Persiapan Soal Ujian</CardTitle>
+      <Card className="mb-8 border-0 shadow-lg bg-gradient-to-b from-gray-50 to-white">
+        <CardHeader className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-t-lg">
+          <CardTitle className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
+            Persiapan Soal Ujian
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-6">
             {!isComplete && (
               <>
-                <Alert className="bg-blue-50 dark:bg-blue-950">
-                  <InfoIcon className="h-4 w-4" />
+                <Alert className="bg-gradient-to-r from-blue-50 to-purple-50 border-0 shadow-sm">
+                  <InfoIcon className="h-4 w-4 text-blue-600" />
                   <AlertDescription>
                     Sebelum memulai ujian, sistem perlu menyiapkan semua soal. Proses ini mungkin memerlukan waktu
                     beberapa menit.
@@ -209,6 +350,13 @@ export default function GenerateQuestionsPage() {
                   </label>
                 </div>
 
+                {randomizeQuestions && (
+                  <div className="flex items-center space-x-2 mb-4">
+                    <Shuffle className="h-4 w-4 text-blue-600" />
+                    <span className="text-sm font-medium">Soal akan diacak dalam setiap subtes</span>
+                  </div>
+                )}
+
                 {error && (
                   <Alert variant="destructive">
                     <AlertTriangle className="h-4 w-4" />
@@ -221,7 +369,7 @@ export default function GenerateQuestionsPage() {
                     <span className="text-sm font-medium">Progress Persiapan Soal</span>
                     <span className="text-sm text-gray-500">{progress}%</span>
                   </div>
-                  <Progress value={progress} className="h-2" />
+                  <Progress value={progress} className="h-2 bg-gray-100" />
                   {isGenerating && currentSubtest && (
                     <p className="text-sm text-gray-500">Menyiapkan soal untuk: {currentSubtest}</p>
                   )}
@@ -230,7 +378,10 @@ export default function GenerateQuestionsPage() {
                 <div className="flex flex-col sm:flex-row gap-4">
                   {!isGenerating ? (
                     <>
-                      <Button onClick={generateAllQuestions} className="bg-blue-600 hover:bg-blue-700">
+                      <Button
+                        onClick={generateAllQuestions}
+                        className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-md hover:shadow-lg transition-all duration-300"
+                      >
                         Mulai Persiapan Soal
                       </Button>
                       {error && (
@@ -240,7 +391,7 @@ export default function GenerateQuestionsPage() {
                       )}
                     </>
                   ) : (
-                    <Button disabled>
+                    <Button disabled className="bg-gradient-to-r from-blue-600 to-purple-600">
                       <span className="animate-spin mr-2">⏳</span> Menyiapkan Soal...
                     </Button>
                   )}
@@ -257,7 +408,10 @@ export default function GenerateQuestionsPage() {
 
                 <p>Semua soal telah siap. Anda dapat memulai ujian sekarang.</p>
 
-                <Button onClick={handleContinue} className="bg-blue-600 hover:bg-blue-700">
+                <Button
+                  onClick={handleContinue}
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-md hover:shadow-lg transition-all duration-300"
+                >
                   Mulai Ujian
                 </Button>
               </div>
