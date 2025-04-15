@@ -1086,7 +1086,7 @@ export default function ResultsPage() {
                                     <div className="relative max-w-full overflow-auto">
                                       <Image
                                         src={question.image || question.diagram || question.map}
-                                        alt="Question visual"
+                                        alt={question.image || question.diagram || question.map}
                                         width={600}
                                         height={400}
                                         className="object-contain rounded-md border border-gray-200"
