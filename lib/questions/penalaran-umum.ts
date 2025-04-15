@@ -3,61 +3,61 @@
 export const penalaranUmumQuestions = [
   {
     id: 1,
-    text: "Sebagian orang yang memasuki usia lanjut berisiko mengalami katarak... Berdasarkan informasi tersebut, manakah pernyataan yang PASTI BENAR?",
+    text: "Sebagian orang yang memasuki usia lanjut berisiko mengalami katarak. Katarak terjadi karena terdapat gumpalan protein pada lensa mata sehingga lensa menjadi keruh dan penglihatan menurun. Berdasarkan informasi tersebut, manakah pernyataan yang PASTI BENAR?",
+    type: "single",
     options: [
       { id: "A", text: "Katarak tidak akan terjadi pada seseorang yang berusia muda." },
       { id: "B", text: "Semua orang yang menderita katarak akan mengalami kebutaan." },
       { id: "C", text: "Gangguan penglihatan tidak akan terjadi apabila tidak menderita katarak." },
       { id: "D", text: "Semua orang yang memasuki usia lanjut tidak berisiko mengalami katarak." },
-      { id: "E", text: "Sebagian orang yang memasuki usia lanjut berisiko mengalami penurunan penglihatan." },
+      { id: "E", text: "Sebagian orang yang memasuki usia lanjut berisiko mengalami penurunan penglihatan." }
     ],
     correctAnswer: "E",
-    explanation:
-      "Disebutkan bahwa sebagian orang yang memasuki usia lanjut berisiko mengalami katarak, dan katarak menyebabkan penurunan penglihatan. Maka, sebagian orang lanjut usia berisiko mengalami penurunan penglihatan.",
+    explanation: "Katarak terjadi pada sebagian lansia, menyebabkan penurunan penglihatan. Pernyataan E paling sesuai dengan isi teks."
   },
   {
     id: 2,
-    text: "Bayi sebelum usia 12 bulan tidak diperbolehkan mengonsumsi madu... Berdasarkan informasi tersebut, manakah pernyataan yang PASTI SALAH?",
+    text: "Bayi di bawah usia 12 bulan tidak boleh mengonsumsi madu karena sistem pencernaannya belum sempurna. Madu mengandung spora Clostridium botulinum. Berdasarkan informasi ini, manakah pernyataan yang PASTI SALAH?",
+    type: "single",
     options: [
       { id: "A", text: "Sistem pencernaan bayi terganggu karena mengonsumsi madu." },
       { id: "B", text: "Bayi kurang dari setahun akan mengalami infeksi saluran pencernaan jika mengonsumsi madu." },
       { id: "C", text: "Madu aman dikonsumsi siapa pun karena memiliki manfaat untuk kesehatan." },
       { id: "D", text: "Orang dewasa dapat mengalami gangguan pencernaan karena mengonsumsi madu." },
-      { id: "E", text: "Madu dalam jumlah banyak tidak berbahaya untuk bayi berusia lebih dari satu tahun." },
+      { id: "E", text: "Madu dalam jumlah banyak tidak berbahaya untuk bayi berusia lebih dari satu tahun." }
     ],
     correctAnswer: "C",
-    explanation:
-      "Pernyataan C jelas salah karena disebutkan bahwa madu tidak aman untuk bayi di bawah 12 bulan karena bisa menyebabkan infeksi.",
+    explanation: "Pernyataan C menyatakan madu aman untuk semua orang, padahal bayi di bawah 1 tahun tidak boleh mengonsumsinya. Ini pasti salah."
   },
   {
     id: 3,
-    text: "Jika Hamdan mendapatkan diskon 15% di Kedai Kopi Merdeka dan menjadi anggota VVIP di Hotel Merdeka... manakah simpulan yang PALING MUNGKIN BENAR?",
+    text: "Hamdan mendapat diskon 15% di Kedai Kopi Merdeka dan menjadi anggota VVIP di Hotel Merdeka. Berdasarkan teks, manakah simpulan yang PALING MUNGKIN BENAR?",
+    type: "single",
     options: [
       { id: "A", text: "Hamdan telah memiliki kartu kredit black card Merdeka." },
       { id: "B", text: "Hamdan pernah memiliki kartu kredit black card Merdeka." },
       { id: "C", text: "Hamdan baru saja memiliki kartu kredit black card Merdeka." },
       { id: "D", text: "Hamdan sudah pasti memiliki kartu kredit black card Merdeka." },
-      { id: "E", text: "Hamdan mungkin saja memiliki kartu kredit black card Merdeka." },
+      { id: "E", text: "Hamdan mungkin saja memiliki kartu kredit black card Merdeka." }
     ],
     correctAnswer: "A",
-    explanation:
-      "Diskon 15% dan keanggotaan VVIP adalah benefit khusus untuk pemilik kartu black card Merdeka, sehingga simpulan yang paling mungkin benar adalah Hamdan memiliki kartu tersebut.",
-  },
+    explanation: "Diskon dan keanggotaan VVIP hanya diberikan kepada pemilik black card, jadi simpulan A paling mungkin benar."
+    },
   // Soal 4 sampai 30
   {
     id: 4,
-    text: "Nara berangkat ke sekolah menggunakan bus sekolah atau diantar orang tuanya. Kemarin, Nara berangkat ke sekolah tidak menggunakan bus. Manakah simpulan berikut yang PALING TEPAT?",
+    text: "Nara berangkat ke sekolah menggunakan bus sekolah atau diantar orang tuanya. Kemarin Nara tidak menggunakan bus. Manakah simpulan PALING TEPAT?",
+    type: "single",
     options: [
       { id: "A", text: "Kemarin semua sekolah libur." },
       { id: "B", text: "Kemarin Nara tidak berangkat ke sekolah." },
       { id: "C", text: "Kemarin Nara menginap di asrama sekolah." },
       { id: "D", text: "Kemarin Nara berangkat ke sekolah diantar orang tuanya." },
-      { id: "E", text: "Kemarin Nara berangkat ke sekolah tidak diantar orang tuanya." },
+      { id: "E", text: "Kemarin Nara berangkat ke sekolah tidak diantar orang tuanya." }
     ],
     correctAnswer: "D",
-    explanation:
-      "Karena hanya ada dua pilihan moda transportasi ke sekolah (bus atau diantar orang tua), dan diketahui Nara tidak menggunakan bus, maka simpulan yang paling tepat adalah dia diantar orang tuanya.",
-  },
+    explanation: "Kalau tidak naik bus dan tetap berangkat, maka dia diantar orang tuanya. Jawaban D paling tepat."
+   },
   {
     id: 5,
     text: "Rendahnya motivasi belajar dan kurangnya dukungan lingkungan sekitar mengakibatkan prestasi belajar menurun. Siswa tidak akan menerima Beasiswa A apabila prestasi belajar menurun. Desta selalu memperoleh Beasiswa A setiap tahun. Manakah simpulan berikut yang BENAR?",
@@ -391,18 +391,18 @@ export const penalaranUmumQuestions = [
   },
   {
     id: 22,
-    text: "Terdapat dua loyang pizza yang potongannya sama banyak dan sama besar. Alam mendapatkan 5 potong pizza yang merupakan 12,5% dari total potongan. Satu loyang pizza terdiri atas ... potong pizza.",
+    text: "Terdapat dua loyang pizza. Alam mendapatkan 5 potong, yang merupakan 12,5% dari total potongan pizza. Satu loyang terdiri atas ... potong pizza.",
+    type: "single",
     options: [
       { id: "A", text: "12" },
       { id: "B", text: "14" },
       { id: "C", text: "16" },
       { id: "D", text: "18" },
-      { id: "E", text: "20" },
+      { id: "E", text: "20" }
     ],
     correctAnswer: "E",
-    explanation:
-      "Total potongan = 5 / 12,5% = 40. Maka 1 loyang = 40 / 2 = 20. Jawaban yang benar adalah 20, yaitu opsi E.",
-  },
+    explanation: "5 potong = 12.5% → total = 5 ÷ 0.125 = 40 → 2 loyang = 40 → 1 loyang = 20."
+   },
   {
     id: 24,
     text: "Hari menjual tas dengan harga Rp315.000,00 dan mengalami kerugian 10%. Harga beli = 315.000 / 90% = 350.000. Untuk untung, harus menjual di atas itu. Maka harga jual agar untung adalah ....",
@@ -445,55 +445,61 @@ export const penalaranUmumQuestions = [
   },
   {
     id: 27,
-    text: "THR Hajar, Suci, dan Yusuf tahun lalu 5:2:6, total Rp14.300.000. Hajar dapat 5/13 × 14.300.000 = Rp5.500.000. Naik 10% = ...",
+    text: "THR Hajar:Suci:Yusuf = 5:2:6. Total THR = Rp14.300.000. Hajar dapat kenaikan 10%. THR Hajar tahun ini adalah ....",
+    type: "single",
     options: [
       { id: "A", text: "Rp5.050.000,00" },
       { id: "B", text: "Rp5.550.000,00" },
       { id: "C", text: "Rp6.050.000,00" },
       { id: "D", text: "Rp6.550.000,00" },
-      { id: "E", text: "Rp7.050.000,00" },
+      { id: "E", text: "Rp7.050.000,00" }
     ],
     correctAnswer: "C",
-    explanation: "Naik 10% dari 5.500.000 adalah 550.000, total = 6.050.000.",
+    explanation: "Total rasio: 13 → Hajar: 5/13 × 14.300.000 = 5.500.000 → naik 10% = 6.050.000"
+  
   },
   {
     id: 28,
-    text: "Market Day nilai akhir = 45% Proposal + 55% Penjualan. Kelas A: 90×0,45+80×0,55=84.5; B=85.5; C=85.5; D=89; E=75. Kelas tertinggi?",
+    text: "Market Day: nilai akhir = 45% Proposal + 55% Penjualan. Nilai kelas:\nA(90,80), B(80,90), C(70,100), D(100,80), E(80,70). Kelas dengan nilai akhir tertinggi adalah ....",
+    type: "single",
     options: [
       { id: "A", text: "Kelas A" },
       { id: "B", text: "Kelas B" },
       { id: "C", text: "Kelas C" },
       { id: "D", text: "Kelas D" },
-      { id: "E", text: "Kelas E" },
+      { id: "E", text: "Kelas E" }
     ],
-    correctAnswer: "D",
-    explanation: "Kelas D mendapat nilai akhir tertinggi yaitu 89.",
+    correctAnswer: "C",
+    explanation: "C: 45%×70 + 55%×100 = 31.5 + 55 = 86.5 → nilai tertinggi dibandingkan kelas lain."
+  
   },
   {
     id: 29,
-    text: "Sebuah toko keripik mencatat penjualan produk rasa balado dan rumput laut selama lima bulan. Jika penjualan keripik balado meningkat dari 100 ke 160 bungkus, dan keripik rumput laut dari 90 ke 140 bungkus, maka kenaikan penjualan paling besar adalah ....",
+    text: "Diagram menunjukkan penjualan keripik rasa balado dan rumput laut selama Januari–Mei. Kenaikan penjualan terbesar terjadi pada ....",
+    type: "single",
+    diagram: "/images/puimg.png",
     options: [
-      { id: "A", text: "keripik balado, Januari-Februari" },
-      { id: "B", text: "keripik rumput laut, Februari-Maret" },
-      { id: "C", text: "keripik balado, Maret-April" },
-      { id: "D", text: "keripik rumput laut, Maret-April" },
-      { id: "E", text: "keripik balado, April-Mei" },
+      { id: "A", text: "Keripik balado, Januari–Februari" },
+      { id: "B", text: "Keripik rumput laut, Februari–Maret" },
+      { id: "C", text: "Keripik balado, Maret–April" },
+      { id: "D", text: "Keripik rumput laut, Maret–April" },
+      { id: "E", text: "Keripik balado, April–Mei" }
     ],
-    correctAnswer: "E",
-    explanation:
-      "Dalam simulasi soal ini, data asumsi digunakan untuk mengganti grafik. Peningkatan keripik balado antara April-Mei merupakan yang paling signifikan.",
-  },
+    correctAnswer: "A",
+    explanation: "Dari diagram, kenaikan tajam keripik balado terlihat paling besar antara Januari dan Februari."
+    },
   {
     id: 30,
-    text: "Pernyataan manakah yang paling tepat berdasarkan data penjualan keripik?",
+    text: "Pernyataan manakah yang PALING TEPAT berdasarkan data penjualan keripik di diagram?",
+    type: "single",
     options: [
       { id: "A", text: "Total penjualan keripik tertinggi terjadi pada bulan Maret." },
       { id: "B", text: "Total penjualan keripik terendah terjadi pada bulan April." },
       { id: "C", text: "Total penjualan keripik balado dan rumput laut sama banyak." },
-      { id: "D", text: "Total penjualan keripik pada bulan Januari dan Maret sama banyak." },
-      { id: "E", text: "Total penjualan keripik balado lebih sedikit dari keripik rumput laut." },
+      { id: "D", text: "Total penjualan keripik Januari dan Maret sama banyak." },
+      { id: "E", text: "Penjualan keripik balado lebih sedikit dari rumput laut." }
     ],
     correctAnswer: "B",
-    explanation: "Dari grafik, April adalah bulan dengan total penjualan terendah untuk kedua jenis keripik.",
+    explanation: "Dari grafik, bulan April tampak sebagai titik terendah total penjualan kedua rasa keripik."
   },
 ]
