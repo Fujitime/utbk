@@ -68,7 +68,11 @@ export default function RootLayout({
     <html lang="id">
       <head>
         <link rel="canonical" href="https://utbk-simulator.vercel.app/" />
-        <meta name="google-site-verification" content="your-verification-code" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
+        <link rel="manifest" href="/site.webmanifest"/>
+        <meta name="google-site-verification" content="8P23QSTZuBhdGUN41YJky9h4_XBDTWuyxeQQlcZ3crQ" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
