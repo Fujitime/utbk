@@ -321,7 +321,7 @@ export default function InstructionsPage() {
 
             <Button
               onClick={handleStartExam}
-              className="w-full md:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+              className="w-full md:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-md hover:shadow-lg transition-all duration-300"
             >
               Saya Mengerti, Lanjutkan
             </Button>

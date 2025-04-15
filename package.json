@@ -1,7 +1,10 @@
 {
-  "name": "my-v0-project",
+  "name": "utbk",
   "version": "0.1.0",
   "private": true,
+  "description": "Simulasi UTBK gratis dengan Next.js",
+  "author": "fujitime",
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -59,8 +62,8 @@
     "vaul": "^0.9.6",
     "zod": "^3.24.1",
     "@emotion/is-prop-valid": "latest",
-    "better-react-mathjax": "latest",
     "framer-motion": "latest",
+    "better-react-mathjax": "latest",
     "jspdf": "latest"
   },
   "devDependencies": {

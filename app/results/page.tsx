@@ -308,7 +308,6 @@ export default function ResultsPage() {
     }
   }
 
-  // Fix the handleRetry function to properly handle redirects after mini practice
   const handleRetry = () => {
     // Check if this was a mini practice session
     const isPracticeMode = session?.isPracticeMode === true
@@ -336,7 +335,7 @@ export default function ResultsPage() {
     // Navigate to appropriate page based on session type
     if (isPracticeMode) {
       const mode = localStorage.getItem("questionMode") || "builtin"
-      router.push(`/mini-practice?mode=${mode}`)
+      router.push(`/register?mode=${mode}&practice=true`)
     } else {
       // Navigate to instructions page
       router.push("/register")
@@ -838,7 +837,7 @@ export default function ResultsPage() {
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="overview" value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="flex w-full mb-4 gap-1 flex-wrap">
+            <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 mb-4 gap-1 overflow-x-auto">
               <TabsTrigger value="overview" className="text-xs md:text-sm px-2 py-1">
                 Ringkasan
               </TabsTrigger>
@@ -1096,7 +1095,7 @@ export default function ResultsPage() {
                                   </div>
                                 )}
 
-                                <div className="grid gap-3">
+                                <div className="grid gap-2">
                                   {question.type === "multiple" ? (
                                     // Multiple choice (checkbox)
                                     question.options && question.options.length > 0 ? (
@@ -1110,7 +1109,7 @@ export default function ResultsPage() {
                                         return (
                                           <div
                                             key={option.id}
-                                            className={`p-4 rounded-md border ${
+                                            className={`p-3 rounded-md border ${
                                               isCorrectAnswer
                                                 ? "bg-green-50 border-green-200"
                                                 : isUserAnswer && !isCorrectAnswer
@@ -1118,21 +1117,19 @@ export default function ResultsPage() {
                                                   : ""
                                             }`}
                                           >
-                                            <div className="flex items-start">
-                                              <span className="font-semibold mr-2 flex-shrink-0">{option.id}.</span>
-                                              <MathJax className="break-words">{option.text}</MathJax>
-                                            </div>
+                                            <span className="font-semibold mr-2">{option.id}.</span>
+                                            <MathJax>{option.text}</MathJax>
                                           </div>
                                         )
                                       })
                                     ) : (
-                                      <div className="p-4 rounded-md border">
+                                      <div className="p-3 rounded-md border">
                                         <span className="text-gray-500">Tidak ada pilihan jawaban tersedia</span>
                                       </div>
                                     )
                                   ) : question.type === "numeric" ? (
                                     // Numeric input
-                                    <div className="p-4 rounded-md border">
+                                    <div className="p-3 rounded-md border">
                                       <span className="font-semibold">Jawaban Numerik:</span>
                                       <span className="ml-2">{question.userAnswer || "-"}</span>
                                       <span className="ml-4 text-green-600">
@@ -1144,7 +1141,7 @@ export default function ResultsPage() {
                                     question.options.map((option: any) => (
                                       <div
                                         key={option.id}
-                                        className={`p-4 rounded-md border ${
+                                        className={`p-3 rounded-md border ${
                                           option.id === question.correctAnswer
                                             ? "bg-green-50 border-green-200"
                                             : option.id === question.userAnswer && option.id !== question.correctAnswer
@@ -1152,14 +1149,12 @@ export default function ResultsPage() {
                                               : ""
                                         }`}
                                       >
-                                        <div className="flex items-start">
-                                          <span className="font-semibold mr-2 flex-shrink-0">{option.id}.</span>
-                                          <MathJax className="break-words">{option.text}</MathJax>
-                                        </div>
+                                        <span className="font-semibold mr-2">{option.id}.</span>
+                                        <MathJax>{option.text}</MathJax>
                                       </div>
                                     ))
                                   ) : (
-                                    <div className="p-4 rounded-md border">
+                                    <div className="p-3 rounded-md border">
                                       <span className="text-gray-500">Tidak ada pilihan jawaban tersedia</span>
                                     </div>
                                   )}

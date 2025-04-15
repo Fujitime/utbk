@@ -125,7 +125,7 @@ export default function MiniPracticePage() {
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-2xl">
-      <Card className="border-0 shadow-lg bg-gradient-to-b from-gray-50 to-white hover:shadow-xl transition-all duration-300">
+      <Card className="border-0 shadow-lg bg-gradient-to-b from-gray-50 to-white">
         <CardHeader className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-t-lg">
           <CardTitle className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
             Latihan Mini
@@ -237,7 +237,7 @@ export default function MiniPracticePage() {
 
             <Button
               onClick={handleStartPractice}
-              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-md hover:shadow-lg transition-all duration-300"
               disabled={questionMode === "ai" && !apiKeyExists && !apiKey}
             >
               Mulai Latihan

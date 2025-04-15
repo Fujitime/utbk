@@ -28,6 +28,7 @@ export default function RegisterPage() {
   }, [])
 
   const handleSubmit = (e: React.FormEvent) => {
+    console.log("handleSubmit called") 
     e.preventDefault()
 
     // Validate inputs
@@ -50,17 +51,25 @@ export default function RegisterPage() {
 
     localStorage.setItem("userData", JSON.stringify(userData))
 
-    // Get the search parameters from the URL
     const urlParams = new URLSearchParams(window.location.search)
     const mode = urlParams.get("mode") || "builtin"
     const isPractice = urlParams.get("practice") === "true"
+    const isMiniPractice = window.location.pathname.includes("mini-practice")
+    
+    // test debug dulu guys
+    // console.log("mode:", mode)
+    // console.log("practice:", urlParams.get("practice"))
+    // console.log("isPractice:", isPractice) 
 
-    // Redirect to instructions page with the appropriate parameters
+    
     if (isPractice) {
-      router.push(`/instructions?mode=${mode}&practice=true`)
+      router.push(`/mini-practice?mode=${mode}`)
     } else {
       router.push(`/instructions?mode=${mode}`)
     }
+    
+        
+    
   }
 
   return (
@@ -70,7 +79,9 @@ export default function RegisterPage() {
           <CardTitle className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
             Registrasi Peserta
           </CardTitle>
-          <CardDescription>Silakan lengkapi data diri Anda sebelum memulai simulasi UTBK</CardDescription>
+          <CardDescription>
+          Silakan lengkapi data diri Anda sebelum memulai simulasi UTBK. Data tidak disimpan di server.
+        </CardDescription>
         </CardHeader>
         <CardContent className="p-6">
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -105,7 +116,7 @@ export default function RegisterPage() {
 
             <Button
               type="submit"
-              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-md hover:shadow-lg transition-all duration-300"
             >
               Lanjutkan
             </Button>

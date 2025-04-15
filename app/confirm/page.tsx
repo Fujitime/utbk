@@ -146,41 +146,6 @@ export default function ConfirmPage() {
     router.push("/exam")
   }
 
-  const handleRetry = () => {
-    // Check if this was a mini practice session
-    const isPracticeMode = session?.isPracticeMode === true
-
-    // Clear session and start a new one
-    localStorage.removeItem("tryoutSession")
-    localStorage.removeItem("flaggedQuestions")
-    localStorage.removeItem("questionsGenerated")
-
-    // Clear all questions
-    const subtests = [
-      "Penalaran Umum",
-      "Pengetahuan dan Pemahaman Umum",
-      "Kemampuan Memahami Bacaan dan Menulis",
-      "Pengetahuan Kuantitatif",
-      "Literasi dalam Bahasa Indonesia",
-      "Literasi dalam Bahasa Inggris",
-      "Penalaran Matematika",
-    ]
-
-    subtests.forEach((subtest) => {
-      localStorage.removeItem(`questions_${subtest}`)
-    })
-
-    // Navigate to appropriate page based on session type
-    if (isPracticeMode) {
-      const mode = localStorage.getItem("questionMode") || "builtin"
-      const practiceSubtest = session.currentSubtest || "Penalaran Umum"
-      router.push(`/mini-practice?mode=${mode}`)
-    } else {
-      // Navigate to instructions page
-      router.push("/register")
-    }
-  }
-
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -242,17 +207,10 @@ export default function ConfirmPage() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-              <Button
-                variant="outline"
-                onClick={handleContinue}
-                className="hover:bg-gray-100 transition-all duration-300"
-              >
+              <Button variant="outline" onClick={handleContinue}>
                 Kembali ke Ujian
               </Button>
-              <Button
-                onClick={handleSubmit}
-                className="bg-blue-600 hover:bg-blue-700 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
-              >
+              <Button onClick={handleSubmit} className="bg-blue-600 hover:bg-blue-700">
                 Kumpulkan Ujian
               </Button>
             </div>

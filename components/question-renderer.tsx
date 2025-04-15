@@ -118,7 +118,7 @@ export function QuestionRenderer({
                 <div
                   key={option.id}
                   className={cn(
-                    "flex items-start rounded-lg border p-4 transition-colors duration-300 question-interaction",
+                    "flex items-center rounded-lg border p-4 transition-colors duration-300 question-interaction",
                     localSelectedAnswers.includes(option.id) && "bg-blue-50 border-blue-200",
                   )}
                 >
@@ -126,7 +126,7 @@ export function QuestionRenderer({
                     id={`option-${option.id}`}
                     checked={localSelectedAnswers.includes(option.id)}
                     onCheckedChange={() => handleCheckboxChange(option.id)}
-                    className="mr-3 mt-1 flex-shrink-0 question-interaction"
+                    className="mr-3 question-interaction"
                   />
                   <Label
                     htmlFor={`option-${option.id}`}
@@ -166,16 +166,12 @@ export function QuestionRenderer({
                   key={option.id}
                   onClick={() => onAnswerSelect(option.id)}
                   className={cn(
-                    "flex items-start rounded-lg border p-4 transition-colors duration-300 question-interaction",
+                    "flex items-center rounded-lg border p-4 transition-colors duration-300 question-interaction",
                     selectedAnswer === option.id && "bg-blue-50 border-blue-200 dark:bg-blue-950 dark:border-blue-800",
                   )}
                   data-state={selectedAnswer === option.id ? "selected" : "unselected"}
                 >
-                  <RadioGroupItem
-                    value={option.id}
-                    id={`option-${option.id}`}
-                    className="mr-3 mt-1 flex-shrink-0 question-interaction"
-                  />
+                  <RadioGroupItem value={option.id} id={`option-${option.id}`} className="mr-3 question-interaction" />
                   <Label
                     htmlFor={`option-${option.id}`}
                     className="w-full cursor-pointer question-interaction break-words"

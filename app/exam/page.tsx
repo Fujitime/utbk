@@ -611,14 +611,14 @@ export default function ExamPage() {
         {isMobile && (
           <div className="mb-4 bg-white p-3 rounded-lg shadow-md">
             <h3 className="font-medium text-xs mb-2">Navigasi Soal</h3>
-            <div className="grid grid-cols-6 gap-1 pb-2">
+            <div className="grid grid-cols-6 gap-1 overflow-x-auto pb-2">
               {Array.from({ length: Math.min(12, availableQuestions[currentSubtest] || 0) }, (_, i) => i + 1).map(
                 (questionIndex) => (
                   <Button
                     key={questionIndex}
                     variant="outline"
                     size="sm"
-                    className={`h-8 w-8 p-0 font-normal text-xs ${
+                    className={`h-7 w-7 p-0 font-normal text-xs ${
                       questionIndex === currentQuestionIndex
                         ? "bg-blue-600 text-white hover:bg-blue-700"
                         : isAnswered(currentSubtest, questionIndex)
@@ -635,7 +635,7 @@ export default function ExamPage() {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="h-8 w-8 p-0 font-normal text-xs"
+                  className="h-7 w-7 p-0 font-normal text-xs"
                   onClick={() => setSheetOpen(true)}
                 >
                   ...

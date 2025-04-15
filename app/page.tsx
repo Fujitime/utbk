@@ -51,7 +51,7 @@ export default function LandingPage() {
               >
                 <div className="inline-flex items-center px-3 py-1 rounded-full bg-blue-900/30 border border-blue-700/30 text-blue-400 text-sm">
                   <Sparkles className="h-4 w-4 mr-2" />
-                  <span>Persiapan UTBK {currentYear} Terbaik</span>
+                  <span>Persiapan UTBK {currentYear} Gratis</span>
                 </div>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
                   Simulasi UTBK{" "}
@@ -60,24 +60,21 @@ export default function LandingPage() {
                   </span>
                 </h1>
                 <p className="text-lg text-slate-300 max-w-xl">
-                  Latihan UTBK gratis. Rill, no fek-fek. No teori-teori—real experience!
-                </p>
+              Mau latihan UTBK? Nggak perlu bayar mahal buat soal tahun lalu, Di sini, kamu bisa akses latihan UTBK gratis. Yuk, buktikan sendiri!
+            </p>
+
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Link href="/register?mode=builtin" passHref>
                     <Button
                       size="lg"
-                      className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white border-0 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+                      className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white border-0"
                     >
                       Tryout Lengkap
                       <ChevronRight className="h-4 w-4 ml-2" />
                     </Button>
                   </Link>
                   <Link href="/register?mode=builtin&practice=true" passHref>
-                    <Button
-                      size="lg"
-                      variant="outline"
-                      className="border-blue-500 text-blue-400 hover:bg-blue-950/30 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1"
-                    >
+                    <Button size="lg" variant="outline" className="border-blue-500 text-blue-400 hover:text-blue-950/30">
                       Latihan Mini
                     </Button>
                   </Link>
@@ -224,7 +221,7 @@ export default function LandingPage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="bg-slate-800/30 border border-slate-700/50 rounded-xl p-6 hover:bg-slate-800/50 transition-all duration-300 hover:shadow-lg hover:border-slate-600/50 transform hover:-translate-y-1">
+              <div className="bg-slate-800/30 border border-slate-700/50 rounded-xl p-6 hover:bg-slate-800/50 transition-colors">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-lg mr-3">
                     🧠
@@ -240,7 +237,7 @@ export default function LandingPage() {
                 </p>
               </div>
 
-              <div className="bg-slate-800/30 border border-slate-700/50 rounded-xl p-6 hover:bg-slate-800/50 transition-all duration-300 hover:shadow-lg hover:border-slate-600/50 transform hover:-translate-y-1">
+              <div className="bg-slate-800/30 border border-slate-700/50 rounded-xl p-6 hover:bg-slate-800/50 transition-colors">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center text-lg mr-3">
                     📚
@@ -256,7 +253,7 @@ export default function LandingPage() {
                 </p>
               </div>
 
-              <div className="bg-slate-800/30 border border-slate-700/50 rounded-xl p-6 hover:bg-slate-800/50 transition-all duration-300 hover:shadow-lg hover:border-slate-600/50 transform hover:-translate-y-1">
+              <div className="bg-slate-800/30 border border-slate-700/50 rounded-xl p-6 hover:bg-slate-800/50 transition-colors">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 rounded-full bg-cyan-600 flex items-center justify-center text-lg mr-3">
                     🤖
