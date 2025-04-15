@@ -245,19 +245,13 @@ export const penalaranUmumQuestions = [
     options: [
       { id: "A", text: "Terjadi cuaca buruk pada kuartal kedua hingga ketiga di tahun 2023." },
       { id: "B", text: "Pemerintah melakukan impor beras pada bulan September 2023." },
-      {
-        id: "C",
-        text: "Banyak masyarakat yang beralih mengonsumsi makanan pokok selain beras sejak bulan April 2023.",
-      },
+      { id: "C", text: "Banyak masyarakat yang beralih mengonsumsi makanan pokok selain beras sejak bulan April 2023." },
       { id: "D", text: "Stok beras pada bulan Oktober 2023 melimpah dibandingkan bulan Maret 2023." },
-      {
-        id: "E",
-        text: "Kualitas beras bulan Maret 2023 lebih baik daripada kualitas beras yang sama pada bulan Oktober 2023.",
-      },
+      { id: "E", text: "Kualitas beras bulan Maret 2023 lebih baik daripada kualitas beras yang sama pada bulan Oktober 2023." },
     ],
     correctAnswer: "A",
     explanation:
-      "Kenaikan harga kemungkinan besar karena pasokan terganggu akibat cuaca buruk yang berdampak pada produksi.",
+      "Cuaca buruk dapat merusak hasil panen, sehingga pasokan berkurang dan harga naik. Ini kemungkinan terbesar yang menjelaskan kenaikan harga beras."
   },
   {
     id: 16,
@@ -301,25 +295,16 @@ export const penalaranUmumQuestions = [
   },
   {
     id: 18,
-    text: "Penggunaan kompor listrik oleh masyarakat saat ini semakin meningkat... Manakah pernyataan-pernyataan berikut yang MEMPERLEMAH dan TIDAK MEMPERLEMAH pendapat pakar tersebut?",
+    text: "Penggunaan kompor listrik oleh masyarakat saat ini semakin meningkat. Manakah dua pernyataan berikut yang MEMPERLEMAH argumen bahwa kompor listrik lebih hemat dan ramah lingkungan?",
     options: [
-      {
-        id: "I",
-        text: "Penjualan kompor listrik di toko perlengkapan rumah tangga mengalami kenaikan sejak beberapa bulan terakhir.",
-      },
-      { id: "II", text: "Harga kompor listrik semakin murah karena produsen menyadari kebutuhan masyarakat." },
-      { id: "III", text: "Pemerintah masih menggunakan bahan bakar fosil sebagai bahan bakar pembangkit listrik." },
-      {
-        id: "IV",
-        text: "Biaya untuk membayar listrik yang dikeluarkan untuk penggunaan kompor listrik lebih tinggi daripada harga gas LPG.",
-      },
-      {
-        id: "V",
-        text: "Agar efisien, migrasi dari kompor gas ke kompor listrik harus dibarengi dengan mengganti alat masak.",
-      },
+      { id: "A", text: "Pemerintah masih menggunakan bahan bakar fosil sebagai bahan bakar pembangkit listrik." },
+      { id: "B", text: "Biaya untuk membayar listrik yang dikeluarkan untuk penggunaan kompor listrik lebih tinggi daripada harga gas LPG." },
+      { id: "C", text: "Harga kompor listrik semakin murah karena produsen menyadari kebutuhan masyarakat." },
+      { id: "D", text: "Penjualan kompor listrik di toko perlengkapan rumah tangga mengalami kenaikan sejak beberapa bulan terakhir." },
+      { id: "E", text: "Agar efisien, migrasi dari kompor gas ke kompor listrik harus dibarengi dengan mengganti alat masak." },
     ],
-    correctAnswer: "III dan IV",
-    explanation: "Pernyataan III memperlemah klaim ramah lingkungan, dan IV memperlemah klaim hemat biaya.",
+    correctAnswer: "A dan B",
+    explanation: "A memperlemah klaim ramah lingkungan, B memperlemah klaim hemat biaya."
   },
   {
     id: 19,
@@ -377,20 +362,6 @@ export const penalaranUmumQuestions = [
   },
   {
     id: 22,
-    text: "Terdapat dua loyang pizza yang potongannya sama banyak dan sama besar. Alam mendapatkan 5 potong pizza yang merupakan 12,5% dari total potongan. Satu loyang pizza terdiri atas ... potong pizza.",
-    options: [
-      { id: "A", text: "12" },
-      { id: "B", text: "14" },
-      { id: "C", text: "16" },
-      { id: "D", text: "18" },
-      { id: "E", text: "20" },
-    ],
-    correctAnswer: "C",
-    explanation:
-      "Total potongan = 5 / 12,5% = 40. Maka 1 loyang = 40 / 2 = 20. Salah! Jawaban yang benar adalah 20, yaitu opsi E.",
-  },
-  {
-    id: 22,
     text: "Terdapat dua loyang pizza. Alam mendapatkan 5 potong, yang merupakan 12,5% dari total potongan pizza. Satu loyang terdiri atas ... potong pizza.",
     type: "single",
     options: [
@@ -402,7 +373,7 @@ export const penalaranUmumQuestions = [
     ],
     correctAnswer: "E",
     explanation: "5 potong = 12.5% → total = 5 ÷ 0.125 = 40 → 2 loyang = 40 → 1 loyang = 20."
-   },
+  },
    {
     id: 23,
     text: "Bilangan berikut yang selisihnya terhadap 4/7 + 31% paling kecil adalah …. ",
@@ -482,9 +453,8 @@ export const penalaranUmumQuestions = [
       { id: "D", text: "Kelas D" },
       { id: "E", text: "Kelas E" }
     ],
-    correctAnswer: "C",
-    explanation: "C: 45%×70 + 55%×100 = 31.5 + 55 = 86.5 → nilai tertinggi dibandingkan kelas lain."
-  
+    correctAnswer: "D",
+    explanation: "C: 31.5 + 55 = 86.5. D: 45 + 44 = 89. Kelas D memiliki nilai tertinggi, jadi jawaban yang benar adalah D."
   },
   {
     id: 29,
@@ -504,6 +474,7 @@ export const penalaranUmumQuestions = [
   {
     id: 30,
     text: "Pernyataan manakah yang PALING TEPAT berdasarkan data penjualan keripik di diagram?",
+    diagram: "/images/questions/puimg.png",
     type: "single",
     options: [
       { id: "A", text: "Total penjualan keripik tertinggi terjadi pada bulan Maret." },
