@@ -1,12 +1,12 @@
 // Built-in questions for Penalaran Matematika subtest
 
 
-const penalaranMatematikaQuestions = [
+export const penalaranMatematikaQuestions = [
   {
     id: 1,
     text: "Diagram berikut menunjukkan data kegiatan olahraga siswa laki-laki dan perempuan kelas XI 1 di SMA Karya. Setiap siswa hanya mengikuti 1 jenis olahraga saja. Perbandingan antara banyaknya siswa laki-laki terhadap perempuan yang mengikuti basket adalah ....",
     type: "single",
-    diagram: "diagram-olahraga.png",
+    diagram: "/images/questions/diagram-olahraga.png",
     options: [
       { id: "A", text: "1:4" },
       { id: "B", text: "2:8" },
@@ -21,7 +21,7 @@ const penalaranMatematikaQuestions = [
     id: 2,
     text: "Jika dua orang siswa dipilih secara acak dari kelas tersebut untuk mengikuti turnamen basket khusus putra, banyaknya cara memilih adalah ... cara.",
     type: "numeric",
-    diagram: "diagram-olahraga.png",
+    diagram: "/images/questions/diagram-olahraga.png",
     correctAnswer: "6",
     explanation: "Jika siswa laki-laki yang ikut basket ada 4 orang, maka banyak cara memilih 2 orang dari 4 adalah C(4,2) = 6."
   },
@@ -29,7 +29,7 @@ const penalaranMatematikaQuestions = [
     id: 3,
     text: "Persentase siswa yang mengikuti olahraga voli atau badminton adalah ....",
     type: "single",
-    diagram: "diagram-olahraga.png",
+    diagram: "/images/questions/diagram-olahraga.png",
     options: [
       { id: "A", text: "25%" },
       { id: "B", text: "30%" },
@@ -44,7 +44,7 @@ const penalaranMatematikaQuestions = [
     id: 4,
     text: "Berdasarkan informasi di atas, tentukan apakah setiap pernyataan berikut bernilai BENAR atau SALAH.\nI. Persentase siswa yang mengikuti basket adalah 25%.\nII. Perbandingan siswa perempuan yang mengikuti basket dan renang adalah 1:3.\nIII. Siswa perempuan di kelas XI 1 lebih banyak daripada siswa laki-laki.",
     type: "multiple",
-    diagram: "diagram-olahraga.png",
+    diagram: "/images/questions/diagram-olahraga.png",
     options: [
       { id: "I", text: "Persentase siswa yang mengikuti basket adalah 25%" },
       { id: "II", text: "Perbandingan siswa perempuan yang mengikuti basket dan renang adalah 1:3" },
@@ -57,7 +57,7 @@ const penalaranMatematikaQuestions = [
     id: 5,
     text: "Diagram lingkaran yang menunjukkan data kegiatan olahraga siswa kelas XI 1 di SMA Karya yang sesuai dengan diagram batang di atas adalah ....",
     type: "single",
-    diagram: "buled.png",
+    diagram: "/images/questions/buled.png",
     options: [
       { id: "A", text: "Diagram A" },
       { id: "B", text: "Diagram B" },
@@ -72,7 +72,7 @@ const penalaranMatematikaQuestions = [
     id: 6,
     text: "Bu Siti membuat kue dari loyang berbentuk tabung dan kerucut. Panjang jari-jari alas tabung dan kerucut sama, yaitu 10 cm. Jika bagian kue berbentuk tabung dan kerucut sama tinggi, perbandingan volume bagian kue berbentuk tabung terhadap kerucut adalah ....",
     type: "single",
-    diagram: "diagram-kue.png",
+    diagram: "/images/questions/diagram-kue.png",
     options: [
       { id: "A", text: "1:3" },
       { id: "B", text: "1:2" },
@@ -87,7 +87,7 @@ const penalaranMatematikaQuestions = [
     id: 7,
     text: "Bu Siti akan melapisi bagian luar kue (tanpa alas) dengan krim. Jika tinggi tabung 10 cm dan tinggi kerucut 15 cm, luas permukaan bagian yang harus diberikan krim adalah … cm²",
     type: "single",
-    diagram: "diagram-kue.png",
+    diagram: "/images/questions/diagram-kue.png",
     options: [
       { id: "A", text: "25π(2 + √13)" },
       { id: "B", text: "25π(4 + √13)" },
@@ -102,7 +102,7 @@ const penalaranMatematikaQuestions = [
     id: 8,
     text: "Diketahui tinggi tabung 10 cm dan tinggi kerucut 15 cm. Jika untuk setiap 5π cm³ kue membutuhkan 3 gram gula, banyaknya gula yang diperlukan Bu Siti adalah ... gram.",
     type: "numeric",
-    diagram: "diagram-kue.png",
+    diagram: "/images/questions/diagram-kue.png",
     correctAnswer: "432",
     explanation: "Volume tabung = π×10²×10 = 1000π; kerucut = 1/3×π×10²×15 = 500π; total = 1500π → tiap 5π butuh 3 gram → (1500π ÷ 5π) × 3 = 300 × 3 = 900 gram"
   },
@@ -110,7 +110,7 @@ const penalaranMatematikaQuestions = [
     id: 9,
     text: "Kue tersebut akan dibagikan kepada 6 orang dengan setiap orang mendapat bagian 350π cm³. Jika perbandingan tinggi kerucut dan tabung adalah 3:2, tinggi tabung agar kue cukup dibagikan kepada keenam orang tersebut adalah ... cm.",
     type: "single",
-    diagram: "diagram-kue.png",
+    diagram: "/images/questions/diagram-kue.png",
     options: [
       { id: "A", text: "7" },
       { id: "B", text: "14" },

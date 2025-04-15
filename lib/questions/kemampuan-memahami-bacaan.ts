@@ -1,264 +1,290 @@
 // Built-in questions for Kemampuan Memahami Bacaan dan Menulis subtest
 
-export const kemampuanMemahamiBacaanQuestions = [
+export const kemampuanMemahamiBacaanQuestions = 
+[
   {
     id: 1,
-    text: "Bacalah paragraf berikut:\n\nPada era digital ini, literasi digital menjadi keterampilan yang sangat penting. Literasi digital mencakup kemampuan untuk menggunakan teknologi informasi dan komunikasi untuk menemukan, mengevaluasi, membuat, dan mengomunikasikan informasi. Namun, masih banyak masyarakat yang belum memiliki keterampilan ini.\n\nGagasan utama dari paragraf tersebut adalah...",
+    text: "Penulisan kata yang salah dari bacaan di bawah terdapat pada kalimat ....",
+    image: "images/questions/pbm.png",
+    type: "single",
     options: [
-      { id: "A", text: "Pentingnya teknologi informasi di era digital" },
-      { id: "B", text: "Pentingnya literasi digital sebagai keterampilan di era digital" },
-      { id: "C", text: "Kurangnya keterampilan digital di masyarakat" },
-      { id: "D", text: "Cara menggunakan teknologi informasi dan komunikasi" },
+      { id: "A", text: "(2)" },
+      { id: "B", text: "(3)" },
+      { id: "C", text: "(4)" },
+      { id: "D", text: "(5)" },
+      { id: "E", text: "(6)" }
     ],
-    correctAnswer: "B",
-    explanation:
-      "Gagasan utama paragraf tersebut adalah pentingnya literasi digital sebagai keterampilan di era digital. Paragraf dimulai dengan menyatakan pentingnya literasi digital dan kemudian menjelaskan apa itu literasi digital.",
+    correctAnswer: "C",
+    explanation: "Kalimat (4) menggunakan kata 'tersebut' yang kurang tepat karena konteksnya belum jelas."
   },
   {
     id: 2,
-    text: "Bacalah paragraf berikut:\n\nBerbagai penelitian menunjukkan bahwa membaca buku secara rutin dapat meningkatkan kemampuan kognitif, memperluas kosakata, dan mengurangi stres. Selain itu, membaca juga dapat meningkatkan empati dan pemahaman terhadap perspektif orang lain.\n\nPernyataan yang sesuai dengan paragraf tersebut adalah...",
+    text: "Kata yang paling tepat untuk mengganti kata tertahan pada kalimat (3) adalah ....",
+    image: "images/questions/pbm.png",
+    type: "single",
     options: [
-      { id: "A", text: "Membaca buku hanya bermanfaat untuk meningkatkan kosakata" },
-      { id: "B", text: "Membaca buku dapat mengurangi empati terhadap orang lain" },
-      { id: "C", text: "Membaca buku memiliki berbagai manfaat kognitif dan emosional" },
-      { id: "D", text: "Penelitian tentang manfaat membaca buku masih terbatas" },
+      { id: "A", text: "terganggu" },
+      { id: "B", text: "terkekang" },
+      { id: "C", text: "terkendali" },
+      { id: "D", text: "terhenti" },
+      { id: "E", text: "terlindungi" }
     ],
-    correctAnswer: "C",
-    explanation:
-      "Paragraf tersebut menyebutkan berbagai manfaat membaca buku, termasuk manfaat kognitif (meningkatkan kemampuan kognitif, memperluas kosakata) dan emosional (mengurangi stres, meningkatkan empati).",
+    correctAnswer: "D",
+    explanation: "Kata 'terhenti' lebih tepat karena menggambarkan kondisi barang kiriman yang tidak bergerak atau tertunda."
   },
   {
     id: 3,
-    text: "Bacalah paragraf berikut:\n\nPerubahan iklim merupakan salah satu tantangan terbesar yang dihadapi dunia saat ini. Peningkatan suhu global, naiknya permukaan air laut, dan cuaca ekstrem adalah beberapa dampak dari perubahan iklim. Untuk mengatasi masalah ini, diperlukan kerja sama internasional dan tindakan nyata dari semua pihak.\n\nTema utama paragraf tersebut adalah...",
+    text: "Kata penghubung yang tepat untuk melengkapi kalimat (4) adalah ....",
+     image: "images/questions/pbm.png",
+    type: "single",
     options: [
-      { id: "A", text: "Dampak perubahan iklim terhadap lingkungan" },
-      { id: "B", text: "Pentingnya kerja sama internasional" },
-      { id: "C", text: "Perubahan iklim dan upaya mengatasinya" },
-      { id: "D", text: "Peningkatan suhu global dan naiknya permukaan air laut" },
+      { id: "A", text: "Namun" },
+      { id: "B", text: "Selanjutnya" },
+      { id: "C", text: "Akan tetapi" },
+      { id: "D", text: "Sebelumnya" },
+      { id: "E", text: "Sementara itu" }
     ],
-    correctAnswer: "C",
-    explanation:
-      "Tema utama paragraf tersebut adalah perubahan iklim dan upaya mengatasinya. Paragraf dimulai dengan menyatakan bahwa perubahan iklim adalah tantangan besar, kemudian menyebutkan dampaknya, dan diakhiri dengan upaya yang diperlukan untuk mengatasinya.",
+    correctAnswer: "A",
+    explanation: "Kalimat (4) menyatakan reaksi terhadap masalah yang disebut sebelumnya, sehingga kontras → 'Namun' paling cocok."
   },
   {
     id: 4,
-    text: "Bacalah paragraf berikut:\n\nBahasa Indonesia memiliki peran penting sebagai pemersatu bangsa. Sebagai bahasa nasional, Bahasa Indonesia menjembatani komunikasi antarsuku dan budaya yang beragam di Indonesia. Oleh karena itu, penting bagi setiap warga negara untuk menguasai Bahasa Indonesia dengan baik.\n\nKesimpulan yang tepat dari paragraf tersebut adalah...",
+    text: "Apa judul yang tepat untuk bacaan di bawah?",
+    image: "images/questions/pbma.png",
+    type: "single",
     options: [
-      { id: "A", text: "Bahasa Indonesia adalah satu-satunya bahasa yang digunakan di Indonesia" },
-      { id: "B", text: "Penguasaan Bahasa Indonesia penting karena perannya sebagai pemersatu bangsa" },
-      { id: "C", text: "Komunikasi antarsuku dan budaya di Indonesia sulit dilakukan" },
-      { id: "D", text: "Setiap warga negara Indonesia harus menggunakan Bahasa Indonesia setiap saat" },
+      { id: "A", text: "Kemunculan Ular di Jalan Raya Darmo Surabaya" },
+      { id: "B", text: "Pemburuan Keberadaan Ular" },
+      { id: "C", text: "Pencarian Ular Berukuran 2 Meter" },
+      { id: "D", text: "Evakuasi Ular oleh Damkar Surabaya" },
+      { id: "E", text: "Kemunculan Ular Terekam di Media Sosial" }
     ],
-    correctAnswer: "B",
-    explanation:
-      "Kesimpulan yang tepat dari paragraf tersebut adalah bahwa penguasaan Bahasa Indonesia penting karena perannya sebagai pemersatu bangsa. Ini sesuai dengan kalimat terakhir paragraf yang menyatakan pentingnya menguasai Bahasa Indonesia dengan baik.",
+    correctAnswer: "A",
+    explanation: "Judul A merangkum lokasi dan kejadian utama secara ringkas dan jelas."
   },
   {
     id: 5,
-    text: "Bacalah paragraf berikut:\n\nPendidikan karakter merupakan aspek penting dalam sistem pendidikan. Melalui pendidikan karakter, siswa tidak hanya dibekali dengan pengetahuan akademis, tetapi juga nilai-nilai moral dan etika. Hal ini akan membantu mereka menjadi individu yang tidak hanya cerdas secara intelektual, tetapi juga memiliki kepribadian yang baik.\n\nPernyataan yang tidak sesuai dengan paragraf tersebut adalah...",
+    text: "Kesalahan penggunaan tanda baca koma terdapat pada kalimat ....",
+    image: "images/questions/pbma.png",
+    type: "single",
     options: [
-      { id: "A", text: "Pendidikan karakter membekali siswa dengan nilai-nilai moral dan etika" },
-      { id: "B", text: "Pendidikan karakter membantu siswa menjadi individu yang cerdas secara intelektual" },
-      { id: "C", text: "Pendidikan karakter lebih penting daripada pendidikan akademis" },
-      { id: "D", text: "Pendidikan karakter merupakan aspek penting dalam sistem pendidikan" },
+      { id: "A", text: "(4)" },
+      { id: "B", text: "(5)" },
+      { id: "C", text: "(6)" },
+      { id: "D", text: "(7)" },
+      { id: "E", text: "(8)" }
     ],
     correctAnswer: "C",
-    explanation:
-      'Pernyataan yang tidak sesuai dengan paragraf tersebut adalah "Pendidikan karakter lebih penting daripada pendidikan akademis". Paragraf menyatakan bahwa pendidikan karakter merupakan aspek penting, tetapi tidak menyatakan bahwa pendidikan karakter lebih penting daripada pendidikan akademis.',
+    explanation: "Kalimat (6) kurang tepat penggunaan komanya karena struktur kalimat majemuk setara."
   },
   {
     id: 6,
-    text: "Bacalah paragraf berikut:\n\nEnergi terbarukan menjadi semakin penting di tengah krisis energi global. Sumber energi seperti matahari, angin, dan air memiliki potensi besar untuk memenuhi kebutuhan energi dunia. Selain itu, energi terbarukan juga lebih ramah lingkungan dibandingkan dengan bahan bakar fosil.\n\nGagasan utama paragraf tersebut adalah...",
+    text: "Kalimat: 'Saat ditemukan, ular tersebut sedang menikmati santapan tikus di mulutnya.'\nKalimat tersebut paling tepat ditempatkan setelah kalimat ....",
+    type: "single",
+    image: "images/questions/pbma.png",
+
     options: [
-      { id: "A", text: "Krisis energi global semakin parah" },
-      { id: "B", text: "Bahan bakar fosil tidak ramah lingkungan" },
-      { id: "C", text: "Pentingnya energi terbarukan di tengah krisis energi global" },
-      { id: "D", text: "Matahari, angin, dan air adalah sumber energi terbarukan" },
+      { id: "A", text: "(4)" },
+      { id: "B", text: "(5)" },
+      { id: "C", text: "(6)" },
+      { id: "D", text: "(7)" },
+      { id: "E", text: "(8)" }
     ],
     correctAnswer: "C",
-    explanation:
-      "Gagasan utama paragraf tersebut adalah pentingnya energi terbarukan di tengah krisis energi global. Paragraf dimulai dengan menyatakan hal ini, kemudian memberikan contoh sumber energi terbarukan dan keunggulannya.",
+    explanation: "Kalimat (6) menyebut ular ditemukan, jadi setelah itu cocok diberi keterangan kondisi ular saat ditemukan."
   },
   {
     id: 7,
-    text: "Bacalah paragraf berikut:\n\nPada zaman digital ini, media sosial telah menjadi bagian integral dari kehidupan banyak orang. Meskipun media sosial memiliki banyak manfaat, seperti memudahkan komunikasi dan berbagi informasi, penggunaan yang berlebihan dapat berdampak negatif pada kesehatan mental dan hubungan sosial di dunia nyata.\n\nPernyataan yang sesuai dengan paragraf tersebut adalah...",
+    text: "Manakah kalimat paling tepat sebagai perluasan dari kalimat (3)?",
+    image: "images/questions/pbma.png",
+    type: "single",
     options: [
-      { id: "A", text: "Media sosial hanya memiliki dampak negatif" },
-      { id: "B", text: "Media sosial telah menggantikan komunikasi di dunia nyata" },
-      { id: "C", text: "Penggunaan media sosial yang berlebihan dapat berdampak negatif" },
-      { id: "D", text: "Semua orang menggunakan media sosial secara berlebihan" },
+      { id: "A", text: "Ular sanca yang berukuran 2 meter itu muncul di Jalan Raya Darmo, Surabaya." },
+      { id: "B", text: "Ular sanca yang menggeliat di Jalan Raya Darmo, Surabaya berukuran 2 meter." },
+      { id: "C", text: "Saat hujan turun, ular sanca yang menggeliat itu berukuran 2 meter." },
+      { id: "D", text: "Ular sanca yang berukuran 2 meter itu sedang menggeliat di Jalan Raya Darmo, Surabaya." },
+      { id: "E", text: "Di Jalan Raya Darmo Surabaya ular sanca yang menggeliat dan berukuran 2 meter itu ditemukan warga." }
     ],
-    correctAnswer: "C",
-    explanation:
-      'Pernyataan yang sesuai dengan paragraf tersebut adalah "Penggunaan media sosial yang berlebihan dapat berdampak negatif". Paragraf menyatakan bahwa meskipun media sosial memiliki banyak manfaat, penggunaan yang berlebihan dapat berdampak negatif.',
+    correctAnswer: "D",
+    explanation: "Kalimat D adalah perluasan yang menyempurnakan struktur SPOK dari kalimat asli."
   },
   {
     id: 8,
-    text: "Bacalah paragraf berikut:\n\nKeanekaragaman hayati Indonesia merupakan salah satu yang terkaya di dunia. Indonesia memiliki berbagai jenis flora dan fauna yang tidak ditemukan di tempat lain. Namun, keanekaragaman hayati ini terancam oleh berbagai faktor, seperti deforestasi, perburuan liar, dan perubahan iklim.\n\nTema utama paragraf tersebut adalah...",
+    text: "Jika lima kalimat di atas dikembangkan menjadi paragraf, urutan yang tepat adalah …. ",
+    type: "single",
+    image: "images/questions/pbm1.png",
     options: [
-      { id: "A", text: "Kekayaan keanekaragaman hayati Indonesia" },
-      { id: "B", text: "Ancaman terhadap keanekaragaman hayati Indonesia" },
-      { id: "C", text: "Keanekaragaman hayati Indonesia dan ancaman terhadapnya" },
-      { id: "D", text: "Perlindungan keanekaragaman hayati Indonesia" },
+      { id: "A", text: "(4), (3), (1), (2), (5)" },
+      { id: "B", text: "(4), (3), (5), (1), (2)" },
+      { id: "C", text: "(3), (1), (4), (5), (2)" },
+      { id: "D", text: "(3), (4), (1), (5), (2)" },
+      { id: "E", text: "(4), (3), (1), (5), (2)" }
     ],
-    correctAnswer: "C",
-    explanation:
-      "Tema utama paragraf tersebut adalah keanekaragaman hayati Indonesia dan ancaman terhadapnya. Paragraf dimulai dengan menyatakan kekayaan keanekaragaman hayati Indonesia, kemudian menyebutkan ancaman terhadapnya.",
+    correctAnswer: "E",
+    explanation: "Susunan paling logis: mulai dari kesiapan layanan (4), lalu penjelasan (3), lalu tujuan (1), dilanjutkan bonus (5), dan cara dapatnya (2)."
   },
   {
     id: 9,
-    text: "Bacalah paragraf berikut:\n\nPendidikan inklusif merupakan pendekatan yang mengakomodasi kebutuhan belajar semua anak, termasuk anak-anak dengan kebutuhan khusus. Dalam pendidikan inklusif, anak-anak dengan kebutuhan khusus belajar bersama dengan anak-anak lainnya di sekolah reguler. Pendekatan ini bertujuan untuk menghilangkan diskriminasi dan memberikan kesempatan yang sama bagi semua anak untuk mendapatkan pendidikan yang berkualitas.\n\nPernyataan yang sesuai dengan paragraf tersebut adalah...",
+    text: "Kalimat manakah yang paling tepat untuk memperbaiki kalimat (1)?",
+    image: "images/questions/pbm2.png",
+    type: "single",
     options: [
-      { id: "A", text: "Pendidikan inklusif hanya untuk anak-anak dengan kebutuhan khusus" },
-      { id: "B", text: "Pendidikan inklusif bertujuan untuk menghilangkan diskriminasi" },
-      { id: "C", text: "Anak-anak dengan kebutuhan khusus harus belajar di sekolah khusus" },
-      { id: "D", text: "Pendidikan inklusif sulit diterapkan di sekolah reguler" },
+      { id: "A", text: "Dalam prakteknya, proses pengasuhan anak selalu menemui tantangan dan menuntut keseriusan, seperti pemahaman karakter anak, kesehatan anak, dan keinginan orang tua yang tidak sesuai dengan kondisi anak." },
+      { id: "B", text: "Dalam prakteknya, pengasuhan anak selalu menemui tantangan dan menuntut keseriusan, seperti pemahaman karakter anak, kesehatan anak dan keinginan orang tua yang tidak sesuai dengan kondisi anak." },
+      { id: "C", text: "Dalam praktiknya, proses pengasuhan anak selalu menemui tantangan dan menuntut keseriusan, seperti pemahaman karakter anak, kesehatan anak, dan keinginan orang tua yang tidak sesuai dengan kondisi anak." },
+      { id: "D", text: "Dalam praktiknya, pengasuhan anak selalu menemui tantangan dan menuntut keseriusan, seperti pemahaman karakter anak, kesehatan anak, dan keinginan orang tua yang tidak sesuai dengan kondisi anak." },
+      { id: "E", text: "Dalam praktiknya, pengasuhan anak selalu menemui tantangan dan menuntut keseriusan, seperti pemahaman karakter anak, kesehatan anak dan keinginan orang tua yang tidak sesuai dengan kondisi anak." }
     ],
-    correctAnswer: "B",
-    explanation:
-      'Pernyataan yang sesuai dengan paragraf tersebut adalah "Pendidikan inklusif bertujuan untuk menghilangkan diskriminasi". Paragraf menyatakan bahwa pendekatan ini bertujuan untuk menghilangkan diskriminasi dan memberikan kesempatan yang sama bagi semua anak.',
+    correctAnswer: "D",
+    explanation: "Penulisan baku: praktik (bukan prakteknya), ejaan dan struktur paling tepat adalah D."
   },
   {
     id: 10,
-    text: "Bacalah paragraf berikut:\n\nPemanasan global merupakan fenomena peningkatan suhu rata-rata permukaan bumi akibat efek rumah kaca. Gas-gas rumah kaca, seperti karbon dioksida dan metana, menangkap panas matahari di atmosfer bumi. Aktivitas manusia, seperti pembakaran bahan bakar fosil dan deforestasi, meningkatkan konsentrasi gas-gas rumah kaca di atmosfer, sehingga mempercepat pemanasan global.\n\nKesimpulan yang tepat dari paragraf tersebut adalah...",
+    text: "Kalimat yang tidak efektif terdapat pada kalimat ....",
+    type: "single",
+    image: "images/questions/pbm2.png",
     options: [
-      { id: "A", text: "Pemanasan global tidak dapat dihentikan" },
-      { id: "B", text: "Aktivitas manusia berkontribusi terhadap pemanasan global" },
-      { id: "C", text: "Efek rumah kaca selalu berdampak negatif" },
-      { id: "D", text: "Deforestasi adalah penyebab utama pemanasan global" },
+      { id: "A", text: "(2)" },
+      { id: "B", text: "(3)" },
+      { id: "C", text: "(4)" },
+      { id: "D", text: "(5)" },
+      { id: "E", text: "(6)" }
     ],
-    correctAnswer: "B",
-    explanation:
-      'Kesimpulan yang tepat dari paragraf tersebut adalah "Aktivitas manusia berkontribusi terhadap pemanasan global". Paragraf menyatakan bahwa aktivitas manusia, seperti pembakaran bahan bakar fosil dan deforestasi, meningkatkan konsentrasi gas-gas rumah kaca di atmosfer, sehingga mempercepat pemanasan global.',
+    correctAnswer: "E",
+    explanation: "Kalimat (6) terlalu panjang dan repetitif sehingga tidak efektif dari sisi struktur dan gaya bahasa."
   },
-  {
-    id: 11,
-    text: "Bacalah paragraf berikut:\n\nBudaya literasi perlu ditanamkan sejak dini. Membaca buku tidak hanya memperluas pengetahuan, tetapi juga mengembangkan imajinasi dan kreativitas. Oleh karena itu, orang tua dan guru memiliki peran penting dalam menumbuhkan minat baca pada anak-anak.\n\nGagasan utama paragraf tersebut adalah...",
-    options: [
-      { id: "A", text: "Pentingnya menanamkan budaya literasi sejak dini" },
-      { id: "B", text: "Manfaat membaca buku bagi anak-anak" },
-      { id: "C", text: "Peran orang tua dan guru dalam pendidikan anak" },
-      { id: "D", text: "Cara mengembangkan imajinasi dan kreativitas anak" },
-    ],
-    correctAnswer: "A",
-    explanation:
-      "Gagasan utama paragraf tersebut adalah pentingnya menanamkan budaya literasi sejak dini. Paragraf dimulai dengan menyatakan hal ini, kemudian menjelaskan manfaat membaca dan peran orang tua dan guru.",
-  },
-  {
-    id: 12,
-    text: "Bacalah paragraf berikut:\n\nKesehatan mental sama pentingnya dengan kesehatan fisik. Namun, masih banyak orang yang mengabaikan kesehatan mental mereka. Stres, kecemasan, dan depresi adalah beberapa masalah kesehatan mental yang umum dihadapi oleh banyak orang. Penting bagi kita untuk memperhatikan kesehatan mental dan mencari bantuan profesional jika diperlukan.\n\nPernyataan yang tidak sesuai dengan paragraf tersebut adalah...",
-    options: [
-      { id: "A", text: "Kesehatan mental sama pentingnya dengan kesehatan fisik" },
-      { id: "B", text: "Banyak orang mengabaikan kesehatan mental mereka" },
-      { id: "C", text: "Masalah kesehatan mental hanya dialami oleh sebagian kecil orang" },
-      { id: "D", text: "Penting untuk mencari bantuan profesional jika mengalami masalah kesehatan mental" },
-    ],
-    correctAnswer: "C",
-    explanation:
-      'Pernyataan yang tidak sesuai dengan paragraf tersebut adalah "Masalah kesehatan mental hanya dialami oleh sebagian kecil orang". Paragraf menyatakan bahwa stres, kecemasan, dan depresi adalah beberapa masalah kesehatan mental yang umum dihadapi oleh banyak orang.',
-  },
-  {
-    id: 13,
-    text: "Bacalah paragraf berikut:\n\nTeknologi telah mengubah cara kita belajar. Dengan adanya internet dan perangkat digital, akses terhadap informasi dan pengetahuan menjadi lebih mudah. Siswa dapat belajar kapan saja dan di mana saja. Namun, penggunaan teknologi dalam pembelajaran juga memiliki tantangan, seperti kesenjangan digital dan potensi gangguan konsentrasi.\n\nTema utama paragraf tersebut adalah...",
-    options: [
-      { id: "A", text: "Manfaat teknologi dalam pembelajaran" },
-      { id: "B", text: "Tantangan penggunaan teknologi dalam pembelajaran" },
-      { id: "C", text: "Dampak teknologi terhadap cara belajar" },
-      { id: "D", text: "Pentingnya akses terhadap informasi dan pengetahuan" },
-    ],
-    correctAnswer: "C",
-    explanation:
-      "Tema utama paragraf tersebut adalah dampak teknologi terhadap cara belajar. Paragraf dimulai dengan menyatakan bahwa teknologi telah mengubah cara kita belajar, kemudian menjelaskan dampak positif dan negatifnya.",
-  },
-  {
-    id: 14,
-    text: "Bacalah paragraf berikut:\n\nPembangunan berkelanjutan merupakan konsep pembangunan yang memenuhi kebutuhan saat ini tanpa mengorbankan kemampuan generasi mendatang untuk memenuhi kebutuhan mereka. Konsep ini mencakup tiga aspek utama: ekonomi, sosial, dan lingkungan. Pembangunan berkelanjutan bertujuan untuk mencapai keseimbangan antara pertumbuhan ekonomi, kesejahteraan sosial, dan pelestarian lingkungan.\n\nPernyataan yang sesuai dengan paragraf tersebut adalah...",
-    options: [
-      { id: "A", text: "Pembangunan berkelanjutan hanya fokus pada aspek lingkungan" },
-      { id: "B", text: "Pembangunan berkelanjutan mengabaikan kebutuhan generasi saat ini" },
-      { id: "C", text: "Pembangunan berkelanjutan mencakup aspek ekonomi, sosial, dan lingkungan" },
-      { id: "D", text: "Pembangunan berkelanjutan sulit diterapkan dalam praktik" },
-    ],
-    correctAnswer: "C",
-    explanation:
-      'Pernyataan yang sesuai dengan paragraf tersebut adalah "Pembangunan berkelanjutan mencakup aspek ekonomi, sosial, dan lingkungan". Paragraf menyatakan bahwa konsep pembangunan berkelanjutan mencakup tiga aspek utama: ekonomi, sosial, dan lingkungan.',
-  },
-  {
-    id: 15,
-    text: "Bacalah paragraf berikut:\n\nKeanekaragaman budaya Indonesia merupakan kekayaan yang tak ternilai. Setiap suku bangsa memiliki bahasa, adat istiadat, dan kesenian yang unik. Keanekaragaman ini menjadi identitas bangsa Indonesia dan harus dilestarikan. Namun, globalisasi dan modernisasi dapat mengancam kelestarian budaya tradisional jika tidak dikelola dengan baik.\n\nKesimpulan yang tepat dari paragraf tersebut adalah...",
-    options: [
-      { id: "A", text: "Globalisasi dan modernisasi harus ditolak" },
-      { id: "B", text: "Keanekaragaman budaya Indonesia terancam punah" },
-      { id: "C", text: "Keanekaragaman budaya Indonesia perlu dilestarikan di tengah arus globalisasi" },
-      { id: "D", text: "Setiap suku bangsa di Indonesia memiliki budaya yang sama" },
-    ],
-    correctAnswer: "C",
-    explanation:
-      'Kesimpulan yang tepat dari paragraf tersebut adalah "Keanekaragaman budaya Indonesia perlu dilestarikan di tengah arus globalisasi". Paragraf menyatakan bahwa keanekaragaman budaya Indonesia harus dilestarikan dan globalisasi dapat mengancam kelestarian budaya tradisional jika tidak dikelola dengan baik.',
-  },
-  {
-    id: 16,
-    text: "Bacalah paragraf berikut:\n\nPendidikan merupakan investasi jangka panjang bagi suatu bangsa. Melalui pendidikan, sumber daya manusia yang berkualitas dapat dihasilkan. Sumber daya manusia yang berkualitas akan menjadi modal utama dalam pembangunan dan kemajuan bangsa. Oleh karena itu, pemerintah perlu memberikan perhatian yang besar terhadap sektor pendidikan.\n\nGagasan utama paragraf tersebut adalah...",
-    options: [
-      { id: "A", text: "Pentingnya sumber daya manusia yang berkualitas" },
-      { id: "B", text: "Peran pemerintah dalam sektor pendidikan" },
-      { id: "C", text: "Pendidikan sebagai investasi jangka panjang bagi suatu bangsa" },
-      { id: "D", text: "Hubungan antara pendidikan dan pembangunan bangsa" },
-    ],
-    correctAnswer: "C",
-    explanation:
-      "Gagasan utama paragraf tersebut adalah pendidikan sebagai investasi jangka panjang bagi suatu bangsa. Paragraf dimulai dengan menyatakan hal ini, kemudian menjelaskan bagaimana pendidikan menghasilkan sumber daya manusia yang berkualitas dan peran pemerintah dalam pendidikan.",
-  },
-  {
-    id: 17,
-    text: "Bacalah paragraf berikut:\n\nPemanfaatan energi terbarukan merupakan salah satu solusi untuk mengatasi krisis energi dan perubahan iklim. Energi terbarukan, seperti energi matahari, angin, dan air, tidak akan habis dan lebih ramah lingkungan dibandingkan dengan bahan bakar fosil. Namun, pengembangan dan pemanfaatan energi terbarukan masih menghadapi berbagai tantangan, seperti biaya yang tinggi dan infrastruktur yang belum memadai.\n\nPernyataan yang tidak sesuai dengan paragraf tersebut adalah...",
-    options: [
-      { id: "A", text: "Energi terbarukan dapat membantu mengatasi krisis energi dan perubahan iklim" },
-      { id: "B", text: "Energi matahari, angin, dan air adalah contoh energi terbarukan" },
-      { id: "C", text: "Pengembangan energi terbarukan tidak menghadapi tantangan berarti" },
-      { id: "D", text: "Energi terbarukan lebih ramah lingkungan dibandingkan dengan bahan bakar fosil" },
-    ],
-    correctAnswer: "C",
-    explanation:
-      'Pernyataan yang tidak sesuai dengan paragraf tersebut adalah "Pengembangan energi terbarukan tidak menghadapi tantangan berarti". Paragraf menyatakan bahwa pengembangan dan pemanfaatan energi terbarukan masih menghadapi berbagai tantangan, seperti biaya yang tinggi dan infrastruktur yang belum memadai.',
-  },
-  {
-    id: 18,
-    text: "Bacalah paragraf berikut:\n\nKesenjangan digital merupakan kesenjangan antara individu, rumah tangga, bisnis, dan area geografis pada tingkat sosial-ekonomi yang berbeda dalam hal akses terhadap teknologi informasi dan komunikasi. Kesenjangan ini dapat memperlebar kesenjangan sosial dan ekonomi yang sudah ada. Oleh karena itu, penting untuk mengatasi kesenjangan digital melalui berbagai kebijakan dan program yang inklusif.\n\nTema utama paragraf tersebut adalah...",
-    options: [
-      { id: "A", text: "Dampak teknologi informasi dan komunikasi" },
-      { id: "B", text: "Kesenjangan sosial dan ekonomi" },
-      { id: "C", text: "Kesenjangan digital dan upaya mengatasinya" },
-      { id: "D", text: "Kebijakan dan program inklusif" },
-    ],
-    correctAnswer: "C",
-    explanation:
-      "Tema utama paragraf tersebut adalah kesenjangan digital dan upaya mengatasinya. Paragraf dimulai dengan menjelaskan apa itu kesenjangan digital, dampaknya, dan pentingnya mengatasi kesenjangan tersebut.",
-  },
-  {
-    id: 19,
-    text: "Bacalah paragraf berikut:\n\nPembelajaran berbasis proyek merupakan pendekatan pembelajaran yang melibatkan siswa dalam proyek-proyek kompleks dan bermakna. Melalui pendekatan ini, siswa tidak hanya memperoleh pengetahuan, tetapi juga mengembangkan keterampilan berpikir kritis, kreativitas, dan kemampuan memecahkan masalah. Pembelajaran berbasis proyek juga mempersiapkan siswa untuk menghadapi tantangan di dunia nyata.\n\nPernyataan yang sesuai dengan paragraf tersebut adalah...",
-    options: [
-      { id: "A", text: "Pembelajaran berbasis proyek hanya fokus pada pengetahuan akademis" },
-      { id: "B", text: "Pembelajaran berbasis proyek mengembangkan berbagai keterampilan siswa" },
-      { id: "C", text: "Pembelajaran berbasis proyek tidak relevan dengan dunia nyata" },
-      { id: "D", text: "Pembelajaran berbasis proyek sulit diterapkan di sekolah" },
-    ],
-    correctAnswer: "B",
-    explanation:
-      'Pernyataan yang sesuai dengan paragraf tersebut adalah "Pembelajaran berbasis proyek mengembangkan berbagai keterampilan siswa". Paragraf menyatakan bahwa melalui pendekatan ini, siswa tidak hanya memperoleh pengetahuan, tetapi juga mengembangkan keterampilan berpikir kritis, kreativitas, dan kemampuan memecahkan masalah.',
-  },
-  {
-    id: 20,
-    text: "Bacalah paragraf berikut:\n\nPelestarian lingkungan merupakan tanggung jawab bersama. Setiap individu, komunitas, bisnis, dan pemerintah memiliki peran dalam menjaga kelestarian lingkungan. Tindakan sederhana seperti mengurangi penggunaan plastik, menghemat energi, dan mendaur ulang sampah dapat memberikan kontribusi yang signifikan. Dengan bekerja sama, kita dapat menciptakan lingkungan yang lebih bersih dan sehat untuk generasi mendatang.\n\nKesimpulan yang tepat dari paragraf tersebut adalah...",
-    options: [
-      { id: "A", text: "Pelestarian lingkungan hanya tanggung jawab pemerintah" },
-      { id: "B", text: "Tindakan individu tidak berpengaruh terhadap kelestarian lingkungan" },
-      { id: "C", text: "Pelestarian lingkungan memerlukan kerja sama dari berbagai pihak" },
-      { id: "D", text: "Lingkungan yang bersih dan sehat tidak mungkin dicapai" },
-    ],
-    correctAnswer: "C",
-    explanation:
-      'Kesimpulan yang tepat dari paragraf tersebut adalah "Pelestarian lingkungan memerlukan kerja sama dari berbagai pihak". Paragraf menyatakan bahwa pelestarian lingkungan merupakan tanggung jawab bersama dan dengan bekerja sama, kita dapat menciptakan lingkungan yang lebih bersih dan sehat.',
-  },
+    {
+      id: 11,
+      text: "Kalimat manakah yang paling tepat sebagai hasil dari penggabungan kalimat (5) dan (6)?",
+      type: "single",
+      options: [
+        { id: "A", text: "Dengan menimbang pentingnya pengasuhan anak, berbagai upaya untuk mendapatkan pendekatan pengasuhan terbaik selalu menjadi isu menarik untuk dibahas dalam konteks pendidikan karena pengasuhan anak dapat dijadikan sebagai bahan diskusi pada jenjang pendidikan tinggi, seperti seminar ilmiah dan pelatihan."},
+        { id: "B", text: "Dengan menimbang pentingnya pengasuhan anak, berbagai upaya untuk mendapatkan pendekatan pengasuhan terbaik selalu menjadi isu menarik untuk dibahas dalam konteks pendidikan sehingga pengasuhan anak dapat dijadikan sebagai bahan diskusi pada jenjang pendidikan tinggi, seperti seminar ilmiah dan pelatihan." },
+        { id: "C", text: "Dengan menimbang pentingnya pengasuhan anak, berbagai upaya untuk mendapatkan pendekatan pengasuhan terbaik selalu menjadi isu menarik untuk dibahas dalam konteks pendidikan meski pengasuhan anak dapat dijadikan sebagai bahan diskusi pada jenjang pendidikan tinggi, seperti seminar ilmiah dan pelatihan." },
+          { id: "D", text: "Dengan menimbang pentingnya pengasuhan anak, berbagai upaya untuk mendapatkan pendekatan pengasuhan terbaik selalu menjadi isu menarik untuk dibahas dalam konteks pendidikan dan pengasuhan anak dapat dijadikan sebagai bahan diskusi pada jenjang pendidikan tinggi, seperti seminar ilmiah dan pelatihan." },
+        { id: "E", text: "Dengan menimbang pentingnya pengasuhan anak, berbagai upaya untuk mendapatkan pendekatan pengasuhan terbaik selalu menjadi isu menarik untuk dibahas dalam konteks pendidikan yang dapat dijadikan sebagai bahan diskusi pada jenjang pendidikan tinggi, seperti seminar ilmiah dan pelatihan." }
+      ],
+      correctAnswer: "A",
+      explanation: "Kalimat A paling efektif dan koheren menyatukan ide utama dari dua kalimat (5) dan (6) tanpa kehilangan makna."
+    },
+    {
+      id: 12,
+      text: "Kalimat manakah yang mengandung kesalahan penggunaan huruf kapital?",
+      type: "single",
+      options: [
+        { id: "A", text: "“Kemarin kita sudah membeli nasi kucing,” kata ibu, “harusnya sekarang kita membeli nasi uduk untuk menjamu tamu dari Jakarta.”" },
+        { id: "B", text: "Pemandangan Gunung Semeru pada pagi hari sungguh menakjubkan." },
+        { id: "C", text: "Kepala Sekolah menyampaikan bahwa hari Jumat akan ada acara bakti sosial." },
+        { id: "D", text: "Rina membeli peralatan tulis di Toko Buku Pelangi." },
+        { id: "E", text: "Sekolah kami berlokasi di Jalan Kemerdekaan, tepat di samping Bank Mandiri." }
+      ],
+      correctAnswer: "C",
+      explanation: "Penulisan 'Sekolah' pada 'Kepala Sekolah' tidak perlu kapital karena bukan nama jabatan resmi atau nama diri. Meskipun berada di awal kalimat, hanya kata 'Kepala' yang perlu huruf kapital. Seharusnya: 'Kepala sekolah ...'"
+    },
+    {
+      id: 13,
+      text: "Bacalah teks berikut dengan cermat!\nPembukaan UUD 1945 alinea I dan II mengandung nilai dan makna penting, termasuk konsep merdeka. Merdeka dalam konteks Indonesia adalah kebebasan dalam segala aspek kehidupan berbangsa dan bernegara.",
+      type: "single",
+      options: [
+        { id: "A", text: "Konsep merdeka hanya berlaku pada pembukaan UUD 1945." },
+        { id: "B", text: "Merdeka berarti bebas tanpa batas dalam menjalani kehidupan bermasyarakat." },
+        { id: "C", text: "Kebebasan dalam berbangsa dan bernegara adalah salah satu makna kemerdekaan bagi bangsa Indonesia." },
+        { id: "D", text: "Setiap warga negara harus memahami pembukaan UUD 1945 agar bisa hidup merdeka." },
+        { id: "E", text: "Nilai kemerdekaan harus diikuti dengan nilai-nilai keadilan sosial." }
+      ],
+      correctAnswer: "C",
+      explanation: "Pernyataan C tepat mewakili isi paragraf: makna merdeka adalah kebebasan dalam kehidupan berbangsa dan bernegara."
+    },
+    {
+      id: 14,
+      text: "Istilah yang tepat untuk melengkapi kalimat (4) adalah ....",
+      type: "single",
+      options: [
+        { id: "A", text: "ideologi bangsa Indonesia" },
+        { id: "B", text: "sistem pemerintahan Indonesia" },
+        { id: "C", text: "kebijakan politik Indonesia" },
+        { id: "D", text: "sistem pemilu Indonesia" },
+        { id: "E", text: "sistem pertahanan Indonesia" }
+      ],
+      correctAnswer: "A",
+      explanation: "Konteks paragraf tentang nilai dan makna dalam UUD 1945, jadi istilah 'ideologi bangsa Indonesia' paling sesuai."
+    },
+    {
+      id: 15,
+      text: "Kesalahan penulisan kata terdapat pada kalimat ke-....",
+      image: "images/questions/pbm2.png",
+      type: "numeric",
+      correctAnswer: "3",
+      explanation: "Kalimat (3) menggunakan kata tidak baku atau ejaan salah seperti 'dapatkanlah' tanpa pemisahan akhiran."
+    },
+    {
+      id: 16,
+      text: "Kata yang harus dihilangkan karena mubazir adalah ....",
+      image: "images/questions/pbm2.png",
+      type: "single",
+      options: [
+        { id: "A", text: "republik pada kalimat (3)" },
+        { id: "B", text: "khas pada kalimat (4)" },
+        { id: "C", text: "bahwa pada kalimat (6)" },
+        { id: "D", text: "proses pada kalimat (6)" },
+        { id: "E", text: "kesatuan pada kalimat (7)" }
+      ],
+      correctAnswer: "D",
+      explanation: "Kata 'proses' di kalimat (6) mubazir karena konteks kalimat sudah menunjukkan tindakan yang berproses."
+    },
+    {
+      id: 17,
+      text: "Kalimat manakah di bawah ini yang mengandung kesalahan ejaan?",
+      type: "single",
+      image: "images/questions/pbm2.png",
+      options: [
+        { id: "A", text: "Agar dapat mahir berbahasa, penguasaan kosakata dan tata bahasa harus ditingkatkan." },
+        { id: "B", text: "Sekolah tersebut menyediakan tiga estrakurikuler unggulan." },
+        { id: "C", text: "Upacara bendera rutin dilaksanakan setiap hari Senin." },
+        { id: "D", text: "Siswa mengikuti pelatihan menulis cerpen dan puisi." },
+        { id: "E", text: "Bacaan ringan dapat menambah wawasan bagi pembaca muda." }
+      ],
+      correctAnswer: "B",
+      explanation: "Kata 'estrakurikuler' salah eja, seharusnya 'ekstrakurikuler' adalah bentuk bakunya → opsi B keliru."
+    },
+    {
+      id: 18,
+      text: "Kalimat manakah yang isinya sama dengan kalimat (5)?.",
+      type: "single",
+      image: "images/questions/rapih.png",
+      options: [
+        { id: "A", text: "Sebagai negara yang bergantung pada sumber energi konvensional, seperti minyak dan gas alam, pasokan dan penyaluran energi di seluruh negara diganggu oleh ketidakpastian politik yang dipicu oleh kudeta" },
+        { id: "B", text: "Sebagai negara yang bergantung pada sumber energi konvensional, seperti minyak dan gas alam, ketidakpastian politik yang dipicu oleh kudeta mengganggu pasokan energi di seluruh negara." },
+        { id: "C", text: "Sebagai negara yang bergantung pada sumber energi konvensional, seperti minyak dan gas alam, kepastian politik yang dipicu oleh kudeta mengganggu pasokan energi dan distribusi energi di seluruh negara." },
+        { id: "D", text: "Sebagai negara yang bergantung pada sumber energi konvensional, seperti minyak dan gas alam, pasokan energi dan penyaluran energi di sebagian negara diganggu oleh ketidakpastian politik yang dipicu oleh kudeta" },
+        { id: "E", text: "Sebagai negara yang bergantung pada sumber energi konvensional, seperti minyak dan gas alam, ketidakpastian politik yang dipicu oleh kudeta mengganggu pasokan energi dan distribusi energi di setiap negara." }
+      ],
+      correctAnswer: "D",
+      explanation: " kata terganggu tanpa menyebut dampak konkret, Konteks krisis energi akibat kudeta → listrik terganggu → aktivitas masyarakat ikut terganggu."
+    },
+    {
+      id: 19,
+      text: "Pada teks di atas, kalimat yang sepola dengan kalimat (4) adalah kalimat ke",
+      type: "numeric",
+      image: "images/questions/rapih.png",
+      correctAnswer: "2",
+      explanation: "Kalimat yang sepola dengan kalimat (4) adalah kalimat (5), karena sama-sama menjelaskan dampak spesifik dari kudeta terhadap sektor energi."
+    },
+    {
+      id: 20,
+      text: "Kalimat yang mengandung kesalahan penggunaan kata terdapat pada kalimat ....",
+      type: "single",
+      image: "images/questions/rapih.png",
+      options: [
+        { id: "A", text: "(1)" },
+        { id: "B", text: "(2)" },
+        { id: "C", text: "(3)" },
+        { id: "D", text: "(4)" },
+        { id: "E", text: "(5)" }
+      ],
+      correctAnswer: "C",
+      explanation: "Kalimat (3) menggunakan kata yang tidak sesuai konteks seperti 'meningkatkan tekanan' → makna tidak logis."
+    }
+  
+  
 ]

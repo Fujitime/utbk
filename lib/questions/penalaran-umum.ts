@@ -403,6 +403,19 @@ export const penalaranUmumQuestions = [
     correctAnswer: "E",
     explanation: "5 potong = 12.5% → total = 5 ÷ 0.125 = 40 → 2 loyang = 40 → 1 loyang = 20."
    },
+   {
+    id: 23,
+    text: "Bilangan berikut yang selisihnya terhadap 4/7 + 31% paling kecil adalah …. ",
+    options: [
+      { id: "A", text: "90%" },
+      { id: "B", text: "89%" },
+      { id: "C", text: "88%" },
+      { id: "D", text: "87%" },
+      { id: "E", text: "86%" },
+    ],
+    correctAnswer: "C",
+    explanation: "Nilai 4/7 adalah sekitar 0,5714. Jika ditambahkan dengan 31% (0,31), hasilnya 0,8814 atau 88,14%. Maka, bilangan yang paling dekat (selisih paling kecil) dengan 88,14% adalah 88%. Jadi, jawabannya adalah 88%.",
+  },  
   {
     id: 24,
     text: "Hari menjual tas dengan harga Rp315.000,00 dan mengalami kerugian 10%. Harga beli = 315.000 / 90% = 350.000. Untuk untung, harus menjual di atas itu. Maka harga jual agar untung adalah ....",
@@ -477,7 +490,7 @@ export const penalaranUmumQuestions = [
     id: 29,
     text: "Diagram menunjukkan penjualan keripik rasa balado dan rumput laut selama Januari–Mei. Kenaikan penjualan terbesar terjadi pada ....",
     type: "single",
-    diagram: "/images/puimg.png",
+    diagram: "/images/questions/puimg.png",
     options: [
       { id: "A", text: "Keripik balado, Januari–Februari" },
       { id: "B", text: "Keripik rumput laut, Februari–Maret" },
