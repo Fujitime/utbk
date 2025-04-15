@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "id_ID",
-    url: "https://utbk-simulator.vercel.app/",
+    url: "https://utbk.vercel.app/",
     title: "Simulasi UTBK 2025 | Tryout UTBK GRATIS Berbasis AI",
     description:
       "Simulasi UTBK 2025 GRATIS dengan soal dinamis berbasis AI. Latihan UTBK SNBT terlengkap dengan 7 subtes, analisis hasil real-time, dan rekomendasi belajar personal.",
