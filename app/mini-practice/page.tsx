@@ -11,7 +11,7 @@ import { Slider } from "@/components/ui/slider"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Switch } from "@/components/ui/switch"
 import { Shuffle } from "lucide-react"
-import { getSubtestQuestions } from "@/lib/mock-questions"
+import { getQuestionsFromBank } from "@/lib/questions/utils"
 
 export default function MiniPracticePage() {
   const router = useRouter()
@@ -91,7 +91,8 @@ export default function MiniPracticePage() {
     } else {
       // For built-in questions, generate them now and go directly to exam
       try {
-        const questions = getSubtestQuestions(selectedSubtest, questionCount)
+        const questions = getQuestionsFromBank(selectedSubtest, questionCount)
+
 
         // Randomize questions if enabled
         if (randomizeQuestions && questions.length >= 2) {
@@ -110,7 +111,7 @@ export default function MiniPracticePage() {
         localStorage.setItem("useAIQuestions", "false")
 
         // Store available question counts
-        const questionCounts = {}
+        const questionCounts: Record<string, number> = {}
         questionCounts[selectedSubtest] = questions.length
         localStorage.setItem("availableQuestionCounts", JSON.stringify(questionCounts))
 

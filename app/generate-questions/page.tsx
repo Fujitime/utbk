@@ -8,8 +8,7 @@ import { Progress } from "@/components/ui/progress"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Checkbox } from "@/components/ui/checkbox"
 import { InfoIcon, AlertTriangle, CheckCircle, Shuffle } from "lucide-react"
-import { getSubtestQuestions } from "@/lib/mock-questions"
-
+import { getQuestionsFromBank } from "@/lib/questions/utils"
 // Fungsi untuk menghasilkan soal dengan AI
 async function generateAIQuestions(subtest: string, count: number, difficulty = "medium") {
   // Simulasi panggilan API ke model AI
@@ -168,7 +167,7 @@ export default function GenerateQuestionsPage() {
         const count = sessionData.practiceConfig?.questionCount || 5
 
         // Get built-in questions for this subtest
-        let questions = getSubtestQuestions(subtest, count)
+        let questions = getQuestionsFromBank(subtest, count)
 
         // Make sure we have questions
         if (!questions || questions.length === 0) {
@@ -202,7 +201,7 @@ export default function GenerateQuestionsPage() {
         // Generate questions for each subtest
         for (const subtest of subtests) {
           // Get built-in questions for this subtest
-          let questions = getSubtestQuestions(subtest, subtestInfo[subtest])
+          let questions = getQuestionsFromBank(subtest, subtestInfo[subtest])
 
           // Make sure we have questions
           if (!questions || questions.length === 0) {
@@ -365,7 +364,7 @@ export default function GenerateQuestionsPage() {
           setProgress(100) // Complete progress
         } else {
           // Use built-in questions
-          questions = getSubtestQuestions(subtest, count)
+          questions = getQuestionsFromBank(subtest, count)
         }
 
         // Randomize questions if enabled
@@ -413,7 +412,7 @@ export default function GenerateQuestionsPage() {
             setProgress(totalProgress)
           } else {
             // Use built-in questions
-            questions = getSubtestQuestions(subtest, subtestInfo[subtest])
+            questions = getQuestionsFromBank(subtest, subtestInfo[subtest])
             questionsGenerated += subtestInfo[subtest]
             totalProgress = Math.round((questionsGenerated / totalQuestions) * 100)
             setProgress(totalProgress)
