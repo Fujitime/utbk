@@ -16,6 +16,7 @@ export default function InstructionsPage() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const mode = searchParams.get("mode") || "ai"
+  const isPractice = searchParams.get("practice") === "true"
 
   const [apiKey, setApiKey] = useState("")
   const [agreed, setAgreed] = useState(false)
@@ -24,6 +25,7 @@ export default function InstructionsPage() {
   const [allowJumpSubtests, setAllowJumpSubtests] = useState(true)
   const [difficultyLevel, setDifficultyLevel] = useState("medium")
   const [randomizeQuestions, setRandomizeQuestions] = useState(false)
+  const [userData, setUserData] = useState<any>(null)
 
   // Default public API key
   const DEFAULT_API_KEY =
@@ -33,6 +35,15 @@ export default function InstructionsPage() {
   const [questionMode, setQuestionMode] = useState(mode)
 
   useEffect(() => {
+    // Check if user data exists
+    const storedUserData = localStorage.getItem("userData")
+    if (!storedUserData) {
+      router.push("/register")
+      return
+    }
+
+    setUserData(JSON.parse(storedUserData))
+
     // Check if API key exists in localStorage
     const storedApiKey = localStorage.getItem("chatgpt-api-key")
     if (storedApiKey) {
@@ -42,7 +53,13 @@ export default function InstructionsPage() {
 
     // Clear any previous question generation state
     localStorage.removeItem("questionsGenerated")
-  }, [])
+
+    // Set default values based on practice mode
+    if (isPractice) {
+      // For practice mode, we might want different defaults
+      setAllowJumpSubtests(false) // No jumping between subtests in practice mode
+    }
+  }, [router, isPractice])
 
   // Update the handleStartExam function to handle both modes
   const handleStartExam = () => {
@@ -105,10 +122,19 @@ export default function InstructionsPage() {
           selesai: false,
         },
       },
-      timeLeft: 195 * 60, // 195 minutes in seconds
+      timeLeft: isPractice ? 15 * 60 : 195 * 60, // 15 minutes for practice, 195 minutes for full exam
       currentSubtest: "Penalaran Umum",
       currentQuestion: 1,
       submitted: false,
+      isPracticeMode: isPractice,
+      practiceConfig: isPractice
+        ? {
+            subtest: "Penalaran Umum",
+            questionCount: 10,
+            timeLimit: 15,
+            questionMode,
+          }
+        : undefined,
     }
 
     localStorage.setItem("tryoutSession", JSON.stringify(examSession))
@@ -128,6 +154,22 @@ export default function InstructionsPage() {
         </CardHeader>
         <CardContent className="p-6">
           <div className="space-y-6">
+            {userData && (
+              <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                <h3 className="text-lg font-semibold mb-2">Data Peserta</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-sm text-gray-500">Nama Peserta</p>
+                    <p className="font-medium">{userData.name}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-500">Asal Sekolah/Institusi</p>
+                    <p className="font-medium">{userData.school}</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
             <div>
               <h3 className="text-lg font-semibold mb-2">Rincian Ujian UTBK SNBT 2025</h3>
               <div className="overflow-x-auto">
@@ -279,7 +321,7 @@ export default function InstructionsPage() {
 
             <Button
               onClick={handleStartExam}
-              className="w-full md:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-md hover:shadow-lg transition-all duration-300"
+              className="w-full md:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
             >
               Saya Mengerti, Lanjutkan
             </Button>

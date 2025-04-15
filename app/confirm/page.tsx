@@ -31,71 +31,93 @@ export default function ConfirmPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const savedSession = localStorage.getItem("tryoutSession")
-    if (!savedSession) {
-      router.push("/instructions")
-      return
-    }
+    try {
+      const savedSession = localStorage.getItem("tryoutSession")
+      if (!savedSession) {
+        router.push("/register")
+        return
+      }
 
-    const parsedSession = JSON.parse(savedSession)
-    setSession(parsedSession)
+      const parsedSession = JSON.parse(savedSession)
+      setSession(parsedSession)
 
-    // Calculate stats
-    let answered = 0
-    let flagged = 0
-    let totalQuestions = 0
+      // Calculate stats
+      let answered = 0
+      let flagged = 0
+      let totalQuestions = 0
 
-    // Get flagged questions
-    const flaggedQuestions = JSON.parse(localStorage.getItem("flaggedQuestions") || "{}")
+      // Get flagged questions
+      const flaggedQuestions = JSON.parse(localStorage.getItem("flaggedQuestions") || "{}")
 
-    // Check if this is a mini practice session
-    const isPracticeMode = parsedSession.isPracticeMode === true
+      // Check if this is a mini practice session
+      const isPracticeMode = parsedSession.isPracticeMode === true
 
-    if (isPracticeMode) {
-      // For mini practice, only count questions for the current subtest
-      const subtest = parsedSession.currentSubtest
-      const subtestAnswers = parsedSession.subtes[subtest].soalJawaban || {}
+      if (isPracticeMode) {
+        // For mini practice, only count questions for the current subtest
+        const subtest = parsedSession.currentSubtest
+        const subtestAnswers = parsedSession.subtes[subtest]?.soalJawaban || {}
 
-      // Get the question count for this subtest
-      const questionsJson = localStorage.getItem(`questions_${subtest}`)
-      const questions = questionsJson ? JSON.parse(questionsJson) : []
-      totalQuestions = questions.length
+        // Get the question count for this subtest
+        const questionsJson = localStorage.getItem(`questions_${subtest}`)
+        const questions = questionsJson ? JSON.parse(questionsJson) : []
+        totalQuestions = questions.length
 
-      // Count answered and flagged questions
-      answered = Object.keys(subtestAnswers).length
-
-      // Count flagged in this subtest
-      Object.keys(subtestAnswers).forEach((questionNumber) => {
-        if (flaggedQuestions[`${subtest}-${questionNumber}`]) {
-          flagged++
-        }
-      })
-    } else {
-      // For full exam, count all subtests
-      totalQuestions = 160
-
-      // Count answered and flagged questions
-      Object.keys(parsedSession.subtes).forEach((subtest) => {
-        const subtestAnswers = parsedSession.subtes[subtest].soalJawaban || {}
-        answered += Object.keys(subtestAnswers).length
+        // Count answered and flagged questions
+        answered = Object.keys(subtestAnswers).length
 
         // Count flagged in this subtest
-        Object.keys(subtestAnswers).forEach((questionNumber) => {
-          if (flaggedQuestions[`${subtest}-${questionNumber}`]) {
+        Object.keys(flaggedQuestions || {}).forEach((key) => {
+          if (key.startsWith(`${subtest}-`) && flaggedQuestions[key]) {
             flagged++
           }
         })
+      } else {
+        // For full exam, count all subtests
+        // Get available question counts
+        const availableQuestionCountsJson = localStorage.getItem("availableQuestionCounts")
+        const availableQuestionCounts = availableQuestionCountsJson ? JSON.parse(availableQuestionCountsJson) : {}
+
+        // Calculate total questions from available counts
+        totalQuestions = Object.values(availableQuestionCounts).reduce((sum: any, count: any) => sum + count, 0)
+
+        // If no available counts, use default value
+        if (totalQuestions === 0) {
+          totalQuestions = 160
+        }
+
+        // Count answered and flagged questions
+        Object.keys(parsedSession.subtes || {}).forEach((subtest) => {
+          const subtestAnswers = parsedSession.subtes[subtest]?.soalJawaban || {}
+          answered += Object.keys(subtestAnswers).length
+
+          // Count flagged in this subtest
+          Object.keys(flaggedQuestions || {}).forEach((key) => {
+            if (key.startsWith(`${subtest}-`) && flaggedQuestions[key]) {
+              flagged++
+            }
+          })
+        })
+      }
+
+      setStats({
+        answered,
+        unanswered: totalQuestions - answered,
+        flagged,
+        total: totalQuestions,
+      })
+
+      setLoading(false)
+    } catch (error) {
+      console.error("Error loading session:", error)
+      setLoading(false)
+      // Handle error gracefully
+      setStats({
+        answered: 0,
+        unanswered: 0,
+        flagged: 0,
+        total: 0,
       })
     }
-
-    setStats({
-      answered,
-      unanswered: totalQuestions - answered,
-      flagged,
-      total: totalQuestions,
-    })
-
-    setLoading(false)
   }, [])
 
   const handleSubmit = () => {
@@ -122,6 +144,41 @@ export default function ConfirmPage() {
 
   const handleContinue = () => {
     router.push("/exam")
+  }
+
+  const handleRetry = () => {
+    // Check if this was a mini practice session
+    const isPracticeMode = session?.isPracticeMode === true
+
+    // Clear session and start a new one
+    localStorage.removeItem("tryoutSession")
+    localStorage.removeItem("flaggedQuestions")
+    localStorage.removeItem("questionsGenerated")
+
+    // Clear all questions
+    const subtests = [
+      "Penalaran Umum",
+      "Pengetahuan dan Pemahaman Umum",
+      "Kemampuan Memahami Bacaan dan Menulis",
+      "Pengetahuan Kuantitatif",
+      "Literasi dalam Bahasa Indonesia",
+      "Literasi dalam Bahasa Inggris",
+      "Penalaran Matematika",
+    ]
+
+    subtests.forEach((subtest) => {
+      localStorage.removeItem(`questions_${subtest}`)
+    })
+
+    // Navigate to appropriate page based on session type
+    if (isPracticeMode) {
+      const mode = localStorage.getItem("questionMode") || "builtin"
+      const practiceSubtest = session.currentSubtest || "Penalaran Umum"
+      router.push(`/mini-practice?mode=${mode}`)
+    } else {
+      // Navigate to instructions page
+      router.push("/register")
+    }
   }
 
   if (loading) {
@@ -185,10 +242,17 @@ export default function ConfirmPage() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-              <Button variant="outline" onClick={handleContinue}>
+              <Button
+                variant="outline"
+                onClick={handleContinue}
+                className="hover:bg-gray-100 transition-all duration-300"
+              >
                 Kembali ke Ujian
               </Button>
-              <Button onClick={handleSubmit} className="bg-blue-600 hover:bg-blue-700">
+              <Button
+                onClick={handleSubmit}
+                className="bg-blue-600 hover:bg-blue-700 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+              >
                 Kumpulkan Ujian
               </Button>
             </div>

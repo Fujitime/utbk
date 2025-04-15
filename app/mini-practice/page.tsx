@@ -42,6 +42,7 @@ export default function MiniPracticePage() {
     }
   }, [defaultMode])
 
+  // Update the handleStartPractice function to ensure proper routing
   const handleStartPractice = () => {
     // Store API key if provided
     if (apiKey) {
@@ -80,36 +81,51 @@ export default function MiniPracticePage() {
 
     localStorage.setItem("tryoutSession", JSON.stringify(practiceSession))
 
+    // Also store allowJumpSubtests as false for mini practice
+    localStorage.setItem("allowJumpSubtests", "false")
+
     // Navigate to question generation page if using AI, otherwise directly to exam
     if (questionMode === "ai" && (apiKey || apiKeyExists)) {
       localStorage.setItem("questionsGenerated", "false")
       router.push("/generate-questions")
     } else {
       // For built-in questions, generate them now and go directly to exam
-      const questions = getSubtestQuestions(selectedSubtest, questionCount)
+      try {
+        const questions = getSubtestQuestions(selectedSubtest, questionCount)
 
-      // Randomize questions if enabled
-      if (randomizeQuestions && questions.length >= 2) {
-        const shuffled = [...questions].sort(() => Math.random() - 0.5)
-        // Ensure IDs are sequential after shuffling
-        const reindexed = shuffled.map((q, index) => ({
-          ...q,
-          id: index + 1,
-        }))
-        localStorage.setItem(`questions_${selectedSubtest}`, JSON.stringify(reindexed))
-      } else {
-        localStorage.setItem(`questions_${selectedSubtest}`, JSON.stringify(questions))
+        // Randomize questions if enabled
+        if (randomizeQuestions && questions.length >= 2) {
+          const shuffled = [...questions].sort(() => Math.random() - 0.5)
+          // Ensure IDs are sequential after shuffling
+          const reindexed = shuffled.map((q, index) => ({
+            ...q,
+            id: index + 1,
+          }))
+          localStorage.setItem(`questions_${selectedSubtest}`, JSON.stringify(reindexed))
+        } else {
+          localStorage.setItem(`questions_${selectedSubtest}`, JSON.stringify(questions))
+        }
+
+        localStorage.setItem("questionsGenerated", "true")
+        localStorage.setItem("useAIQuestions", "false")
+
+        // Store available question counts
+        const questionCounts = {}
+        questionCounts[selectedSubtest] = questions.length
+        localStorage.setItem("availableQuestionCounts", JSON.stringify(questionCounts))
+
+        router.push("/exam")
+      } catch (error) {
+        console.error("Error generating questions:", error)
+        // Show error message
+        alert("Terjadi kesalahan saat menghasilkan soal. Silakan coba lagi.")
       }
-
-      localStorage.setItem("questionsGenerated", "true")
-      localStorage.setItem("useAIQuestions", "false")
-      router.push("/exam")
     }
   }
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-2xl">
-      <Card className="border-0 shadow-lg bg-gradient-to-b from-gray-50 to-white">
+      <Card className="border-0 shadow-lg bg-gradient-to-b from-gray-50 to-white hover:shadow-xl transition-all duration-300">
         <CardHeader className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-t-lg">
           <CardTitle className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
             Latihan Mini
@@ -221,7 +237,7 @@ export default function MiniPracticePage() {
 
             <Button
               onClick={handleStartPractice}
-              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-md hover:shadow-lg transition-all duration-300"
+              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
               disabled={questionMode === "ai" && !apiKeyExists && !apiKey}
             >
               Mulai Latihan

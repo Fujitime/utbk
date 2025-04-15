@@ -4,22 +4,23 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Label } from "@/components/ui/label"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Clock, AlertTriangle, Flag } from "lucide-react"
+import { AlertTriangle } from "lucide-react"
 import { useMobile } from "@/hooks/use-mobile"
-import { ExamTimer } from "@/components/exam-timer"
 import { Progress } from "@/components/ui/progress"
 import { QuestionNavigation } from "@/components/question-navigation"
+import { QuestionRenderer } from "@/components/question-renderer"
+import { Sheet, SheetContent } from "@/components/ui/sheet"
+import { ExamHeader } from "@/components/exam-header"
 
+// Update the component to handle errors properly
 export default function ExamPage() {
   const router = useRouter()
   const isMobile = useMobile()
   const [session, setSession] = useState<any>(null)
   const [currentSubtest, setCurrentSubtest] = useState("")
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(1)
-  const [selectedAnswer, setSelectedAnswer] = useState("")
+  const [selectedAnswer, setSelectedAnswer] = useState<string | string[]>("")
   const [flagged, setFlagged] = useState(false)
   const [tabWarning, setTabWarning] = useState(false)
   const [idleWarning, setIdleWarning] = useState(false)
@@ -30,71 +31,103 @@ export default function ExamPage() {
   const [lastIdleCheck, setLastIdleCheck] = useState(Date.now())
   const [availableQuestions, setAvailableQuestions] = useState<Record<string, number>>({})
   const [allowJumpSubtests, setAllowJumpSubtests] = useState(true)
+  const [sheetOpen, setSheetOpen] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  // Check if a question is answered
+  const isAnswered = (subtest: string, questionIndex: number): boolean => {
+    return (
+      session &&
+      session.subtes &&
+      session.subtes[subtest] &&
+      session.subtes[subtest].soalJawaban &&
+      session.subtes[subtest].soalJawaban[questionIndex] !== undefined
+    )
+  }
+
+  // Check if this is the last question
+  const isLastQuestion = (
+    subtest: string,
+    questionIndex: number,
+    availableQuestions: Record<string, number>,
+    isPracticeMode: boolean,
+  ): boolean => {
+    if (isPracticeMode) {
+      return questionIndex === (availableQuestions[subtest] || 0)
+    }
+    return subtest === "Penalaran Matematika" && questionIndex === (availableQuestions["Penalaran Matematika"] || 20)
+  }
 
   // Load session from localStorage
   useEffect(() => {
-    const savedSession = localStorage.getItem("tryoutSession")
-    if (!savedSession) {
-      router.push("/instructions")
-      return
-    }
-
-    const parsedSession = JSON.parse(savedSession)
-    setSession(parsedSession)
-    setCurrentSubtest(parsedSession.currentSubtest)
-    setCurrentQuestionIndex(parsedSession.currentQuestion)
-
-    // Check if questions are generated
-    const questionsGenerated = localStorage.getItem("questionsGenerated")
-    if (questionsGenerated !== "true") {
-      router.push("/generate-questions")
-      return
-    }
-
-    setQuestionsLoaded(true)
-
-    // Load the current question
-    loadQuestion(parsedSession.currentSubtest, parsedSession.currentQuestion)
-
-    // Count available questions for each subtest
-    countAvailableQuestions()
-
-    // Check if jumping between subtests is allowed
-    const allowJump = localStorage.getItem("allowJumpSubtests") === "true"
-    setAllowJumpSubtests(allowJump)
-
-    setLoading(false)
-
-    // Set up idle detection
-    setupIdleDetection()
-
-    // Set up tab change detection
-    document.addEventListener("visibilitychange", handleVisibilityChange)
-
-    // Request fullscreen if supported
     try {
-      const examContainer = document.getElementById("exam-container")
-      if (examContainer && examContainer.requestFullscreen) {
-        examContainer.requestFullscreen()
+      const savedSession = localStorage.getItem("tryoutSession")
+      if (!savedSession) {
+        router.push("/register")
+        return
+      }
+
+      const parsedSession = JSON.parse(savedSession)
+      setSession(parsedSession)
+      setCurrentSubtest(parsedSession.currentSubtest || "Penalaran Umum")
+      setCurrentQuestionIndex(parsedSession.currentQuestion || 1)
+
+      // Check if questions are generated
+      const questionsGenerated = localStorage.getItem("questionsGenerated")
+      if (questionsGenerated !== "true") {
+        router.push("/generate-questions")
+        return
+      }
+
+      setQuestionsLoaded(true)
+
+      // Load the current question
+      loadQuestion(parsedSession.currentSubtest || "Penalaran Umum", parsedSession.currentQuestion || 1)
+
+      // Count available questions for each subtest
+      countAvailableQuestions()
+
+      // Check if jumping between subtests is allowed
+      const allowJump = localStorage.getItem("allowJumpSubtests") === "true"
+      setAllowJumpSubtests(allowJump)
+
+      setLoading(false)
+
+      // Set up idle detection
+      setupIdleDetection()
+
+      // Set up tab change detection
+      document.addEventListener("visibilitychange", handleVisibilityChange)
+
+      // Request fullscreen if supported
+      try {
+        const examContainer = document.getElementById("exam-container")
+        if (examContainer && examContainer.requestFullscreen) {
+          examContainer.requestFullscreen()
+        }
+      } catch (error) {
+        console.log("Fullscreen not supported or denied")
+      }
+
+      // Add beforeunload event listener
+      const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+        const message =
+          "Anda yakin ingin meninggalkan ujian? Progress Anda akan tetap tersimpan, tetapi timer akan terus berjalan."
+        e.returnValue = message
+        return message
+      }
+
+      window.addEventListener("beforeunload", handleBeforeUnload)
+
+      return () => {
+        document.removeEventListener("visibilitychange", handleVisibilityChange)
+        if (idleTimer) clearTimeout(idleTimer)
+        window.removeEventListener("beforeunload", handleBeforeUnload)
       }
     } catch (error) {
-      console.log("Fullscreen not supported or denied")
-    }
-
-    // Add beforeunload event listener
-    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
-      const message =
-        "Anda yakin ingin meninggalkan ujian? Progress Anda akan tetap tersimpan, tetapi timer akan terus berjalan."
-      e.returnValue = message
-      return message
-    }
-
-    window.addEventListener("beforeunload", handleBeforeUnload)
-
-    return () => {
-      document.removeEventListener("visibilitychange", handleVisibilityChange)
-      if (idleTimer) clearTimeout(idleTimer)
-      window.removeEventListener("beforeunload", handleBeforeUnload)
+      console.error("Error loading session:", error)
+      setError("Terjadi kesalahan saat memuat sesi ujian. Silakan coba lagi.")
+      setLoading(false)
     }
   }, [])
 
@@ -170,7 +203,7 @@ export default function ExamPage() {
           if (session && session.subtes[subtest].soalJawaban[closestQuestion.id]) {
             setSelectedAnswer(session.subtes[subtest].soalJawaban[closestQuestion.id])
           } else {
-            setSelectedAnswer("")
+            setSelectedAnswer(closestQuestion.type === "multiple" ? [] : "")
           }
 
           // Load flagged status
@@ -190,7 +223,8 @@ export default function ExamPage() {
       if (session && session.subtes[subtest].soalJawaban[questionNumber]) {
         setSelectedAnswer(session.subtes[subtest].soalJawaban[questionNumber])
       } else {
-        setSelectedAnswer("")
+        // Initialize based on question type
+        setSelectedAnswer(question.type === "multiple" ? [] : "")
       }
 
       // Load flagged status
@@ -202,6 +236,7 @@ export default function ExamPage() {
       setCurrentQuestion({
         id: questionNumber,
         text: `Terjadi kesalahan saat memuat soal ${questionNumber} untuk ${subtest}. Silakan coba refresh halaman.`,
+        type: "single",
         options: [
           { id: "A", text: "Opsi A" },
           { id: "B", text: "Opsi B" },
@@ -264,7 +299,7 @@ export default function ExamPage() {
   }
 
   // Save answer to localStorage
-  const saveAnswer = (answer: string) => {
+  const saveAnswer = (answer: string | string[]) => {
     if (!session) return
 
     const updatedSession = { ...session }
@@ -275,7 +310,7 @@ export default function ExamPage() {
   }
 
   // Handle answer selection
-  const handleAnswerSelect = (value: string) => {
+  const handleAnswerSelect = (value: string | string[]) => {
     setSelectedAnswer(value)
     saveAnswer(value)
   }
@@ -472,6 +507,9 @@ export default function ExamPage() {
 
     // Load the question
     loadQuestion(subtest, questionIndex)
+
+    // Close the mobile navigation sheet if open
+    setSheetOpen(false)
   }
 
   // Toggle flag for current question
@@ -499,6 +537,19 @@ export default function ExamPage() {
     router.push("/confirm")
   }
 
+  // Return with error handling
+  if (error) {
+    return (
+      <div className="container mx-auto px-4 py-12 max-w-4xl">
+        <Alert variant="destructive" className="mb-4">
+          <AlertTriangle className="h-4 w-4" />
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
+        <Button onClick={() => router.push("/register")}>Kembali ke Halaman Utama</Button>
+      </div>
+    )
+  }
+
   if (loading && !questionsLoaded) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -507,27 +558,20 @@ export default function ExamPage() {
     )
   }
 
+  const isAnsweredComponent = (subtest: string, questionIndex: number): boolean => {
+    return session?.subtes?.[subtest]?.soalJawaban?.[questionIndex] !== undefined
+  }
+
   return (
     <div id="exam-container" className="min-h-screen bg-white">
       {/* Header with timer and subtest info */}
-      <header className="sticky top-0 z-10 bg-white border-b shadow-sm p-4">
-        <div className="container mx-auto flex justify-between items-center">
-          <div>
-            <h1 className="font-semibold">{currentSubtest}</h1>
-            <p className="text-sm text-gray-500">Soal {currentQuestionIndex}</p>
-          </div>
-          <div className="flex items-center gap-2">
-            <Clock className="h-5 w-5 text-blue-600" />
-            {session && (
-              <ExamTimer
-                initialTime={session.timeLeft}
-                onTimeUpdate={handleTimeUpdate}
-                onTimeExpired={handleTimeExpired}
-              />
-            )}
-          </div>
-        </div>
-      </header>
+      <ExamHeader
+        subtest={currentSubtest}
+        questionNumber={currentQuestionIndex}
+        onTimeUpdate={handleTimeUpdate}
+        onTimeExpired={handleTimeExpired}
+        initialTime={session?.timeLeft || 0}
+      />
 
       {/* Warning alerts */}
       {tabWarning && (
@@ -563,59 +607,80 @@ export default function ExamPage() {
       )}
 
       <main className="container mx-auto p-4">
+        {/* Mobile navigation - visible only on mobile */}
+        {isMobile && (
+          <div className="mb-4 bg-white p-3 rounded-lg shadow-md">
+            <h3 className="font-medium text-xs mb-2">Navigasi Soal</h3>
+            <div className="grid grid-cols-6 gap-1 pb-2">
+              {Array.from({ length: Math.min(12, availableQuestions[currentSubtest] || 0) }, (_, i) => i + 1).map(
+                (questionIndex) => (
+                  <Button
+                    key={questionIndex}
+                    variant="outline"
+                    size="sm"
+                    className={`h-8 w-8 p-0 font-normal text-xs ${
+                      questionIndex === currentQuestionIndex
+                        ? "bg-blue-600 text-white hover:bg-blue-700"
+                        : isAnswered(currentSubtest, questionIndex)
+                          ? "bg-green-100 border-green-300 hover:bg-green-200"
+                          : "bg-white hover:bg-gray-100"
+                    }`}
+                    onClick={() => handleNavigate(currentSubtest, questionIndex)}
+                  >
+                    {questionIndex}
+                  </Button>
+                ),
+              )}
+              {availableQuestions[currentSubtest] > 12 && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="h-8 w-8 p-0 font-normal text-xs"
+                  onClick={() => setSheetOpen(true)}
+                >
+                  ...
+                </Button>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Full navigation sheet for mobile */}
+        {isMobile && (
+          <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
+            <SheetContent side="bottom" className="h-[80vh]">
+              {session && (
+                <QuestionNavigation
+                  session={session}
+                  currentSubtest={currentSubtest}
+                  currentQuestionIndex={currentQuestionIndex}
+                  onNavigate={handleNavigate}
+                  availableQuestions={availableQuestions}
+                  isPracticeMode={session.isPracticeMode === true}
+                  allowJumpSubtests={allowJumpSubtests}
+                />
+              )}
+            </SheetContent>
+          </Sheet>
+        )}
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Question content */}
           <div className="md:col-span-2">
             {/* Question card */}
             <Card className="p-6">
               <CardContent className="p-0">
-                <div className="mb-6">
-                  <div className="flex justify-between items-start mb-4">
-                    <h2 className="text-xl font-semibold">Soal {currentQuestionIndex}</h2>
-                    <Button
-                      variant={flagged ? "destructive" : "outline"}
-                      size="sm"
-                      onClick={toggleFlag}
-                      className="flex items-center gap-1"
-                    >
-                      <Flag className="h-4 w-4" />
-                      {flagged ? "Ditandai" : "Tandai Ragu"}
-                    </Button>
-                  </div>
-
-                  {currentQuestion && (
-                    <div className="space-y-6">
-                      <p className="text-gray-800">{currentQuestion.text}</p>
-
-                      <RadioGroup value={selectedAnswer} onValueChange={handleAnswerSelect} className="space-y-3">
-                        {currentQuestion.options.map((option: any) => (
-                          <div
-                            key={option.id}
-                            onClick={() => handleAnswerSelect(option.id)}
-                            className={`flex items-center rounded-lg border p-4 transition-colors duration-300 question-interaction ${
-                              selectedAnswer === option.id
-                                ? "bg-blue-50 border-blue-200 dark:bg-blue-950 dark:border-blue-800"
-                                : ""
-                            }`}
-                            data-state={selectedAnswer === option.id ? "selected" : "unselected"}
-                          >
-                            <RadioGroupItem
-                              value={option.id}
-                              id={`option-${option.id}`}
-                              className="mr-3 question-interaction"
-                            />
-                            <Label
-                              htmlFor={`option-${option.id}`}
-                              className="w-full cursor-pointer question-interaction"
-                            >
-                              <span className="font-semibold mr-2">{option.id}.</span> {option.text}
-                            </Label>
-                          </div>
-                        ))}
-                      </RadioGroup>
-                    </div>
-                  )}
-                </div>
+                {currentQuestion && (
+                  <QuestionRenderer
+                    question={currentQuestion}
+                    selectedAnswer={selectedAnswer}
+                    onAnswerSelect={handleAnswerSelect}
+                    flagged={flagged}
+                    onToggleFlag={toggleFlag}
+                    currentSubtest={currentSubtest}
+                    currentQuestionIndex={currentQuestionIndex}
+                  />
+                )}
 
                 <div className="flex justify-between mt-8">
                   <Button
@@ -675,17 +740,4 @@ export default function ExamPage() {
       </main>
     </div>
   )
-}
-
-// Update the isLastQuestion function to check against actual question count
-function isLastQuestion(
-  subtest: string,
-  questionIndex: number,
-  availableQuestions: Record<string, number>,
-  isPracticeMode: boolean,
-): boolean {
-  if (isPracticeMode) {
-    return questionIndex === (availableQuestions[subtest] || 0)
-  }
-  return subtest === "Penalaran Matematika" && questionIndex === (availableQuestions["Penalaran Matematika"] || 20)
 }

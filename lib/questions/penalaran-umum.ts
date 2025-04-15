@@ -12,7 +12,8 @@ export const penalaranUmumQuestions = [
       { id: "E", text: "Sebagian orang yang memasuki usia lanjut berisiko mengalami penurunan penglihatan." },
     ],
     correctAnswer: "E",
-    explanation: "Disebutkan bahwa sebagian orang yang memasuki usia lanjut berisiko mengalami katarak, dan katarak menyebabkan penurunan penglihatan. Maka, sebagian orang lanjut usia berisiko mengalami penurunan penglihatan."
+    explanation:
+      "Disebutkan bahwa sebagian orang yang memasuki usia lanjut berisiko mengalami katarak, dan katarak menyebabkan penurunan penglihatan. Maka, sebagian orang lanjut usia berisiko mengalami penurunan penglihatan.",
   },
   {
     id: 2,
@@ -25,7 +26,8 @@ export const penalaranUmumQuestions = [
       { id: "E", text: "Madu dalam jumlah banyak tidak berbahaya untuk bayi berusia lebih dari satu tahun." },
     ],
     correctAnswer: "C",
-    explanation: "Pernyataan C jelas salah karena disebutkan bahwa madu tidak aman untuk bayi di bawah 12 bulan karena bisa menyebabkan infeksi."
+    explanation:
+      "Pernyataan C jelas salah karena disebutkan bahwa madu tidak aman untuk bayi di bawah 12 bulan karena bisa menyebabkan infeksi.",
   },
   {
     id: 3,
@@ -38,7 +40,8 @@ export const penalaranUmumQuestions = [
       { id: "E", text: "Hamdan mungkin saja memiliki kartu kredit black card Merdeka." },
     ],
     correctAnswer: "A",
-    explanation: "Diskon 15% dan keanggotaan VVIP adalah benefit khusus untuk pemilik kartu black card Merdeka, sehingga simpulan yang paling mungkin benar adalah Hamdan memiliki kartu tersebut."
+    explanation:
+      "Diskon 15% dan keanggotaan VVIP adalah benefit khusus untuk pemilik kartu black card Merdeka, sehingga simpulan yang paling mungkin benar adalah Hamdan memiliki kartu tersebut.",
   },
   // Soal 4 sampai 30
   {
@@ -52,7 +55,8 @@ export const penalaranUmumQuestions = [
       { id: "E", text: "Kemarin Nara berangkat ke sekolah tidak diantar orang tuanya." },
     ],
     correctAnswer: "D",
-    explanation: "Karena hanya ada dua pilihan moda transportasi ke sekolah (bus atau diantar orang tua), dan diketahui Nara tidak menggunakan bus, maka simpulan yang paling tepat adalah dia diantar orang tuanya."
+    explanation:
+      "Karena hanya ada dua pilihan moda transportasi ke sekolah (bus atau diantar orang tua), dan diketahui Nara tidak menggunakan bus, maka simpulan yang paling tepat adalah dia diantar orang tuanya.",
   },
   {
     id: 5,
@@ -60,12 +64,19 @@ export const penalaranUmumQuestions = [
     options: [
       { id: "A", text: "Desta memiliki motivasi belajar yang tinggi atau mendapat dukungan lingkungan sekitar." },
       { id: "B", text: "Desta memiliki motivasi belajar yang rendah atau mendapat dukungan lingkungan sekitar." },
-      { id: "C", text: "Desta memiliki motivasi belajar yang tinggi, tetapi kurang mendapat dukungan lingkungan sekitar." },
+      {
+        id: "C",
+        text: "Desta memiliki motivasi belajar yang tinggi, tetapi kurang mendapat dukungan lingkungan sekitar.",
+      },
       { id: "D", text: "Desta memiliki motivasi belajar yang rendah meskipun mendapat dukungan lingkungan sekitar." },
-      { id: "E", text: "Jika Desta memiliki motivasi belajar yang rendah, lingkungan sekitar tidak ada yang mendukungnya." },
+      {
+        id: "E",
+        text: "Jika Desta memiliki motivasi belajar yang rendah, lingkungan sekitar tidak ada yang mendukungnya.",
+      },
     ],
     correctAnswer: "A",
-    explanation: "Karena Desta selalu memperoleh beasiswa, maka prestasinya tidak menurun. Itu berarti dia memiliki motivasi belajar tinggi atau mendapat dukungan lingkungan (atau keduanya)."
+    explanation:
+      "Karena Desta selalu memperoleh beasiswa, maka prestasinya tidak menurun. Itu berarti dia memiliki motivasi belajar tinggi atau mendapat dukungan lingkungan (atau keduanya).",
   },
   {
     id: 6,
@@ -78,7 +89,8 @@ export const penalaranUmumQuestions = [
       { id: "E", text: "Apabila komisi yang diperoleh affiliator meningkat, kualitas video affiliator tersebut baik." },
     ],
     correctAnswer: "E",
-    explanation: "Karena disebutkan bahwa kualitas video mendukung popularitas dan peningkatan komisi, maka komisi meningkat menunjukkan kualitas videonya baik."
+    explanation:
+      "Karena disebutkan bahwa kualitas video mendukung popularitas dan peningkatan komisi, maka komisi meningkat menunjukkan kualitas videonya baik.",
   },
   {
     id: 7,
@@ -88,10 +100,11 @@ export const penalaranUmumQuestions = [
       { id: "B", text: "Simpulan tersebut mungkin benar." },
       { id: "C", text: "Simpulan tersebut pasti salah." },
       { id: "D", text: "Simpulan tidak relevan dengan informasi yang diberikan." },
-      { id: "E", text: "Simpulan tidak dapat dinilai karena informasi tidak cukup." }
+      { id: "E", text: "Simpulan tidak dapat dinilai karena informasi tidak cukup." },
     ],
     correctAnswer: "C",
-    explanation: "Disebutkan bahwa Kota S memenuhi semua syarat Adipura Kencana, maka simpulan bahwa Kota S tidak mendapatkan penghargaan tersebut pasti salah."
+    explanation:
+      "Disebutkan bahwa Kota S memenuhi semua syarat Adipura Kencana, maka simpulan bahwa Kota S tidak mendapatkan penghargaan tersebut pasti salah.",
   },
   {
     id: 8,
@@ -101,10 +114,11 @@ export const penalaranUmumQuestions = [
       { id: "B", text: "Olahraga kardio tidak akan menyebabkan masalah kesehatan." },
       { id: "C", text: "Batas aman olahraga kardio sebanyak 30 menit dalam satu hari." },
       { id: "D", text: "Olahraga kardio paling menguras energi dibandingkan jenis olahraga lainnya." },
-      { id: "E", text: "Seseorang mudah terserang penyakit musiman karena terlalu sering olahraga kardio." }
+      { id: "E", text: "Seseorang mudah terserang penyakit musiman karena terlalu sering olahraga kardio." },
     ],
     correctAnswer: "B",
-    explanation: "Pernyataan B bertentangan dengan informasi bahwa olahraga kardio berlebihan dapat menyebabkan penurunan sistem imun."
+    explanation:
+      "Pernyataan B bertentangan dengan informasi bahwa olahraga kardio berlebihan dapat menyebabkan penurunan sistem imun.",
   },
   {
     id: 9,
@@ -114,10 +128,11 @@ export const penalaranUmumQuestions = [
       { id: "B", text: "Memperlemah pernyataan A." },
       { id: "C", text: "Memperkuat pernyataan B." },
       { id: "D", text: "Memperlemah pernyataan B." },
-      { id: "E", text: "Tidak relevan dengan pernyataan A dan B." }
+      { id: "E", text: "Tidak relevan dengan pernyataan A dan B." },
     ],
     correctAnswer: "A",
-    explanation: "Jumlah populasi badak jawa yang kurang dari 100 ekor mendukung pernyataan bahwa spesies ini terancam punah."
+    explanation:
+      "Jumlah populasi badak jawa yang kurang dari 100 ekor mendukung pernyataan bahwa spesies ini terancam punah.",
   },
   {
     id: 10,
@@ -127,49 +142,89 @@ export const penalaranUmumQuestions = [
       { id: "B", text: "Semua anggota keluarga Pak Salim bisa cuti tahun baru dan berkumpul." },
       { id: "C", text: "Sebagian anggota keluarga Pak Salim bisa cuti tahun baru atau berkumpul." },
       { id: "D", text: "Sebagian anggota keluarga Pak Salim bisa cuti tahun baru dan berkumpul." },
-      { id: "E", text: "Sebagian anggota keluarga Pak Salim tidak bisa cuti tahun baru jika semua berkumpul." }
+      { id: "E", text: "Sebagian anggota keluarga Pak Salim tidak bisa cuti tahun baru jika semua berkumpul." },
     ],
     correctAnswer: "A",
-    explanation: "Simpulan logis yang mengikuti dari premis adalah bahwa setidaknya ada kondisi berkumpul atau bisa cuti, sehingga opsi A paling tepat."
+    explanation:
+      "Simpulan logis yang mengikuti dari premis adalah bahwa setidaknya ada kondisi berkumpul atau bisa cuti, sehingga opsi A paling tepat.",
   },
   {
     id: 11,
     text: "Jenis cokelat hitam dengan kandungan kakao yang tinggi... Manakah pernyataan sebab-akibat berikut yang PALING MUNGKIN BENAR?",
     options: [
-      { id: "A", text: "Terlalu sering mengonsumsi cokelat dapat memunculkan dampak negatif seperti diabetes pada seseorang." },
+      {
+        id: "A",
+        text: "Terlalu sering mengonsumsi cokelat dapat memunculkan dampak negatif seperti diabetes pada seseorang.",
+      },
       { id: "B", text: "Semakin tinggi kandungan kakao di dalam cokelat, rasa cokelat tersebut akan semakin lezat." },
-      { id: "C", text: "Jenis cokelat hitam memiliki harga yang relatif lebih tinggi karena dapat memberikan manfaat positif bagi kesehatan mental." },
-      { id: "D", text: "Orang yang kurang mengonsumsi cokelat hitam cenderung tidak bahagia dan gelisah karena merasa kurang nyaman." },
-      { id: "E", text: "Jenis cokelat hitam banyak dikonsumsi untuk mengurangi rasa sedih atau cemas." }
+      {
+        id: "C",
+        text: "Jenis cokelat hitam memiliki harga yang relatif lebih tinggi karena dapat memberikan manfaat positif bagi kesehatan mental.",
+      },
+      {
+        id: "D",
+        text: "Orang yang kurang mengonsumsi cokelat hitam cenderung tidak bahagia dan gelisah karena merasa kurang nyaman.",
+      },
+      { id: "E", text: "Jenis cokelat hitam banyak dikonsumsi untuk mengurangi rasa sedih atau cemas." },
     ],
     correctAnswer: "E",
-    explanation: "Karena kandungan senyawa dalam cokelat hitam memicu pelepasan endorfin, wajar jika banyak orang mengonsumsinya untuk mengurangi rasa sedih/cemas."
+    explanation:
+      "Karena kandungan senyawa dalam cokelat hitam memicu pelepasan endorfin, wajar jika banyak orang mengonsumsinya untuk mengurangi rasa sedih/cemas.",
   },
   {
     id: 12,
     text: "Era digital yang berkembang cepat membuat banyak pelaku media cetak terutama koran merasa perlu melakukan digitalisasi produk... Manakah penyataan sebab-akibat berikut yang PALING MUNGKIN BENAR?",
     options: [
       { id: "A", text: "Banyak pembaca yang tidak lagi membeli koran karena hanya akan menghasilkan sampah kertas." },
-      { id: "B", text: "Harga koran yang relatif lebih mahal menjadi faktor utama mengapa para pembaca lebih memilih mencari berita melalui gawai mereka." },
-      { id: "C", text: "Banyak pelaku media cetak terutama koran merasa perlu melakukan digitalisasi produk karena bisa memangkas biaya cetak." },
-      { id: "D", text: "Perilaku pembaca yang lebih memilih mencari berita melalui gawai membuat para pengiklan mulai memasang iklannya di media digital." },
-      { id: "E", text: "Pelaku media cetak terutama koran tidak perlu khawatir tentang perubahan perilaku pembacanya karena tidak semua pembaca memiliki gawai." }
+      {
+        id: "B",
+        text: "Harga koran yang relatif lebih mahal menjadi faktor utama mengapa para pembaca lebih memilih mencari berita melalui gawai mereka.",
+      },
+      {
+        id: "C",
+        text: "Banyak pelaku media cetak terutama koran merasa perlu melakukan digitalisasi produk karena bisa memangkas biaya cetak.",
+      },
+      {
+        id: "D",
+        text: "Perilaku pembaca yang lebih memilih mencari berita melalui gawai membuat para pengiklan mulai memasang iklannya di media digital.",
+      },
+      {
+        id: "E",
+        text: "Pelaku media cetak terutama koran tidak perlu khawatir tentang perubahan perilaku pembacanya karena tidak semua pembaca memiliki gawai.",
+      },
     ],
     correctAnswer: "B",
-    explanation: "Pernyataan B selaras dengan penjelasan bahwa pembaca lebih memilih gawai karena lebih murah dibanding membeli koran."
+    explanation:
+      "Pernyataan B selaras dengan penjelasan bahwa pembaca lebih memilih gawai karena lebih murah dibanding membeli koran.",
   },
   {
     id: 13,
     text: "Penikmat musik di negara X didominasi oleh masyarakat yang tidak bisa menjaga ketertiban ketika menonton konser... Berdasarkan paragraf tersebut, manakah yang PALING MUNGKIN menjadi asumsi yang mendasari argumen di atas?",
     options: [
-      { id: "A", text: "Penyanyi mancanegara tetap menggelar konser meskipun promotor musik dan menteri pariwisata tidak mengedukasi masyarakat negara X." },
-      { id: "B", text: "Banyaknya penikmat musik yang tidak bisa menjaga ketertiban tidak menyebabkan penyanyi mancanegara enggan menggelar konser di negara X." },
-      { id: "C", text: "Penyanyi mancanegara tetap menggelar konser di negara X karena perilaku konsumtif masyarakatnya yang tinggi." },
-      { id: "D", text: "Perilaku emosional dan cenderung destruktif menjadi salah satu bukti bahwa penikmat musik di negara X memiliki fanatisme yang tinggi." },
-      { id: "E", text: "Perilaku penikmat musik di suatu negara menjadi bahan pertimbangan ketika penyanyi mancanegara hendak menggelar konser." }
+      {
+        id: "A",
+        text: "Penyanyi mancanegara tetap menggelar konser meskipun promotor musik dan menteri pariwisata tidak mengedukasi masyarakat negara X.",
+      },
+      {
+        id: "B",
+        text: "Banyaknya penikmat musik yang tidak bisa menjaga ketertiban tidak menyebabkan penyanyi mancanegara enggan menggelar konser di negara X.",
+      },
+      {
+        id: "C",
+        text: "Penyanyi mancanegara tetap menggelar konser di negara X karena perilaku konsumtif masyarakatnya yang tinggi.",
+      },
+      {
+        id: "D",
+        text: "Perilaku emosional dan cenderung destruktif menjadi salah satu bukti bahwa penikmat musik di negara X memiliki fanatisme yang tinggi.",
+      },
+      {
+        id: "E",
+        text: "Perilaku penikmat musik di suatu negara menjadi bahan pertimbangan ketika penyanyi mancanegara hendak menggelar konser.",
+      },
     ],
     correctAnswer: "E",
-    explanation: "Asumsi bahwa perilaku penonton memengaruhi keputusan artis adalah dasar dari usaha edukasi agar konser tetap digelar."
+    explanation:
+      "Asumsi bahwa perilaku penonton memengaruhi keputusan artis adalah dasar dari usaha edukasi agar konser tetap digelar.",
   },
   {
     id: 14,
@@ -179,10 +234,10 @@ export const penalaranUmumQuestions = [
       { id: "B", text: "Tidak ada tempat menarik yang patut dikunjungi di pusat Kota X ketika musim liburan." },
       { id: "C", text: "Banyak penduduk Kota X yang berlibur ke objek wisata di kota Y ketika musim liburan." },
       { id: "D", text: "Objek wisata di pusat Kota X cenderung sepi pengunjung ketika musim liburan." },
-      { id: "E", text: "Kota X memiliki objek wisata yang lebih menarik daripada kota-kota lainnya." }
+      { id: "E", text: "Kota X memiliki objek wisata yang lebih menarik daripada kota-kota lainnya." },
     ],
     correctAnswer: "E",
-    explanation: "Kemacetan saat liburan menunjukkan ketertarikan lebih terhadap Kota X sebagai tujuan wisata."
+    explanation: "Kemacetan saat liburan menunjukkan ketertarikan lebih terhadap Kota X sebagai tujuan wisata.",
   },
   {
     id: 15,
@@ -190,51 +245,81 @@ export const penalaranUmumQuestions = [
     options: [
       { id: "A", text: "Terjadi cuaca buruk pada kuartal kedua hingga ketiga di tahun 2023." },
       { id: "B", text: "Pemerintah melakukan impor beras pada bulan September 2023." },
-      { id: "C", text: "Banyak masyarakat yang beralih mengonsumsi makanan pokok selain beras sejak bulan April 2023." },
+      {
+        id: "C",
+        text: "Banyak masyarakat yang beralih mengonsumsi makanan pokok selain beras sejak bulan April 2023.",
+      },
       { id: "D", text: "Stok beras pada bulan Oktober 2023 melimpah dibandingkan bulan Maret 2023." },
-      { id: "E", text: "Kualitas beras bulan Maret 2023 lebih baik daripada kualitas beras yang sama pada bulan Oktober 2023." }
+      {
+        id: "E",
+        text: "Kualitas beras bulan Maret 2023 lebih baik daripada kualitas beras yang sama pada bulan Oktober 2023.",
+      },
     ],
     correctAnswer: "A",
-    explanation: "Kenaikan harga kemungkinan besar karena pasokan terganggu akibat cuaca buruk yang berdampak pada produksi."
+    explanation:
+      "Kenaikan harga kemungkinan besar karena pasokan terganggu akibat cuaca buruk yang berdampak pada produksi.",
   },
   {
     id: 16,
     text: "Dampak negatif yang timbul akibat konsumsi antibiotik yang salah adalah bakteri penyebab penyakit yang menjadi resisten (kebal)... Berdasarkan paragraf di atas, manakah yang PALING MUNGKIN BENAR mengenai resistensi bakteri terhadap antibiotik?",
     options: [
       { id: "A", text: "Banyak penyakit yang diakibatkan oleh bakteri dapat sembuh dengan sendirinya." },
-      { id: "B", text: "Biaya pengobatan penyakit yang disebabkan oleh bakteri akan semakin murah karena tidak perlu membeli antibiotik." },
+      {
+        id: "B",
+        text: "Biaya pengobatan penyakit yang disebabkan oleh bakteri akan semakin murah karena tidak perlu membeli antibiotik.",
+      },
       { id: "C", text: "Penyakit menular yang diakibatkan oleh bakteri semakin sulit menyebar." },
       { id: "D", text: "Risiko infeksi bakteri pada usus dan paru-paru semakin meningkat." },
-      { id: "E", text: "Proses penyembuhan penyakit yang disebabkan oleh bakteri akan semakin singkat." }
+      { id: "E", text: "Proses penyembuhan penyakit yang disebabkan oleh bakteri akan semakin singkat." },
     ],
     correctAnswer: "D",
-    explanation: "Resistensi antibiotik menyebabkan bakteri semakin sulit diobati, yang berarti risiko infeksi dan penyebaran meningkat."
+    explanation:
+      "Resistensi antibiotik menyebabkan bakteri semakin sulit diobati, yang berarti risiko infeksi dan penyebaran meningkat.",
   },
   {
     id: 17,
     text: "Siswa A menyatakan bahwa keberhasilannya dalam meningkatkan skor tryout sebanyak 250 poin... Manakah pernyataan di bawah ini, yang jika benar, akan MEMPERKUAT pernyataan siswa A di atas?",
     options: [
-      { id: "A", text: "Selain disiplin terhadap jadwal belajar yang ketat, siswa A juga menjaga pola makan dan olahraga teratur agar tidak sakit." },
-      { id: "B", text: "Siswa A rutin belajar setiap malam dengan durasi minimal seratus dua puluh menit selama enam pekan terakhir ini." },
+      {
+        id: "A",
+        text: "Selain disiplin terhadap jadwal belajar yang ketat, siswa A juga menjaga pola makan dan olahraga teratur agar tidak sakit.",
+      },
+      {
+        id: "B",
+        text: "Siswa A rutin belajar setiap malam dengan durasi minimal seratus dua puluh menit selama enam pekan terakhir ini.",
+      },
       { id: "C", text: "Skor tryout dapat mencerminkan skor ketika ujian yang sesungguhnya nanti." },
-      { id: "D", text: "Meningkatnya skor tryout yang cukup signifikan mampu menambah kepercayaan diri siswa A menjelang ujian." },
-      { id: "E", text: "Siswa A belajar ketika ada waktu luang dan mood yang mendukung ketika akan memulai belajar." }
+      {
+        id: "D",
+        text: "Meningkatnya skor tryout yang cukup signifikan mampu menambah kepercayaan diri siswa A menjelang ujian.",
+      },
+      { id: "E", text: "Siswa A belajar ketika ada waktu luang dan mood yang mendukung ketika akan memulai belajar." },
     ],
     correctAnswer: "B",
-    explanation: "Pernyataan B menunjukkan bahwa siswa A benar-benar menjalankan disiplin belajar yang ketat seperti yang ia klaim."
+    explanation:
+      "Pernyataan B menunjukkan bahwa siswa A benar-benar menjalankan disiplin belajar yang ketat seperti yang ia klaim.",
   },
   {
     id: 18,
     text: "Penggunaan kompor listrik oleh masyarakat saat ini semakin meningkat... Manakah pernyataan-pernyataan berikut yang MEMPERLEMAH dan TIDAK MEMPERLEMAH pendapat pakar tersebut?",
     options: [
-      { id: "I", text: "Penjualan kompor listrik di toko perlengkapan rumah tangga mengalami kenaikan sejak beberapa bulan terakhir." },
+      {
+        id: "I",
+        text: "Penjualan kompor listrik di toko perlengkapan rumah tangga mengalami kenaikan sejak beberapa bulan terakhir.",
+      },
       { id: "II", text: "Harga kompor listrik semakin murah karena produsen menyadari kebutuhan masyarakat." },
       { id: "III", text: "Pemerintah masih menggunakan bahan bakar fosil sebagai bahan bakar pembangkit listrik." },
-      { id: "IV", text: "Biaya untuk membayar listrik yang dikeluarkan untuk penggunaan kompor listrik lebih tinggi daripada harga gas LPG." },
-      { id: "V", text: "Agar efisien, migrasi dari kompor gas ke kompor listrik harus dibarengi dengan mengganti alat masak." }
+      {
+        id: "IV",
+        text: "Biaya untuk membayar listrik yang dikeluarkan untuk penggunaan kompor listrik lebih tinggi daripada harga gas LPG.",
+      },
+      {
+        id: "V",
+        text: "Agar efisien, migrasi dari kompor gas ke kompor listrik harus dibarengi dengan mengganti alat masak.",
+      },
     ],
     correctAnswer: "III dan IV",
-    explanation: "Pernyataan III memperlemah klaim ramah lingkungan, dan IV memperlemah klaim hemat biaya."
+    explanation: "Pernyataan III memperlemah klaim ramah lingkungan, dan IV memperlemah klaim hemat biaya.",
   },
   {
     id: 19,
@@ -242,25 +327,39 @@ export const penalaranUmumQuestions = [
     options: [
       { id: "I", text: "Implementasi kurikulum terbaru di daerah Y masih terlaksana di jenjang SMA/sederajat saja." },
       { id: "II", text: "Banyak guru di daerah Y harus mengajar mata pelajaran yang tidak ia kuasai." },
-      { id: "III", text: "Pemerintah pusat berhasil melaksanakan pemerataan pembangunan infrastuktur di seluruh wilayahnya." },
+      {
+        id: "III",
+        text: "Pemerintah pusat berhasil melaksanakan pemerataan pembangunan infrastuktur di seluruh wilayahnya.",
+      },
       { id: "IV", text: "Banyak orang tua yang ingin anaknya sekolah dengan baik demi memperbesar peluang sukses." },
-      { id: "V", text: "Para lulusan kampus terbaik negeri tidak berminat menjadi guru di daerah terpencil Y karena akses yang serba terbatas." }
+      {
+        id: "V",
+        text: "Para lulusan kampus terbaik negeri tidak berminat menjadi guru di daerah terpencil Y karena akses yang serba terbatas.",
+      },
     ],
     correctAnswer: "I, II, dan V",
-    explanation: "Semua poin tersebut mendukung adanya hambatan dalam kurikulum, kualitas tenaga pengajar, dan kondisi daerah."
+    explanation:
+      "Semua poin tersebut mendukung adanya hambatan dalam kurikulum, kualitas tenaga pengajar, dan kondisi daerah.",
   },
   {
     id: 20,
     text: "Hidroponik merupakan teknik budidaya tanaman konsumsi maupun dekoratif tanpa menggunakan media tanah... Manakah pernyataan-pernyataan berikut yang MEMPERLEMAH dan TIDAK MEMPERLEMAH pendapat pedagang tersebut?",
     options: [
-      { id: "I", text: "Mayoritas masyarakat yang menanam tanaman hidroponik adalah pencinta tanaman hias yang terkendala lahan." },
+      {
+        id: "I",
+        text: "Mayoritas masyarakat yang menanam tanaman hidroponik adalah pencinta tanaman hias yang terkendala lahan.",
+      },
       { id: "II", text: "Tanaman hidroponik yang ditanam masyarakat mampu memenuhi kebutuhan pangan harian." },
       { id: "III", text: "Pola hidup sehat yang sedang tren membuat masyarakat gemar mengonsumsi sayur dan buah." },
-      { id: "IV", text: "Kebanyakan masyarakat lebih memilih membeli masakan dari warung daripada harus masak sendiri." },
-      { id: "V", text: "Banyak masyarakat yang membeli sayur langsung dari kebun karena dirasa lebih segar." }
+      {
+        id: "IV",
+        text: "Kebanyakan masyarakat lebih memilih membeli masakan dari warung daripada harus masak sendiri.",
+      },
+      { id: "V", text: "Banyak masyarakat yang membeli sayur langsung dari kebun karena dirasa lebih segar." },
     ],
     correctAnswer: "II dan V",
-    explanation: "II menunjukkan masyarakat tak lagi bergantung pada penjual, dan V menunjukkan alternatif pembelian di luar pedagang biasa."
+    explanation:
+      "II menunjukkan masyarakat tak lagi bergantung pada penjual, dan V menunjukkan alternatif pembelian di luar pedagang biasa.",
   },
   {
     id: 21,
@@ -270,10 +369,11 @@ export const penalaranUmumQuestions = [
       { id: "B", text: "16, 81" },
       { id: "C", text: "8, 81" },
       { id: "D", text: "8, 9" },
-      { id: "E", text: "4, 729" }
+      { id: "E", text: "4, 729" },
     ],
     correctAnswer: "A",
-    explanation: "Pola bilangan bergantian antara pembagian 2 dan kuadrat: 128, 64, 32, 16 (bagi 2); 1, 9, 81, 729 (kuadrat)."
+    explanation:
+      "Pola bilangan bergantian antara pembagian 2 dan kuadrat: 128, 64, 32, 16 (bagi 2); 1, 9, 81, 729 (kuadrat).",
   },
   {
     id: 22,
@@ -283,10 +383,11 @@ export const penalaranUmumQuestions = [
       { id: "B", text: "14" },
       { id: "C", text: "16" },
       { id: "D", text: "18" },
-      { id: "E", text: "20" }
+      { id: "E", text: "20" },
     ],
     correctAnswer: "C",
-    explanation: "Total potongan = 5 / 12,5% = 40. Maka 1 loyang = 40 / 2 = 20. Salah! Jawaban yang benar adalah 20, yaitu opsi E."
+    explanation:
+      "Total potongan = 5 / 12,5% = 40. Maka 1 loyang = 40 / 2 = 20. Salah! Jawaban yang benar adalah 20, yaitu opsi E.",
   },
   {
     id: 22,
@@ -296,10 +397,11 @@ export const penalaranUmumQuestions = [
       { id: "B", text: "14" },
       { id: "C", text: "16" },
       { id: "D", text: "18" },
-      { id: "E", text: "20" }
+      { id: "E", text: "20" },
     ],
     correctAnswer: "E",
-    explanation: "Total potongan = 5 / 12,5% = 40. Maka 1 loyang = 40 / 2 = 20. Jawaban yang benar adalah 20, yaitu opsi E."
+    explanation:
+      "Total potongan = 5 / 12,5% = 40. Maka 1 loyang = 40 / 2 = 20. Jawaban yang benar adalah 20, yaitu opsi E.",
   },
   {
     id: 24,
@@ -309,10 +411,11 @@ export const penalaranUmumQuestions = [
       { id: "B", text: "Rp330.000,00" },
       { id: "C", text: "Rp345.000,00" },
       { id: "D", text: "Rp350.000,00" },
-      { id: "E", text: "Rp355.000,00" }
+      { id: "E", text: "Rp355.000,00" },
     ],
     correctAnswer: "E",
-    explanation: "Agar memperoleh keuntungan, harga jual harus di atas harga beli (Rp350.000,00). Maka Rp355.000,00 adalah harga minimal untuk untung."
+    explanation:
+      "Agar memperoleh keuntungan, harga jual harus di atas harga beli (Rp350.000,00). Maka Rp355.000,00 adalah harga minimal untuk untung.",
   },
   {
     id: 25,
@@ -322,10 +425,10 @@ export const penalaranUmumQuestions = [
       { id: "B", text: "1.215" },
       { id: "C", text: "1.225" },
       { id: "D", text: "1.235" },
-      { id: "E", text: "1.245" }
+      { id: "E", text: "1.245" },
     ],
     correctAnswer: "B",
-    explanation: "Jumlah 5 hari = 844. Rata-rata = 844/5 = 168,8. Untuk 7 hari = 168,8 × 7 ≈ 1.215."
+    explanation: "Jumlah 5 hari = 844. Rata-rata = 844/5 = 168,8. Untuk 7 hari = 168,8 × 7 ≈ 1.215.",
   },
   {
     id: 26,
@@ -335,10 +438,10 @@ export const penalaranUmumQuestions = [
       { id: "B", text: "45" },
       { id: "C", text: "40" },
       { id: "D", text: "35" },
-      { id: "E", text: "30" }
+      { id: "E", text: "30" },
     ],
     correctAnswer: "A",
-    explanation: "Sisa jarak 50 km dengan kecepatan 60 km/jam = 50/60 jam = 50 menit."
+    explanation: "Sisa jarak 50 km dengan kecepatan 60 km/jam = 50/60 jam = 50 menit.",
   },
   {
     id: 27,
@@ -348,10 +451,10 @@ export const penalaranUmumQuestions = [
       { id: "B", text: "Rp5.550.000,00" },
       { id: "C", text: "Rp6.050.000,00" },
       { id: "D", text: "Rp6.550.000,00" },
-      { id: "E", text: "Rp7.050.000,00" }
+      { id: "E", text: "Rp7.050.000,00" },
     ],
     correctAnswer: "C",
-    explanation: "Naik 10% dari 5.500.000 adalah 550.000, total = 6.050.000."
+    explanation: "Naik 10% dari 5.500.000 adalah 550.000, total = 6.050.000.",
   },
   {
     id: 28,
@@ -361,10 +464,10 @@ export const penalaranUmumQuestions = [
       { id: "B", text: "Kelas B" },
       { id: "C", text: "Kelas C" },
       { id: "D", text: "Kelas D" },
-      { id: "E", text: "Kelas E" }
+      { id: "E", text: "Kelas E" },
     ],
     correctAnswer: "D",
-    explanation: "Kelas D mendapat nilai akhir tertinggi yaitu 89."
+    explanation: "Kelas D mendapat nilai akhir tertinggi yaitu 89.",
   },
   {
     id: 29,
@@ -374,10 +477,11 @@ export const penalaranUmumQuestions = [
       { id: "B", text: "keripik rumput laut, Februari-Maret" },
       { id: "C", text: "keripik balado, Maret-April" },
       { id: "D", text: "keripik rumput laut, Maret-April" },
-      { id: "E", text: "keripik balado, April-Mei" }
+      { id: "E", text: "keripik balado, April-Mei" },
     ],
     correctAnswer: "E",
-    explanation: "Dalam simulasi soal ini, data asumsi digunakan untuk mengganti grafik. Peningkatan keripik balado antara April-Mei merupakan yang paling signifikan."
+    explanation:
+      "Dalam simulasi soal ini, data asumsi digunakan untuk mengganti grafik. Peningkatan keripik balado antara April-Mei merupakan yang paling signifikan.",
   },
   {
     id: 30,
@@ -387,9 +491,9 @@ export const penalaranUmumQuestions = [
       { id: "B", text: "Total penjualan keripik terendah terjadi pada bulan April." },
       { id: "C", text: "Total penjualan keripik balado dan rumput laut sama banyak." },
       { id: "D", text: "Total penjualan keripik pada bulan Januari dan Maret sama banyak." },
-      { id: "E", text: "Total penjualan keripik balado lebih sedikit dari keripik rumput laut." }
+      { id: "E", text: "Total penjualan keripik balado lebih sedikit dari keripik rumput laut." },
     ],
     correctAnswer: "B",
-    explanation: "Dari grafik, April adalah bulan dengan total penjualan terendah untuk kedua jenis keripik."
-  }
-];
+    explanation: "Dari grafik, April adalah bulan dengan total penjualan terendah untuk kedua jenis keripik.",
+  },
+]
