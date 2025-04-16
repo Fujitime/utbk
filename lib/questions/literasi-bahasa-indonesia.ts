@@ -359,4 +359,73 @@ export const literasiBahasaIndonesiaQuestions = [
     correctAnswer: "C",
     explanation: "Pernyataan 'Kasus serangan kimia terhadap pelajar perempuan paling parah terjadi di Kota Q' tidak sesuai dengan teks. Teks hanya menyebutkan bahwa kasus-kasus paling awal dilaporkan di Kota Q, bukan kasus yang paling parah.",
   },
-]
+    {
+      id: 26,
+      text: "Bacalah paragraf berikut:\n\nTeknologi telah mengubah cara kita belajar. Dengan adanya internet dan perangkat digital, akses terhadap informasi dan pengetahuan menjadi lebih mudah. Siswa dapat belajar kapan saja dan di mana saja. Namun, penggunaan teknologi dalam pembelajaran juga memiliki tantangan, seperti kesenjangan digital dan potensi gangguan konsentrasi.\n\nGagasan utama paragraf tersebut adalah...",
+      options: [
+        { id: "A", text: "Dampak teknologi terhadap cara belajar" },
+        { id: "B", text: "Kemudahan akses informasi melalui internet" },
+        { id: "C", text: "Tantangan dalam penggunaan teknologi untuk pembelajaran" },
+        { id: "D", text: "Pentingnya belajar kapan saja dan di mana saja" },
+      ],
+      correctAnswer: "A",
+      explanation:
+        "Gagasan utama paragraf tersebut adalah dampak teknologi terhadap cara belajar. Kalimat pertama langsung menyatakan gagasan ini, dan kalimat-kalimat selanjutnya menjelaskan dampak positif dan negatif teknologi terhadap pembelajaran.",
+    },
+    {
+      id: 27,
+      text: "Bacalah paragraf berikut:\n\nPembangunan berkelanjutan merupakan konsep pembangunan yang memenuhi kebutuhan saat ini tanpa mengorbankan kemampuan generasi mendatang untuk memenuhi kebutuhan mereka. Konsep ini mencakup tiga aspek utama: ekonomi, sosial, dan lingkungan. Pembangunan berkelanjutan bertujuan untuk mencapai keseimbangan antara pertumbuhan ekonomi, kesejahteraan sosial, dan pelestarian lingkungan.\n\nPernyataan yang tidak sesuai dengan paragraf tersebut adalah...",
+      options: [
+        { id: "A", text: "Pembangunan berkelanjutan memperhatikan kebutuhan generasi mendatang" },
+        { id: "B", text: "Pembangunan berkelanjutan mencakup aspek ekonomi, sosial, dan lingkungan" },
+        { id: "C", text: "Pembangunan berkelanjutan mengutamakan pertumbuhan ekonomi di atas segalanya" },
+        { id: "D", text: "Pembangunan berkelanjutan bertujuan untuk mencapai keseimbangan" },
+      ],
+      correctAnswer: "C",
+      explanation:
+        'Pernyataan yang tidak sesuai dengan paragraf tersebut adalah "Pembangunan berkelanjutan mengutamakan pertumbuhan ekonomi di atas segalanya". Paragraf menyatakan bahwa pembangunan berkelanjutan bertujuan untuk mencapai keseimbangan antara pertumbuhan ekonomi, kesejahteraan sosial, dan pelestarian lingkungan, bukan mengutamakan salah satu aspek di atas yang lain.',
+    },
+    {
+      id: 28,
+      text: "Bacalah paragraf berikut:\n\nKeanekaragaman budaya Indonesia merupakan kekayaan yang tak ternilai. Setiap suku bangsa memiliki bahasa, adat istiadat, dan kesenian yang unik. Keanekaragaman ini menjadi identitas bangsa Indonesia dan harus dilestarikan. Namun, globalisasi dan modernisasi dapat mengancam kelestarian budaya tradisional jika tidak dikelola dengan baik.\n\nKalimat utama paragraf tersebut adalah...",
+      options: [
+        { id: "A", text: "Keanekaragaman budaya Indonesia merupakan kekayaan yang tak ternilai." },
+        { id: "B", text: "Setiap suku bangsa memiliki bahasa, adat istiadat, dan kesenian yang unik." },
+        { id: "C", text: "Keanekaragaman ini menjadi identitas bangsa Indonesia dan harus dilestarikan." },
+        {
+          id: "D",
+          text: "Globalisasi dan modernisasi dapat mengancam kelestarian budaya tradisional jika tidak dikelola dengan baik.",
+        },
+      ],
+      correctAnswer: "A",
+      explanation:
+        'Kalimat utama paragraf tersebut adalah "Keanekaragaman budaya Indonesia merupakan kekayaan yang tak ternilai." Kalimat ini merupakan kalimat pertama paragraf yang menyatakan ide pokok, dan kalimat-kalimat selanjutnya menjelaskan atau mendukung ide tersebut.',
+    },
+    {
+      id: 29,
+      text: "Bacalah paragraf berikut:\n\nPemanfaatan energi terbarukan merupakan salah satu solusi untuk mengatasi krisis energi dan perubahan iklim. Energi terbarukan, seperti energi matahari, angin, dan air, tidak akan habis dan lebih ramah lingkungan dibandingkan dengan bahan bakar fosil. Namun, pengembangan dan pemanfaatan energi terbarukan masih menghadapi berbagai tantangan, seperti biaya yang tinggi dan infrastruktur yang belum memadai.\n\nKesimpulan yang tepat dari paragraf tersebut adalah...",
+      options: [
+        { id: "A", text: "Energi terbarukan adalah satu-satunya solusi untuk krisis energi" },
+        { id: "B", text: "Energi terbarukan memiliki potensi besar tetapi juga tantangan dalam pengembangannya" },
+        { id: "C", text: "Biaya tinggi membuat energi terbarukan tidak layak dikembangkan" },
+        { id: "D", text: "Bahan bakar fosil masih lebih baik daripada energi terbarukan" },
+      ],
+      correctAnswer: "B",
+      explanation:
+        'Kesimpulan yang tepat dari paragraf tersebut adalah "Energi terbarukan memiliki potensi besar tetapi juga tantangan dalam pengembangannya". Paragraf menyatakan bahwa energi terbarukan merupakan solusi untuk krisis energi dan perubahan iklim, tetapi pengembangan dan pemanfaatannya masih menghadapi berbagai tantangan.',
+    },
+    {
+      id: 30,
+      text: "Bacalah paragraf berikut:\n\nKesenjangan digital merupakan kesenjangan antara individu, rumah tangga, bisnis, dan area geografis pada tingkat sosial-ekonomi yang berbeda dalam hal akses terhadap teknologi informasi dan komunikasi. Kesenjangan ini dapat memperlebar kesenjangan sosial dan ekonomi yang sudah ada. Oleh karena itu, penting untuk mengatasi kesenjangan digital melalui berbagai kebijakan dan program yang inklusif.\n\nGagasan utama paragraf tersebut adalah...",
+      options: [
+        { id: "A", text: "Definisi kesenjangan digital" },
+        { id: "B", text: "Dampak kesenjangan digital terhadap kesenjangan sosial dan ekonomi" },
+        { id: "C", text: "Pentingnya mengatasi kesenjangan digital" },
+        { id: "D", text: "Kesenjangan digital dan upaya mengatasinya" },
+      ],
+      correctAnswer: "D",
+      explanation:
+        "Gagasan utama paragraf tersebut adalah kesenjangan digital dan upaya mengatasinya. Paragraf dimulai dengan menjelaskan apa itu kesenjangan digital, dampaknya, dan pentingnya mengatasi kesenjangan tersebut.",
+    },
+  ]
+  
