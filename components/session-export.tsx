@@ -20,21 +20,19 @@ export function SessionExport() {
   const [exportData, setExportData] = useState("")
   const [importData, setImportData] = useState("")
 
-  // Handle export session data
   const handleExport = () => {
     try {
-      // Collect all session data
       const sessionData = {
         tryoutSession: JSON.parse(localStorage.getItem("tryoutSession") || "{}"),
         flaggedQuestions: JSON.parse(localStorage.getItem("flaggedQuestions") || "{}"),
         apiKey: localStorage.getItem("chatgpt-api-key") || "",
+        userData: JSON.parse(localStorage.getItem("userData") || "{}"),
         timerData: {
           examTimerStart: localStorage.getItem("examTimerStart") || "",
           examTimerEnd: localStorage.getItem("examTimerEnd") || "",
         },
       }
 
-      // Convert to JSON string
       const jsonData = JSON.stringify(sessionData, null, 2)
       setExportData(jsonData)
 
@@ -52,7 +50,6 @@ export function SessionExport() {
     }
   }
 
-  // Handle copy to clipboard
   const handleCopy = () => {
     navigator.clipboard.writeText(exportData)
     toast({
@@ -61,7 +58,6 @@ export function SessionExport() {
     })
   }
 
-  // Handle download as file
   const handleDownload = () => {
     const blob = new Blob([exportData], { type: "application/json" })
     const url = URL.createObjectURL(blob)
@@ -74,17 +70,14 @@ export function SessionExport() {
     URL.revokeObjectURL(url)
   }
 
-  // Handle import session data
   const handleImport = () => {
     try {
       const data = JSON.parse(importData)
 
-      // Validate data structure
       if (!data.tryoutSession) {
         throw new Error("Data sesi tidak valid")
       }
 
-      // Import all data to localStorage
       localStorage.setItem("tryoutSession", JSON.stringify(data.tryoutSession))
 
       if (data.flaggedQuestions) {
@@ -93,6 +86,10 @@ export function SessionExport() {
 
       if (data.apiKey) {
         localStorage.setItem("chatgpt-api-key", data.apiKey)
+      }
+
+      if (data.userData) {
+        localStorage.setItem("userData", JSON.stringify(data.userData))
       }
 
       if (data.timerData) {
@@ -109,10 +106,7 @@ export function SessionExport() {
         description: "Sesi ujian telah dipulihkan",
       })
 
-      // Close dialog
       setOpen(false)
-
-      // Reload page to apply changes
       window.location.reload()
     } catch (error) {
       console.error("Error importing data:", error)

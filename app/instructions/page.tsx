@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { InfoIcon, CheckCircle, Shuffle } from "lucide-react"
+import { InfoIcon, CheckCircle, Shuffle, ArrowLeft } from "lucide-react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Switch } from "@/components/ui/switch"
 import { Label } from "@/components/ui/label"
@@ -145,6 +145,14 @@ export default function InstructionsPage() {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
+      {/* Back button */}
+      <div className="mb-4">
+        <Button variant="outline" size="sm" className="flex items-center gap-1" onClick={() => router.push("/")}>
+          <ArrowLeft className="h-4 w-4" />
+          Kembali ke Beranda
+        </Button>
+      </div>
+
       <Card className="mb-8 border-0 shadow-lg bg-gradient-to-b from-gray-50 to-white">
         <CardHeader className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-t-lg">
           <CardTitle className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">

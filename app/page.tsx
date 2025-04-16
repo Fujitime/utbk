@@ -60,8 +60,9 @@ export default function LandingPage() {
                   </span>
                 </h1>
                 <p className="text-lg text-slate-300 max-w-xl">
-              Mau latihan UTBK? Nggak perlu bayar mahal buat soal tahun lalu, Di sini, kamu bisa akses latihan UTBK gratis. Yuk, buktikan sendiri!
-            </p>
+                  Mau latihan UTBK? Nggak perlu bayar mahal, Di sini, kamu bisa akses latihan UTBK
+                  gratis. Yuk, buktikan sendiri!
+                </p>
 
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Link href="/register?mode=builtin" passHref>
@@ -74,7 +75,11 @@ export default function LandingPage() {
                     </Button>
                   </Link>
                   <Link href="/register?mode=builtin&practice=true" passHref>
-                    <Button size="lg" variant="outline" className="border-blue-500 text-blue-400 hover:text-blue-950/30">
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      className="border-blue-500 text-blue-400 hover:text-blue-950/30"
+                    >
                       Latihan Mini
                     </Button>
                   </Link>
@@ -87,7 +92,7 @@ export default function LandingPage() {
                     </div>
                     <div className="w-8 h-8 rounded-full bg-cyan-600 flex items-center justify-center text-xs">🤖</div>
                   </div>
-                  <p className="text-sm text-slate-400">Bergabung dengan 5,000+ pelajar</p>
+                  <p className="text-sm text-slate-400">Bergabung dengan 1500+ pelajar</p>
                 </div>
               </motion.div>
 
@@ -184,9 +189,9 @@ export default function LandingPage() {
                   <Bot className="h-4 w-4 mr-2" />
                   <span>Mode AI (BETA - Belum Disarankan)</span>
                 </div>
-                <h2 className="text-3xl md:text-4xl font-bold">Mode AI Dalam Pengembangan</h2>
+                <h2 className="text-3xl md:text-4xl font-bold">Mode AI / Masih Dalam Pengembangan</h2>
                 <p className="text-lg text-slate-300">
-                  Mode AI kami masih dalam tahap pengembangan dan belum disarankan untuk digunakan. Kami menyarankan
+                  Mode AI kami masih belum disarankan untuk digunakan. Kami menyarankan
                   untuk menggunakan mode soal bawaan untuk pengalaman terbaik.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
@@ -199,8 +204,7 @@ export default function LandingPage() {
                 </div>
                 <div className="bg-red-900/20 border border-red-700/30 rounded-lg p-4">
                   <p className="text-sm text-red-300">
-                    <strong>Catatan:</strong> Mode AI masih dalam tahap pengembangan dan mungkin tidak stabil. Gunakan
-                    mode soal bawaan untuk pengalaman terbaik.
+                    <strong>Catatan:</strong> Mode AI masih dalam tahap pengembangan dan mungkin tidak stabil.
                   </p>
                 </div>
               </motion.div>

@@ -10,7 +10,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Label } from "@/components/ui/label"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { AlertTriangle } from "lucide-react"
-
+import { ArrowLeft } from "lucide-react"
 export default function RegisterPage() {
   const router = useRouter()
   const [name, setName] = useState("")
@@ -28,7 +28,7 @@ export default function RegisterPage() {
   }, [])
 
   const handleSubmit = (e: React.FormEvent) => {
-    console.log("handleSubmit called") 
+    console.log("handleSubmit called")
     e.preventDefault()
 
     // Validate inputs
@@ -55,33 +55,37 @@ export default function RegisterPage() {
     const mode = urlParams.get("mode") || "builtin"
     const isPractice = urlParams.get("practice") === "true"
     const isMiniPractice = window.location.pathname.includes("mini-practice")
-    
+
     // test debug dulu guys
     // console.log("mode:", mode)
     // console.log("practice:", urlParams.get("practice"))
-    // console.log("isPractice:", isPractice) 
+    // console.log("isPractice:", isPractice)
 
-    
     if (isPractice) {
       router.push(`/mini-practice?mode=${mode}`)
     } else {
       router.push(`/instructions?mode=${mode}`)
     }
-    
-        
-    
   }
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-md">
+            {/* Back button */}
+            <div className="mb-4">
+        <Button variant="outline" size="sm" className="flex items-center gap-1" onClick={() => router.push("/")}>
+          <ArrowLeft className="h-4 w-4" />
+          Kembali ke Beranda
+        </Button>
+      </div>
+
       <Card className="border-0 shadow-lg bg-gradient-to-b from-gray-50 to-white">
         <CardHeader className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-t-lg">
           <CardTitle className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
             Registrasi Peserta
           </CardTitle>
           <CardDescription>
-          Silakan lengkapi data diri Anda sebelum memulai simulasi UTBK. Data tidak disimpan di server.
-        </CardDescription>
+            Silakan lengkapi data diri Anda sebelum memulai simulasi UTBK. Data tidak disimpan di server.
+          </CardDescription>
         </CardHeader>
         <CardContent className="p-6">
           <form onSubmit={handleSubmit} className="space-y-6">

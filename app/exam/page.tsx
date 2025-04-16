@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { AlertTriangle } from "lucide-react"
+import { AlertTriangle, ArrowLeft } from "lucide-react"
 import { useMobile } from "@/hooks/use-mobile"
 import { Progress } from "@/components/ui/progress"
 import { QuestionNavigation } from "@/components/question-navigation"
@@ -33,6 +33,7 @@ export default function ExamPage() {
   const [allowJumpSubtests, setAllowJumpSubtests] = useState(true)
   const [sheetOpen, setSheetOpen] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [showExitConfirm, setShowExitConfirm] = useState(false)
 
   // Check if a question is answered
   const isAnswered = (subtest: string, questionIndex: number): boolean => {
@@ -99,16 +100,6 @@ export default function ExamPage() {
       // Set up tab change detection
       document.addEventListener("visibilitychange", handleVisibilityChange)
 
-      // Request fullscreen if supported
-      try {
-        const examContainer = document.getElementById("exam-container")
-        if (examContainer && examContainer.requestFullscreen) {
-          examContainer.requestFullscreen()
-        }
-      } catch (error) {
-        console.log("Fullscreen not supported or denied")
-      }
-
       // Add beforeunload event listener
       const handleBeforeUnload = (e: BeforeUnloadEvent) => {
         const message =
@@ -148,11 +139,16 @@ export default function ExamPage() {
     const counts: Record<string, number> = {}
 
     subtests.forEach((subtest) => {
-      const questionsJson = localStorage.getItem(`questions_${subtest}`)
-      if (questionsJson) {
-        const questions = JSON.parse(questionsJson)
-        counts[subtest] = questions.length
-      } else {
+      try {
+        const questionsJson = localStorage.getItem(`questions_${subtest}`)
+        if (questionsJson) {
+          const questions = JSON.parse(questionsJson)
+          counts[subtest] = questions.length
+        } else {
+          counts[subtest] = 0
+        }
+      } catch (error) {
+        console.error(`Error parsing questions for ${subtest}:`, error)
         counts[subtest] = 0
       }
     })
@@ -256,34 +252,65 @@ export default function ExamPage() {
     }
   }
 
-  // Setup idle detection
+  // Fix the idle detection to avoid false positives
+  // Replace the setupIdleDetection function with this improved version:
+
+  // Improve the idle detection logic to prevent false positives
+  // Fix the timer reset issue when navigating between questions
+
+  // Update the setupIdleDetection function to be more accurate
   const setupIdleDetection = () => {
     const resetIdleTimer = () => {
       if (idleTimer) clearTimeout(idleTimer)
 
-      const now = Date.now()
-      // Only check for idle every 5 minutes instead of 60 seconds
-      if (now - lastIdleCheck > 5 * 60 * 1000) {
-        setLastIdleCheck(now)
-
-        // Only set idle timer if user is not actively answering or reading
-        if (!document.activeElement || !document.activeElement.classList.contains("question-interaction")) {
-          setIdleTimer(
-            setTimeout(
-              () => {
+      // Only set a new idle timer if we're not already showing the warning
+      if (!idleWarning) {
+        // Use a longer timeout (10 minutes instead of 5)
+        setIdleTimer(
+          setTimeout(
+            () => {
+              // Check if there's been any user activity in the last 5 minutes
+              // before showing the warning
+              const now = Date.now()
+              if (now - lastIdleCheck > 5 * 60 * 1000) {
                 setIdleWarning(true)
-              },
-              5 * 60 * 1000,
-            ), // Changed to 5 minutes
-          )
-        }
+              }
+            },
+            10 * 60 * 1000,
+          ), // 10 minutes
+        )
       }
+
+      // Update the last activity timestamp
+      setLastIdleCheck(Date.now())
     }
 
-    // Reset timer on user activity
-    const events = ["mousedown", "mousemove", "keypress", "scroll", "touchstart"]
+    // Track more user events to better detect activity
+    const events = [
+      "mousedown",
+      "mousemove",
+      "mouseup",
+      "keydown",
+      "keypress",
+      "keyup",
+      "touchstart",
+      "touchmove",
+      "touchend",
+      "scroll",
+      "click",
+      "focus",
+      "blur",
+    ]
+
+    // Add event listeners with a debounce mechanism
+    let debounceTimer: NodeJS.Timeout | null = null
+    const debouncedResetTimer = () => {
+      if (debounceTimer) clearTimeout(debounceTimer)
+      debounceTimer = setTimeout(resetIdleTimer, 1000) // 1 second debounce
+    }
+
     events.forEach((event) => {
-      document.addEventListener(event, resetIdleTimer, true)
+      document.addEventListener(event, debouncedResetTimer, { passive: true })
     })
 
     // Initial setup
@@ -292,8 +319,9 @@ export default function ExamPage() {
     // Cleanup
     return () => {
       if (idleTimer) clearTimeout(idleTimer)
+      if (debounceTimer) clearTimeout(debounceTimer)
       events.forEach((event) => {
-        document.removeEventListener(event, resetIdleTimer, true)
+        document.removeEventListener(event, debouncedResetTimer)
       })
     }
   }
@@ -537,6 +565,16 @@ export default function ExamPage() {
     router.push("/confirm")
   }
 
+  // Handle exit confirmation
+  const handleExitExam = () => {
+    setShowExitConfirm(true)
+  }
+
+  // Confirm exit and go back to home
+  const confirmExit = () => {
+    router.push("/")
+  }
+
   // Return with error handling
   if (error) {
     return (
@@ -607,6 +645,23 @@ export default function ExamPage() {
       )}
 
       <main className="container mx-auto p-4">
+        {/* Back button */}
+        <div className="flex justify-between mb-4">
+          <Button variant="outline" size="sm" className="flex items-center gap-1" onClick={handleExitExam}>
+            <ArrowLeft className="h-4 w-4" />
+            Kembali ke Menu
+          </Button>
+
+          <Button
+            variant="outline"
+            size="sm"
+            className="flex items-center gap-1"
+            onClick={() => router.push("/confirm")}
+          >
+            Selesai Ujian
+          </Button>
+        </div>
+
         {/* Mobile navigation - visible only on mobile */}
         {isMobile && (
           <div className="mb-4 bg-white p-3 rounded-lg shadow-md">
@@ -738,6 +793,26 @@ export default function ExamPage() {
           </div>
         </div>
       </main>
+
+      {/* Exit confirmation dialog */}
+      {showExitConfirm && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+            <h3 className="text-lg font-bold mb-4">Konfirmasi Keluar</h3>
+            <p className="mb-6">
+              Anda yakin ingin keluar dari ujian? Progress Anda akan tetap tersimpan, tetapi timer akan terus berjalan.
+            </p>
+            <div className="flex justify-end gap-2">
+              <Button variant="outline" onClick={() => setShowExitConfirm(false)}>
+                Batal
+              </Button>
+              <Button variant="destructive" onClick={confirmExit}>
+                Keluar
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

@@ -10,7 +10,7 @@ import { Label } from "@/components/ui/label"
 import { Slider } from "@/components/ui/slider"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Switch } from "@/components/ui/switch"
-import { Shuffle } from "lucide-react"
+import { Shuffle, ArrowLeft } from "lucide-react"
 import { getQuestionsFromBank } from "@/lib/questions/utils"
 
 export default function MiniPracticePage() {
@@ -93,7 +93,6 @@ export default function MiniPracticePage() {
       try {
         const questions = getQuestionsFromBank(selectedSubtest, questionCount)
 
-
         // Randomize questions if enabled
         if (randomizeQuestions && questions.length >= 2) {
           const shuffled = [...questions].sort(() => Math.random() - 0.5)
@@ -126,6 +125,14 @@ export default function MiniPracticePage() {
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-2xl">
+      {/* Back button */}
+      <div className="mb-4">
+        <Button variant="outline" size="sm" className="flex items-center gap-1" onClick={() => router.push("/")}>
+          <ArrowLeft className="h-4 w-4" />
+          Kembali ke Beranda
+        </Button>
+      </div>
+
       <Card className="border-0 shadow-lg bg-gradient-to-b from-gray-50 to-white">
         <CardHeader className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-t-lg">
           <CardTitle className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">

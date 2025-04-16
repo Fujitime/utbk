@@ -23,7 +23,7 @@ interface QuestionRendererProps {
   currentQuestionIndex: number
 }
 
-// Fix potential overflow issues in the question renderer
+// Perbaikan untuk mengatasi masalah tampilan soal
 export function QuestionRenderer({
   question,
   selectedAnswer,
@@ -90,17 +90,17 @@ export function QuestionRenderer({
 
       {/* Question text with MathJax support */}
       <MathJaxContext config={mathJaxConfig}>
-        <div className="text-gray-800 mb-4 break-words">
+        <div className="text-gray-800 mb-6 break-words leading-relaxed">
           <MathJax>{question.text}</MathJax>
         </div>
 
         {/* Image/Diagram/Map rendering */}
         {hasImage && (
-          <div className="my-4 flex justify-center">
+          <div className="my-6 flex justify-center">
             <div className="relative max-w-full overflow-auto">
               <Image
                 src={question.image || question.diagram || question.map}
-                alt={question.image || question.diagram || question.map}
+                alt="Gambar soal"
                 width={600}
                 height={400}
                 className="object-contain rounded-md border border-gray-200 max-w-full"
@@ -112,13 +112,13 @@ export function QuestionRenderer({
         {/* Render different question types */}
         {question.type === "multiple" ? (
           // Multiple choice (checkbox)
-          <div className="space-y-3">
+          <div className="space-y-4">
             {question.options && question.options.length > 0 ? (
               question.options.map((option: any) => (
                 <div
                   key={option.id}
                   className={cn(
-                    "flex items-center rounded-lg border p-4 transition-colors duration-300 question-interaction",
+                    "flex items-start rounded-lg border p-4 transition-colors duration-300 question-option",
                     localSelectedAnswers.includes(option.id) && "bg-blue-50 border-blue-200",
                   )}
                 >
@@ -126,7 +126,7 @@ export function QuestionRenderer({
                     id={`option-${option.id}`}
                     checked={localSelectedAnswers.includes(option.id)}
                     onCheckedChange={() => handleCheckboxChange(option.id)}
-                    className="mr-3 question-interaction"
+                    className="mr-3 mt-1 question-interaction"
                   />
                   <Label
                     htmlFor={`option-${option.id}`}
@@ -159,19 +159,23 @@ export function QuestionRenderer({
           </div>
         ) : (
           // Standard single-choice radio buttons
-          <RadioGroup value={selectedAnswer as string} onValueChange={onAnswerSelect} className="space-y-3">
+          <RadioGroup value={selectedAnswer as string} onValueChange={onAnswerSelect} className="space-y-4">
             {question.options && question.options.length > 0 ? (
               question.options.map((option: any) => (
                 <div
                   key={option.id}
                   onClick={() => onAnswerSelect(option.id)}
                   className={cn(
-                    "flex items-center rounded-lg border p-4 transition-colors duration-300 question-interaction",
+                    "flex items-start rounded-lg border p-4 transition-colors duration-300 question-option",
                     selectedAnswer === option.id && "bg-blue-50 border-blue-200 dark:bg-blue-950 dark:border-blue-800",
                   )}
                   data-state={selectedAnswer === option.id ? "selected" : "unselected"}
                 >
-                  <RadioGroupItem value={option.id} id={`option-${option.id}`} className="mr-3 question-interaction" />
+                  <RadioGroupItem
+                    value={option.id}
+                    id={`option-${option.id}`}
+                    className="mr-3 mt-1 question-interaction"
+                  />
                   <Label
                     htmlFor={`option-${option.id}`}
                     className="w-full cursor-pointer question-interaction break-words"

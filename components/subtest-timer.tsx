@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { AlertCircle } from "lucide-react"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 
@@ -21,7 +21,7 @@ export function SubtestTimer({ subtest, onTimeExpired }: SubtestTimerProps) {
     "Penalaran Matematika": 20,
   }
 
-  // Get duration for current subtest
+  // Get duration for current subtest with fallback
   const duration = subtestDurations[subtest] || 30
 
   // Convert to seconds
@@ -29,23 +29,44 @@ export function SubtestTimer({ subtest, onTimeExpired }: SubtestTimerProps) {
 
   const [timeLeft, setTimeLeft] = useState(initialTime)
   const [showWarning, setShowWarning] = useState(false)
+  const timerRef = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
-    // Reset timer when subtest changes
-    setTimeLeft(subtestDurations[subtest] * 60 || 30 * 60)
-    setShowWarning(false)
+    // Clear any existing timer
+    if (timerRef.current) {
+      clearInterval(timerRef.current)
+    }
 
-    // Store the start time and end time
-    const startTime = Date.now()
-    const endTime = startTime + (subtestDurations[subtest] * 60 * 1000 || 30 * 60 * 1000)
+    // Get stored timer state or calculate new time
+    let startTime: number
+    let endTime: number
+    let initialTimeLeft: number
 
-    // Save to localStorage
-    localStorage.setItem(`subtestTimer_${subtest}_start`, startTime.toString())
-    localStorage.setItem(`subtestTimer_${subtest}_end`, endTime.toString())
+    const storedStartTime = localStorage.getItem(`subtestTimer_${subtest}_start`)
+    const storedEndTime = localStorage.getItem(`subtestTimer_${subtest}_end`)
 
-    let animationFrameId: number
+    if (storedStartTime && storedEndTime) {
+      // Resume from stored state
+      startTime = Number.parseInt(storedStartTime)
+      endTime = Number.parseInt(storedEndTime)
+      initialTimeLeft = Math.max(0, Math.floor((endTime - Date.now()) / 1000))
+    } else {
+      // Create new timer
+      startTime = Date.now()
+      endTime = startTime + (subtestDurations[subtest] * 60 * 1000 || 30 * 60 * 1000)
+      initialTimeLeft = subtestDurations[subtest] * 60 || 30 * 60
 
-    const updateTimer = () => {
+      // Save to localStorage
+      localStorage.setItem(`subtestTimer_${subtest}_start`, startTime.toString())
+      localStorage.setItem(`subtestTimer_${subtest}_end`, endTime.toString())
+    }
+
+    // Set initial time left
+    setTimeLeft(initialTimeLeft)
+    setShowWarning(initialTimeLeft <= 120 && initialTimeLeft > 0)
+
+    // Set up interval for timer
+    timerRef.current = setInterval(() => {
       const now = Date.now()
       const remaining = Math.max(0, Math.floor((endTime - now) / 1000))
 
@@ -58,21 +79,17 @@ export function SubtestTimer({ subtest, onTimeExpired }: SubtestTimerProps) {
 
       // Check if time expired
       if (remaining <= 0) {
+        if (timerRef.current) {
+          clearInterval(timerRef.current)
+        }
         onTimeExpired()
-        return
       }
-
-      // Continue the animation frame loop
-      animationFrameId = requestAnimationFrame(updateTimer)
-    }
-
-    // Start the timer
-    animationFrameId = requestAnimationFrame(updateTimer)
+    }, 1000)
 
     // Cleanup
     return () => {
-      if (animationFrameId) {
-        cancelAnimationFrame(animationFrameId)
+      if (timerRef.current) {
+        clearInterval(timerRef.current)
       }
     }
   }, [subtest, onTimeExpired])
@@ -109,17 +126,21 @@ export function SubtestTimer({ subtest, onTimeExpired }: SubtestTimerProps) {
 
 // Function to restore timer state from localStorage
 export function restoreSubtestTimerState(subtest: string): number {
-  const storedStartTime = localStorage.getItem(`subtestTimer_${subtest}_start`)
-  const storedEndTime = localStorage.getItem(`subtestTimer_${subtest}_end`)
+  try {
+    const storedStartTime = localStorage.getItem(`subtestTimer_${subtest}_start`)
+    const storedEndTime = localStorage.getItem(`subtestTimer_${subtest}_end`)
 
-  if (storedStartTime && storedEndTime) {
-    const startTime = Number.parseInt(storedStartTime)
-    const endTime = Number.parseInt(storedEndTime)
-    const now = Date.now()
+    if (storedStartTime && storedEndTime) {
+      const startTime = Number.parseInt(storedStartTime)
+      const endTime = Number.parseInt(storedEndTime)
+      const now = Date.now()
 
-    // Calculate remaining time in seconds
-    const remaining = Math.max(0, Math.floor((endTime - now) / 1000))
-    return remaining
+      // Calculate remaining time in seconds
+      const remaining = Math.max(0, Math.floor((endTime - now) / 1000))
+      return remaining
+    }
+  } catch (error) {
+    console.error("Error restoring subtest timer state:", error)
   }
 
   // Default durations in seconds

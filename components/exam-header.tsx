@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { Clock, User, School } from "lucide-react"
 import { ExamTimer } from "@/components/exam-timer"
 import { SubtestTimer } from "@/components/subtest-timer"
+import { useRouter } from "next/navigation"
 
 interface ExamHeaderProps {
   subtest: string
@@ -11,16 +12,22 @@ interface ExamHeaderProps {
   initialTime: number
   onTimeUpdate: (timeLeft: number) => void
   onTimeExpired: () => void
+  mode?: "mini" | "full"
 }
 
-export function ExamHeader({ subtest, questionNumber, initialTime, onTimeUpdate, onTimeExpired }: ExamHeaderProps) {
+export function ExamHeader({ subtest, questionNumber, initialTime, onTimeUpdate, onTimeExpired, mode = "full" }: ExamHeaderProps) {
   const [userData, setUserData] = useState<any>(null)
+  const router = useRouter()
+  const [showExitConfirm, setShowExitConfirm] = useState(false)
 
   useEffect(() => {
-    // Load user data from localStorage
-    const storedUserData = localStorage.getItem("userData")
-    if (storedUserData) {
-      setUserData(JSON.parse(storedUserData))
+    try {
+      const storedUserData = localStorage.getItem("userData")
+      if (storedUserData) {
+        setUserData(JSON.parse(storedUserData))
+      }
+    } catch (error) {
+      console.error("Error loading user data:", error)
     }
   }, [])
 
@@ -52,7 +59,12 @@ export function ExamHeader({ subtest, questionNumber, initialTime, onTimeUpdate,
             <div className="flex flex-col items-end">
               <div className="flex items-center gap-1">
                 <Clock className="h-4 w-4 text-blue-600" />
-                <ExamTimer initialTime={initialTime} onTimeUpdate={onTimeUpdate} onTimeExpired={onTimeExpired} />
+                <ExamTimer
+                  initialTime={initialTime}
+                  onTimeUpdate={onTimeUpdate}
+                  onTimeExpired={onTimeExpired}
+                  storageKey={`timer-${mode}-tryout`}
+                />
               </div>
               <div className="text-xs text-gray-500">
                 <SubtestTimer subtest={subtest} onTimeExpired={() => {}} />
