@@ -47,7 +47,7 @@ export default function manifest(): MetadataRoute.Manifest {
             purpose: "any",
           },
           {
-            src: "/android-chrome-maskable-192x192.png",
+            src: "/android-chrome-192x192.png",
             sizes: "192x192",
             type: "image/png",
             purpose: "maskable",
@@ -59,12 +59,12 @@ export default function manifest(): MetadataRoute.Manifest {
             purpose: "any",
           },
           {
-            src: "/android-chrome-maskable-512x512.png",
+            src: "/android-chrome-512x512.png",
             sizes: "512x512",
             type: "image/png",
             purpose: "maskable",
           },
-        ],        
+        ],
       },
       {
         name: "Latihan Mini",
@@ -72,7 +72,7 @@ export default function manifest(): MetadataRoute.Manifest {
         description: "Mulai latihan mini UTBK",
         icons: [
           {
-            src: "/icons/mini.png",
+            src: "/icons/minis.png",
             sizes: "96x96",
             type: "image/png",
             purpose: "any",
@@ -85,7 +85,7 @@ export default function manifest(): MetadataRoute.Manifest {
         description: "Lihat hasil terakhir",
         icons: [
           {
-            src: "/icons/results.png",
+            src: "/icons/minis.png",
             sizes: "96x96",
             type: "image/png",
             purpose: "any",
@@ -107,24 +107,36 @@ export default function manifest(): MetadataRoute.Manifest {
         src: "/android-chrome-192x192.png",
         sizes: "192x192",
         type: "image/png",
-        purpose: "any maskable",
+        purpose: "any",
+      },
+      {
+        src: "/android-chrome-192x192.png",
+        sizes: "192x192",
+        type: "image/png",
+        purpose: "maskable",
       },
       {
         src: "/android-chrome-512x512.png",
         sizes: "512x512",
         type: "image/png",
-        purpose: "any maskable",
+        purpose: "any",
+      },
+      {
+        src: "/android-chrome-512x512.png",
+        sizes: "512x512",
+        type: "image/png",
+        purpose: "maskable",
       },
     ],
     screenshots: [
       {
-        src: "/screenshots/home.png",
+        src: "/screenshots/resij.jpg",
         sizes: "1080x1920",
         type: "image/png",
         label: "Halaman Utama UTBK Simulator",
       },
       {
-        src: "/screenshots/exam.png",
+        src: "/screenshots/resij.jpg",
         sizes: "1080x1920",
         type: "image/png",
         label: "Simulasi Ujian UTBK",
