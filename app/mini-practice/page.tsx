@@ -26,6 +26,28 @@ export default function MiniPracticePage() {
   const [apiKeyExists, setApiKeyExists] = useState(false)
   const [randomizeQuestions, setRandomizeQuestions] = useState(false)
 
+  // Add this at the beginning of the component
+  useEffect(() => {
+    // Clear any existing timer data when starting a mini practice
+    localStorage.removeItem("examTimerStart")
+    localStorage.removeItem("examTimerEnd")
+
+    const subtests = [
+      "Penalaran Umum",
+      "Pengetahuan dan Pemahaman Umum",
+      "Kemampuan Memahami Bacaan dan Menulis",
+      "Pengetahuan Kuantitatif",
+      "Literasi dalam Bahasa Indonesia",
+      "Literasi dalam Bahasa Inggris",
+      "Penalaran Matematika",
+    ]
+
+    subtests.forEach((subtest) => {
+      localStorage.removeItem(`subtestTimer_${subtest}_start`)
+      localStorage.removeItem(`subtestTimer_${subtest}_end`)
+    })
+  }, [])
+
   // Check if API key exists in localStorage
   useEffect(() => {
     const storedApiKey = localStorage.getItem("chatgpt-api-key")

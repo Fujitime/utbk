@@ -12,11 +12,15 @@ export const literasiBahasaInggrisQuestions = [
       { id: "A", text: "Digitizing transactions promotes less dependence on physical cash." },
       { id: "B", text: "There is a sense of comfort and familiarity in physical currency." },
       { id: "C", text: "It is the seamlessness of digital payments that allows for financial inclusion." },
-      { id: "D", text: "Cash functions as a physical form of currency, particularly useful in urgent situations or regions lacking robust digital systems." },
+      {
+        id: "D",
+        text: "Cash functions as a physical form of currency, particularly useful in urgent situations or regions lacking robust digital systems.",
+      },
       { id: "E", text: "Embracing cashless options hastily might risk excluding certain segments of society." },
     ],
     correctAnswer: "E",
-    explanation: "Emma Patel menyatakan bahwa meskipun pembayaran digital menawarkan kenyamanan, kita harus mempertimbangkan mereka yang tidak memiliki akses ke layanan perbankan atau teknologi. Dia berpendapat bahwa 'Embracing cashless options hastily might risk excluding certain segments of society' (Mengadopsi opsi tanpa uang tunai secara terburu-buru mungkin berisiko mengecualikan segmen masyarakat tertentu).",
+    explanation:
+      "Emma Patel menyatakan bahwa meskipun pembayaran digital menawarkan kenyamanan, kita harus mempertimbangkan mereka yang tidak memiliki akses ke layanan perbankan atau teknologi. Dia berpendapat bahwa 'Embracing cashless options hastily might risk excluding certain segments of society' (Mengadopsi opsi tanpa uang tunai secara terburu-buru mungkin berisiko mengecualikan segmen masyarakat tertentu).",
   },
   {
     id: 2,
@@ -31,7 +35,8 @@ export const literasiBahasaInggrisQuestions = [
       { id: "E", text: "Harold Thompson, Maria Santos, Emma Patel" },
     ],
     correctAnswer: "D",
-    explanation: "Rachel Chen secara eksplisit menyatakan 'a balance is key' (keseimbangan adalah kunci). Daniel Johnson mengatakan 'I appreciate both perspectives' (Saya menghargai kedua perspektif). Maria Santos menekankan pentingnya uang tunai sebagai cadangan. Ketiganya mendukung penggunaan kedua metode pembayaran.",
+    explanation:
+      "Rachel Chen secara eksplisit menyatakan 'a balance is key' (keseimbangan adalah kunci). Daniel Johnson mengatakan 'I appreciate both perspectives' (Saya menghargai kedua perspektif). Maria Santos menekankan pentingnya uang tunai sebagai cadangan. Ketiganya mendukung penggunaan kedua metode pembayaran.",
   },
   {
     id: 3,
@@ -46,7 +51,8 @@ export const literasiBahasaInggrisQuestions = [
       { id: "E", text: "entirely disappointed" },
     ],
     correctAnswer: "C",
-    explanation: "Harold Thompson refers to digital payment as 'a step forward in efficiency and convenience' and mentions its environmental benefit, reflecting a strongly supportive stance.",
+    explanation:
+      "Harold Thompson refers to digital payment as 'a step forward in efficiency and convenience' and mentions its environmental benefit, reflecting a strongly supportive stance.",
   },
   {
     id: 4,
@@ -61,7 +67,8 @@ export const literasiBahasaInggrisQuestions = [
       { id: "E", text: "entirely disappointed" },
     ],
     correctAnswer: "C",
-    explanation: "Harold Thompson sangat antusias tentang pembayaran digital, menyebutnya sebagai 'a step forward in efficiency and convenience' (langkah maju dalam efisiensi dan kenyamanan) dan menekankan manfaat lingkungannya. Ini menunjukkan sikap yang 'completely enthusiastic' (sepenuhnya antusias).",
+    explanation:
+      "Harold Thompson sangat antusias tentang pembayaran digital, menyebutnya sebagai 'a step forward in efficiency and convenience' (langkah maju dalam efisiensi dan kenyamanan) dan menekankan manfaat lingkungannya. Ini menunjukkan sikap yang 'completely enthusiastic' (sepenuhnya antusias).",
   },
   {
     id: 5,
@@ -71,25 +78,45 @@ export const literasiBahasaInggrisQuestions = [
     options: [
       { id: "A", text: "The transition to a cashless society is a setback in efficiency and convenience." },
       { id: "B", text: "Navigating digital payment poses little to no challenges for senior citizens." },
-      { id: "C", text: "Cash provides a sense of security and autonomy to people who may not have access to banking services." },
-      { id: "D", text: "Embracing both cashless and conventional payment does nothing to promote inclusivity and choice." },
+      {
+        id: "C",
+        text: "Cash provides a sense of security and autonomy to people who may not have access to banking services.",
+      },
+      {
+        id: "D",
+        text: "Embracing both cashless and conventional payment does nothing to promote inclusivity and choice.",
+      },
       { id: "E", text: "Technology cannot be leveraged to improve financial accessibility." },
     ],
     correctAnswer: "C",
-    explanation: "Berdasarkan pendapat Emma Patel dan Maria Santos, uang tunai memberikan rasa keamanan dan otonomi bagi orang-orang yang mungkin tidak memiliki akses ke layanan perbankan. Emma menyebutkan tentang 'those without access to banking services' dan Maria menekankan bahwa uang tunai berfungsi sebagai cadangan dalam situasi darurat.",
+    explanation:
+      "Berdasarkan pendapat Emma Patel dan Maria Santos, uang tunai memberikan rasa keamanan dan otonomi bagi orang-orang yang mungkin tidak memiliki akses ke layanan perbankan. Emma menyebutkan tentang 'those without access to banking services' dan Maria menekankan bahwa uang tunai berfungsi sebagai cadangan dalam situasi darurat.",
   },
   {
     id: 6,
     text: "By digitizing transactions, we reduce the reliance on physical currency, thereby minimizing the environmental impact of printing and distributing bills.' Emma Patel: While digital payments offer convenience, we must consider those without access to banking services or technology. Embracing cashless options hastily might risk excluding certain segments of society.\n\nRachel Chen: I believe a balance is key. Digital payments streamline transactions, but maintaining cash as an option ensures inclusivity and choice.\n\nHarold Thompson: The transition to cashless is a step forward in efficiency and convenience. By digitizing transactions, we reduce the reliance on physical currency, thereby minimizing the environmental impact of printing and distributing bills.\n\nDaniel Johnson: I appreciate both perspectives. Digital payments allow for instant tracking of spending, promoting financial literacy and responsible budgeting. However, cash provides a tangible sense of control for many.\n\nDavid Nguyen: The seamlessness of digital payments allows for financial inclusion, especially in regions where traditional banking infrastructure is limited. Mobile payment solutions can bridge gaps where physical banks cannot.\n\nMaria Santos: There's a sense of comfort and familiarity in physical currency. Cash functions as a backup, particularly useful in urgent situations or regions lacking robust digital systems.\n\nWhich sentence best restates the sentence below?\n\"By digitizing transactions, we reduce the reliance on physical currency, thereby minimizing the environmental impact of printing and distributing bills. \n\nWhich sentence best restates the sentence below?",
     type: "single",
     options: [
-      { id: "A", text: "Digitizing transactions not only reduces reliance on physical currency but also minimizes the environmental impact of printing and distributing bills." },
-      { id: "B", text: "Through digitizing transactions the environmental impact of printing and distributing bills gets more severe." },
-      { id: "C", text: "The environmental impact of printing and distributing bills can only be achieved by reducing dependence on physical currency through digital methods of payment." },
-      { id: "D", text: "Digitizing transactions helps curtail reliance on physical currency which minimizes the environmental impact of printing and distributing bills by a significant degree." },
+      {
+        id: "A",
+        text: "Digitizing transactions not only reduces reliance on physical currency but also minimizes the environmental impact of printing and distributing bills.",
+      },
+      {
+        id: "B",
+        text: "Through digitizing transactions the environmental impact of printing and distributing bills gets more severe.",
+      },
+      {
+        id: "C",
+        text: "The environmental impact of printing and distributing bills can only be achieved by reducing dependence on physical currency through digital methods of payment.",
+      },
+      {
+        id: "D",
+        text: "Digitizing transactions helps curtail reliance on physical currency which minimizes the environmental impact of printing and distributing bills by a significant degree.",
+      },
     ],
     correctAnswer: "D",
-    explanation: "This option best restates the original sentence and maintains the cause-effect relationship accurately. Previous duplicate option removed for clarity.",
+    explanation:
+      "This option best restates the original sentence and maintains the cause-effect relationship accurately. Previous duplicate option removed for clarity.",
   },
   {
     id: 7,
@@ -103,13 +130,14 @@ export const literasiBahasaInggrisQuestions = [
       { id: "E", text: "physical" },
     ],
     correctAnswer: "E",
-    explanation: "Kata 'tangible' dalam konteks ini berarti sesuatu yang dapat dirasakan secara fisik atau nyata. Dari opsi yang diberikan, 'physical' (fisik) adalah yang paling dekat artinya dengan 'tangible'.",
+    explanation:
+      "Kata 'tangible' dalam konteks ini berarti sesuatu yang dapat dirasakan secara fisik atau nyata. Dari opsi yang diberikan, 'physical' (fisik) adalah yang paling dekat artinya dengan 'tangible'.",
   },
   {
     id: 8,
-    text: "Text 1\nIt is an undeniable fact that both computers and the Internet have become one of the most important achievements of modern society. They bring their own revolution in human daily life eliminating the distances and offering immediate and easily access to information and communication. With the continuous development of new technologies, the Internet users are able to communicate anywhere in the world to shop online, use it as an educational tool, work remotely and carry out financial transactions with various services offered by banks. The infinite possibilities that are offered by the Internet can often lead users to abuse it, or to use it for malicious purposes against other users, organizations and public services.\n\nThe human being is often considered as a \"social being.\" Therefore, it is no surprise that the Internet is continuously transformed from a simple tool for publishing information to a mean of social interaction and participation. Social networks are characterized as online services that allow individuals to create a public profile within an entrenched net system. Additionally, the users publish a list of other users with whom share a connection and view and interchange their own lists of connections and those who are created by others in the system. Social networks are a set of interactions and relationships. The term is also used today to describe websites that allow interface between users sharing reviews, photos and other information. The most famous of these websites are Facebook, Twitter, My Space, Skype, OoVoo, LinkedIn, Tumblr, YouTube, TripAdvisor. These websites are virtual communities where people can communicate and develop contacts through them.\n\nA social network is a social structure made up for a number of factors, such as individuals or organizations. On the internet, social networks are a platform that is maintained for the creation of social relations between people, usually as active members of the social network, with common interests or activities.\n\nSocial networking sites are organized sites on the web with more centered character providing in their overwhelming majority, a series of basic and free services such as creating profiles, uploading pictures and videos, commenting on actions taken by other members of the network or group, instant messaging and other more.\n\nText 2\nIt is clear that people spend a large amount of time on the internet at present, and therefore spend less time with actual people. While this use of the Internet has significantly improved the degree of contact available, I strongly believe that it has also had negative effects on the amount and form of social interaction that takes place.\n\nIn terms of enhanced connectivity, the advantages of the Internet are obvious, with people connected across the globe. In the past, it was possible to communicate only by phone or mail, which took time and cost. It also generally meant just keeping in touch with the people you already knew. This has changed drastically with the internet. Online communities that are global in scope have been created by email and social networking sites, and they have fostered contact between people and countries that we would not have considered possible in the not too distant past.\n\nThat said, in my opinion, there is no question that this has had detrimental effects on social interaction. People are spending hours of their time online, chatting, and on forums, particularly the younger generation. While this may be helpful, it is definitely not the same as actual human contact and does not require the same ability. In order to grow their own interpersonal skills, it is crucial that kids have and sustain real friendships. Not only this, if people spend much of their time talking online and not mixing in their neighbourhoods, it can also have detrimental effects on local communities and may contribute to feelings of alienation for those people who do not have a 'real' person to turn to in times of need.\n\nIn conclusion, I believe the internet has certainly been helpful, but there are legitimate reasons to worry about our societies' social interaction. It is critical, therefore, that we maintain a balance between our online lives and our interaction with real human beings.\n\nWhat does the word \"detrimental\" mean in Text 2 Paragraph 3?",
+    text: 'Text 1\nIt is an undeniable fact that both computers and the Internet have become one of the most important achievements of modern society. They bring their own revolution in human daily life eliminating the distances and offering immediate and easily access to information and communication. With the continuous development of new technologies, the Internet users are able to communicate anywhere in the world to shop online, use it as an educational tool, work remotely and carry out financial transactions with various services offered by banks. The infinite possibilities that are offered by the Internet can often lead users to abuse it, or to use it for malicious purposes against other users, organizations and public services.\n\nThe human being is often considered as a "social being." Therefore, it is no surprise that the Internet is continuously transformed from a simple tool for publishing information to a mean of social interaction and participation. Social networks are characterized as online services that allow individuals to create a public profile within an entrenched net system. Additionally, the users publish a list of other users with whom share a connection and view and interchange their own lists of connections and those who are created by others in the system. Social networks are a set of interactions and relationships. The term is also used today to describe websites that allow interface between users sharing reviews, photos and other information. The most famous of these websites are Facebook, Twitter, My Space, Skype, OoVoo, LinkedIn, Tumblr, YouTube, TripAdvisor. These websites are virtual communities where people can communicate and develop contacts through them.\n\nA social network is a social structure made up for a number of factors, such as individuals or organizations. On the internet, social networks are a platform that is maintained for the creation of social relations between people, usually as active members of the social network, with common interests or activities.\n\nSocial networking sites are organized sites on the web with more centered character providing in their overwhelming majority, a series of basic and free services such as creating profiles, uploading pictures and videos, commenting on actions taken by other members of the network or group, instant messaging and other more.\n\nText 2\nIt is clear that people spend a large amount of time on the internet at present, and therefore spend less time with actual people. While this use of the Internet has significantly improved the degree of contact available, I strongly believe that it has also had negative effects on the amount and form of social interaction that takes place.\n\nIn terms of enhanced connectivity, the advantages of the Internet are obvious, with people connected across the globe. In the past, it was possible to communicate only by phone or mail, which took time and cost. It also generally meant just keeping in touch with the people you already knew. This has changed drastically with the internet. Online communities that are global in scope have been created by email and social networking sites, and they have fostered contact between people and countries that we would not have considered possible in the not too distant past.\n\nThat said, in my opinion, there is no question that this has had detrimental effects on social interaction. People are spending hours of their time online, chatting, and on forums, particularly the younger generation. While this may be helpful, it is definitely not the same as actual human contact and does not require the same ability. In order to grow their own interpersonal skills, it is crucial that kids have and sustain real friendships. Not only this, if people spend much of their time talking online and not mixing in their neighbourhoods, it can also have detrimental effects on local communities and may contribute to feelings of alienation for those people who do not have a \'real\' person to turn to in times of need.\n\nIn conclusion, I believe the internet has certainly been helpful, but there are legitimate reasons to worry about our societies\' social interaction. It is critical, therefore, that we maintain a balance between our online lives and our interaction with real human beings.\n\nWhat does the word "detrimental" mean in Text 2 Paragraph 3?',
     type: "single",
- options: [
+    options: [
       { id: "A", text: "Advantageous" },
       { id: "B", text: "Fleeting" },
       { id: "C", text: "Harmful" },
@@ -131,7 +159,8 @@ export const literasiBahasaInggrisQuestions = [
       { id: "E", text: "Text 1 highlights the transformative role of the internet in connecting people globally." },
     ],
     correctAnswer: "E",
-    explanation: "Teks 1 menekankan peran transformatif internet dalam menghubungkan orang secara global. Ini disebutkan dalam kalimat pertama dan kedua yang menjelaskan bagaimana internet telah merevolusi kehidupan sehari-hari dengan menghilangkan jarak dan menawarkan akses mudah ke informasi dan komunikasi.",
+    explanation:
+      "Teks 1 menekankan peran transformatif internet dalam menghubungkan orang secara global. Ini disebutkan dalam kalimat pertama dan kedua yang menjelaskan bagaimana internet telah merevolusi kehidupan sehari-hari dengan menghilangkan jarak dan menawarkan akses mudah ke informasi dan komunikasi.",
   },
   {
     id: 10,
@@ -141,11 +170,15 @@ export const literasiBahasaInggrisQuestions = [
       { id: "A", text: "highlight the negative effects of excessive internet usage" },
       { id: "B", text: "argue for the superiority of online interactions over face-to-face interactions" },
       { id: "C", text: "emphasize the importance of maintaining a balance between online and offline interactions" },
-      { id: "D", text: "discuss the transformative role of the internet in enhancing communication and social interaction" },
+      {
+        id: "D",
+        text: "discuss the transformative role of the internet in enhancing communication and social interaction",
+      },
       { id: "E", text: "critique the lack of genuine human interaction in online communities" },
     ],
     correctAnswer: "D",
-    explanation: "Tujuan penulis dalam menulis Teks 1 adalah untuk membahas peran transformatif internet dalam meningkatkan komunikasi dan interaksi sosial. Teks ini berfokus pada bagaimana internet telah merevolusi kehidupan sehari-hari dan bagaimana jejaring sosial telah menjadi platform untuk interaksi sosial dan partisipasi.",
+    explanation:
+      "Tujuan penulis dalam menulis Teks 1 adalah untuk membahas peran transformatif internet dalam meningkatkan komunikasi dan interaksi sosial. Teks ini berfokus pada bagaimana internet telah merevolusi kehidupan sehari-hari dan bagaimana jejaring sosial telah menjadi platform untuk interaksi sosial dan partisipasi.",
   },
   {
     id: 11,
@@ -153,17 +186,30 @@ export const literasiBahasaInggrisQuestions = [
     type: "single",
     options: [
       { id: "A", text: "The internet has revolutionized the way people communicate and connect globally." },
-      { id: "B", text: "Maintaining a balance between online activities and real-life interactions is crucial for personal development." },
-      { id: "C", text: "Social networking sites play a significant role in fostering global connectivity and communication." },
-      { id: "D", text: "Excessive internet usage can have harmful effects on social interaction and interpersonal skills." },
-      { id: "E", text: "Concerns exist regarding the impact of internet usage on society's social interaction and community cohesion." },
+      {
+        id: "B",
+        text: "Maintaining a balance between online activities and real-life interactions is crucial for personal development.",
+      },
+      {
+        id: "C",
+        text: "Social networking sites play a significant role in fostering global connectivity and communication.",
+      },
+      {
+        id: "D",
+        text: "Excessive internet usage can have harmful effects on social interaction and interpersonal skills.",
+      },
+      {
+        id: "E",
+        text: "Concerns exist regarding the impact of internet usage on society's social interaction and community cohesion.",
+      },
     ],
     correctAnswer: "E",
-    explanation: "Ide utama Teks 2 adalah kekhawatiran tentang dampak penggunaan internet terhadap interaksi sosial masyarakat dan kohesi komunitas. Penulis mengakui manfaat internet tetapi menekankan kekhawatiran tentang dampak negatifnya pada interaksi sosial dan menyimpulkan perlunya keseimbangan.",
+    explanation:
+      "Ide utama Teks 2 adalah kekhawatiran tentang dampak penggunaan internet terhadap interaksi sosial masyarakat dan kohesi komunitas. Penulis mengakui manfaat internet tetapi menekankan kekhawatiran tentang dampak negatifnya pada interaksi sosial dan menyimpulkan perlunya keseimbangan.",
   },
   {
     id: 12,
-    text: "Text 1\nIt is an undeniable fact that both computers and the Internet have become one of the most important achievements of modern society. They bring their own revolution in human daily life eliminating the distances and offering immediate and easily access to information and communication. With the continuous development of new technologies, the Internet users are able to communicate anywhere in the world to shop online, use it as an educational tool, work remotely and carry out financial transactions with various services offered by banks. The infinite possibilities that are offered by the Internet can often lead users to abuse it, or to use it for malicious purposes against other users, organizations and public services.\n\nThe human being is often considered as a \"social being.\" Therefore, it is no surprise that the Internet is continuously transformed from a simple tool for publishing information to a mean of social interaction and participation. Social networks are characterized as online services that allow individuals to create a public profile within an entrenched net system. Additionally, the users publish a list of other users with whom share a connection and view and interchange their own lists of connections and those who are created by others in the system. Social networks are a set of interactions and relationships. The term is also used today to describe websites that allow interface between users sharing reviews, photos and other information. The most famous of these websites are Facebook, Twitter, My Space, Skype, OoVoo, LinkedIn, Tumblr, YouTube, TripAdvisor. These websites are virtual communities where people can communicate and develop contacts through them.\n\nA social network is a social structure made up for a number of factors, such as individuals or organizations. On the internet, social networks are a platform that is maintained for the creation of social relations between people, usually as active members of the social network, with common interests or activities.\n\nSocial networking sites are organized sites on the web with more centered character providing in their overwhelming majority, a series of basic and free services such as creating profiles, uploading pictures and videos, commenting on actions taken by other members of the network or group, instant messaging and other more.\n\nText 2\nIt is clear that people spend a large amount of time on the internet at present, and therefore spend less time with actual people. While this use of the Internet has significantly improved the degree of contact available, I strongly believe that it has also had negative effects on the amount and form of social interaction that takes place.\n\nIn terms of enhanced connectivity, the advantages of the Internet are obvious, with people connected across the globe. In the past, it was possible to communicate only by phone or mail, which took time and cost. It also generally meant just keeping in touch with the people you already knew. This has changed drastically with the internet. Online communities that are global in scope have been created by email and social networking sites, and they have fostered contact between people and countries that we would not have considered possible in the not too distant past.\n\nThat said, in my opinion, there is no question that this has had detrimental effects on social interaction. People are spending hours of their time online, chatting, and on forums, particularly the younger generation. While this may be helpful, it is definitely not the same as actual human contact and does not require the same ability. In order to grow their own interpersonal skills, it is crucial that kids have and sustain real friendships. Not only this, if people spend much of their time talking online and not mixing in their neighbourhoods, it can also have detrimental effects on local communities and may contribute to feelings of alienation for those people who do not have a 'real' person to turn to in times of need.\n\nIn conclusion, I believe the internet has certainly been helpful, but there are legitimate reasons to worry about our societies' social interaction. It is critical, therefore, that we maintain a balance between our online lives and our interaction with real human beings.\n\nWhat does the author mean by \"enhanced connectivity\" in Text 2?",
+    text: 'Text 1\nIt is an undeniable fact that both computers and the Internet have become one of the most important achievements of modern society. They bring their own revolution in human daily life eliminating the distances and offering immediate and easily access to information and communication. With the continuous development of new technologies, the Internet users are able to communicate anywhere in the world to shop online, use it as an educational tool, work remotely and carry out financial transactions with various services offered by banks. The infinite possibilities that are offered by the Internet can often lead users to abuse it, or to use it for malicious purposes against other users, organizations and public services.\n\nThe human being is often considered as a "social being." Therefore, it is no surprise that the Internet is continuously transformed from a simple tool for publishing information to a mean of social interaction and participation. Social networks are characterized as online services that allow individuals to create a public profile within an entrenched net system. Additionally, the users publish a list of other users with whom share a connection and view and interchange their own lists of connections and those who are created by others in the system. Social networks are a set of interactions and relationships. The term is also used today to describe websites that allow interface between users sharing reviews, photos and other information. The most famous of these websites are Facebook, Twitter, My Space, Skype, OoVoo, LinkedIn, Tumblr, YouTube, TripAdvisor. These websites are virtual communities where people can communicate and develop contacts through them.\n\nA social network is a social structure made up for a number of factors, such as individuals or organizations. On the internet, social networks are a platform that is maintained for the creation of social relations between people, usually as active members of the social network, with common interests or activities.\n\nSocial networking sites are organized sites on the web with more centered character providing in their overwhelming majority, a series of basic and free services such as creating profiles, uploading pictures and videos, commenting on actions taken by other members of the network or group, instant messaging and other more.\n\nText 2\nIt is clear that people spend a large amount of time on the internet at present, and therefore spend less time with actual people. While this use of the Internet has significantly improved the degree of contact available, I strongly believe that it has also had negative effects on the amount and form of social interaction that takes place.\n\nIn terms of enhanced connectivity, the advantages of the Internet are obvious, with people connected across the globe. In the past, it was possible to communicate only by phone or mail, which took time and cost. It also generally meant just keeping in touch with the people you already knew. This has changed drastically with the internet. Online communities that are global in scope have been created by email and social networking sites, and they have fostered contact between people and countries that we would not have considered possible in the not too distant past.\n\nThat said, in my opinion, there is no question that this has had detrimental effects on social interaction. People are spending hours of their time online, chatting, and on forums, particularly the younger generation. While this may be helpful, it is definitely not the same as actual human contact and does not require the same ability. In order to grow their own interpersonal skills, it is crucial that kids have and sustain real friendships. Not only this, if people spend much of their time talking online and not mixing in their neighbourhoods, it can also have detrimental effects on local communities and may contribute to feelings of alienation for those people who do not have a \'real\' person to turn to in times of need.\n\nIn conclusion, I believe the internet has certainly been helpful, but there are legitimate reasons to worry about our societies\' social interaction. It is critical, therefore, that we maintain a balance between our online lives and our interaction with real human beings.\n\nWhat does the author mean by "enhanced connectivity" in Text 2?',
     type: "single",
     options: [
       { id: "A", text: "Improved access to entertainment content on the internet" },
@@ -173,21 +219,38 @@ export const literasiBahasaInggrisQuestions = [
       { id: "E", text: "Enhanced security measures for online transactions and communications" },
     ],
     correctAnswer: "B",
-    explanation: "Dalam Teks 2, 'enhanced connectivity' mengacu pada peningkatan kemampuan untuk berkomunikasi dan terhubung dengan orang lain secara global. Ini dijelaskan dalam paragraf kedua yang menyebutkan 'people connected across the globe' dan bagaimana internet telah memungkinkan kontak antara orang dan negara yang sebelumnya tidak mungkin.",
+    explanation:
+      "Dalam Teks 2, 'enhanced connectivity' mengacu pada peningkatan kemampuan untuk berkomunikasi dan terhubung dengan orang lain secara global. Ini dijelaskan dalam paragraf kedua yang menyebutkan 'people connected across the globe' dan bagaimana internet telah memungkinkan kontak antara orang dan negara yang sebelumnya tidak mungkin.",
   },
   {
     id: 13,
     text: "Text 1\nIt is an undeniable fact that both computers and the Internet have become one of the most important achievements of modern society. They bring their own revolution in human daily life eliminating the distances and offering immediate and easily access to information and communication. With the continuous development of new technologies, the Internet users are able to communicate anywhere in the world to shop online, use it as an educational tool, work remotely and carry out financial transactions with various services offered by banks. The infinite possibilities that are offered by the Internet can often lead users to abuse it, or to use it for malicious purposes against other users, organizations and public services.\n\nThe human being is often considered as a \"social being.\" Therefore, it is no surprise that the Internet is continuously transformed from a simple tool for publishing information to a mean of social interaction and participation. Social networks are characterized as online services that allow individuals to create a public profile within an entrenched net system. Additionally, the users publish a list of other users with whom share a connection and view and interchange their own lists of connections and those who are created by others in the system. Social networks are a set of interactions and relationships. The term is also used today to describe websites that allow interface between users sharing reviews, photos and other information. The most famous of these websites are Facebook, Twitter, My Space, Skype, OoVoo, LinkedIn, Tumblr, YouTube, TripAdvisor. These websites are virtual communities where people can communicate and develop contacts through them.\n\nA social network is a social structure made up for a number of factors, such as individuals or organizations. On the internet, social networks are a platform that is maintained for the creation of social relations between people, usually as active members of the social network, with common interests or activities.\n\nSocial networking sites are organized sites on the web with more centered character providing in their overwhelming majority, a series of basic and free services such as creating profiles, uploading pictures and videos, commenting on actions taken by other members of the network or group, instant messaging and other more.\n\nText 2\nIt is clear that people spend a large amount of time on the internet at present, and therefore spend less time with actual people. While this use of the Internet has significantly improved the degree of contact available, I strongly believe that it has also had negative effects on the amount and form of social interaction that takes place.\n\nIn terms of enhanced connectivity, the advantages of the Internet are obvious, with people connected across the globe. In the past, it was possible to communicate only by phone or mail, which took time and cost. It also generally meant just keeping in touch with the people you already knew. This has changed drastically with the internet. Online communities that are global in scope have been created by email and social networking sites, and they have fostered contact between people and countries that we would not have considered possible in the not too distant past.\n\nThat said, in my opinion, there is no question that this has had detrimental effects on social interaction. People are spending hours of their time online, chatting, and on forums, particularly the younger generation. While this may be helpful, it is definitely not the same as actual human contact and does not require the same ability. In order to grow their own interpersonal skills, it is crucial that kids have and sustain real friendships. Not only this, if people spend much of their time talking online and not mixing in their neighbourhoods, it can also have detrimental effects on local communities and may contribute to feelings of alienation for those people who do not have a 'real' person to turn to in times of need.\n\nIn conclusion, I believe the internet has certainly been helpful, but there are legitimate reasons to worry about our societies' social interaction. It is critical, therefore, that we maintain a balance between our online lives and our interaction with real human beings.\n\nHow would Text 1 differ from Text 2 despite discussing the same topic?",
     type: "single",
     options: [
-      { id: "A", text: "Text 1 focuses on the positive aspects of social networking and online communities, while Text 2 takes a more critical stance towards the internet's impact on social interaction." },
-      { id: "B", text: "Text 1 emphasizes the negative effects of excessive internet usage on interpersonal skills, while Text 2 highlights the transformative role of the internet in connecting people globally." },
-      { id: "C", text: "Text 1 argues that online interactions are superior to face-to-face interactions, while Text 2 expresses concerns about the decline of genuine human interaction due to excessive internet use." },
-      { id: "D", text: "Text 1 suggests that the internet fosters stronger local communities, while Text 2 discusses the potential for online interactions to lead to feelings of alienation." },
-      { id: "E", text: "Text 1 discusses the benefits of online communication for education and work, while Text 2 focuses on the negative effects of spending excessive time online." },
+      {
+        id: "A",
+        text: "Text 1 focuses on the positive aspects of social networking and online communities, while Text 2 takes a more critical stance towards the internet's impact on social interaction.",
+      },
+      {
+        id: "B",
+        text: "Text 1 emphasizes the negative effects of excessive internet usage on interpersonal skills, while Text 2 highlights the transformative role of the internet in connecting people globally.",
+      },
+      {
+        id: "C",
+        text: "Text 1 argues that online interactions are superior to face-to-face interactions, while Text 2 expresses concerns about the decline of genuine human interaction due to excessive internet use.",
+      },
+      {
+        id: "D",
+        text: "Text 1 suggests that the internet fosters stronger local communities, while Text 2 discusses the potential for online interactions to lead to feelings of alienation.",
+      },
+      {
+        id: "E",
+        text: "Text 1 discusses the benefits of online communication for education and work, while Text 2 focuses on the negative effects of spending excessive time online.",
+      },
     ],
     correctAnswer: "A",
-    explanation: "Teks 1 berfokus pada aspek positif jejaring sosial dan komunitas online, menjelaskan bagaimana internet telah merevolusi kehidupan dan menjadi sarana interaksi sosial. Sementara itu, Teks 2 mengambil sikap yang lebih kritis terhadap dampak internet pada interaksi sosial, menekankan efek merugikan dan pentingnya keseimbangan antara kehidupan online dan interaksi manusia nyata.",
+    explanation:
+      "Teks 1 berfokus pada aspek positif jejaring sosial dan komunitas online, menjelaskan bagaimana internet telah merevolusi kehidupan dan menjadi sarana interaksi sosial. Sementara itu, Teks 2 mengambil sikap yang lebih kritis terhadap dampak internet pada interaksi sosial, menekankan efek merugikan dan pentingnya keseimbangan antara kehidupan online dan interaksi manusia nyata.",
   },
   {
     id: 14,
@@ -200,7 +263,8 @@ export const literasiBahasaInggrisQuestions = [
       { id: "E", text: "common microorganisms" },
     ],
     correctAnswer: "D",
-    explanation: "'Foreign invaders' in the medical context most accurately refers to 'infectious pathogens'. Ambiguous option 'exogenous threats' was removed.",
+    explanation:
+      "'Foreign invaders' in the medical context most accurately refers to 'infectious pathogens'. Ambiguous option 'exogenous threats' was removed.",
   },
   {
     id: 15,
@@ -214,7 +278,8 @@ export const literasiBahasaInggrisQuestions = [
       { id: "E", text: "secretoglobins" },
     ],
     correctAnswer: "B",
-    explanation: "Frasa 'this protein' dalam paragraf 4 Teks 2 mengacu pada 'secretoglobin called SCGB1D2' yang disebutkan di akhir paragraf 3. Ini adalah protein spesifik (SCGB1D2) yang merupakan jenis secretoglobin.",
+    explanation:
+      "Frasa 'this protein' dalam paragraf 4 Teks 2 mengacu pada 'secretoglobin called SCGB1D2' yang disebutkan di akhir paragraf 3. Ini adalah protein spesifik (SCGB1D2) yang merupakan jenis secretoglobin.",
   },
   {
     id: 16,
@@ -228,7 +293,8 @@ export const literasiBahasaInggrisQuestions = [
       { id: "E", text: "memory issues" },
     ],
     correctAnswer: "A",
-    explanation: "According to Text 2 paragraph 1, persistent symptoms include fatigue, memory issues, sleep disruption, and body pain. The bulls-eye rash is mentioned as an early symptom of Lyme disease and not as a long-lasting one.",
+    explanation:
+      "According to Text 2 paragraph 1, persistent symptoms include fatigue, memory issues, sleep disruption, and body pain. The bulls-eye rash is mentioned as an early symptom of Lyme disease and not as a long-lasting one.",
   },
   {
     id: 17,

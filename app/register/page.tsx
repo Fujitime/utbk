@@ -70,8 +70,8 @@ export default function RegisterPage() {
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-md">
-            {/* Back button */}
-            <div className="mb-4">
+      {/* Back button */}
+      <div className="mb-4">
         <Button variant="outline" size="sm" className="flex items-center gap-1" onClick={() => router.push("/")}>
           <ArrowLeft className="h-4 w-4" />
           Kembali ke Beranda

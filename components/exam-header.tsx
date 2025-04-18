@@ -15,7 +15,14 @@ interface ExamHeaderProps {
   mode?: "mini" | "full"
 }
 
-export function ExamHeader({ subtest, questionNumber, initialTime, onTimeUpdate, onTimeExpired, mode = "full" }: ExamHeaderProps) {
+export function ExamHeader({
+  subtest,
+  questionNumber,
+  initialTime,
+  onTimeUpdate,
+  onTimeExpired,
+  mode = "full",
+}: ExamHeaderProps) {
   const [userData, setUserData] = useState<any>(null)
   const router = useRouter()
   const [showExitConfirm, setShowExitConfirm] = useState(false)

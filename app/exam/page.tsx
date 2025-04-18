@@ -12,6 +12,8 @@ import { QuestionNavigation } from "@/components/question-navigation"
 import { QuestionRenderer } from "@/components/question-renderer"
 import { Sheet, SheetContent } from "@/components/ui/sheet"
 import { ExamHeader } from "@/components/exam-header"
+import { clearExamTimerData } from "@/components/exam-timer"
+import { clearAllSubtestTimerData } from "@/components/subtest-timer"
 
 // Update the component to handle errors properly
 export default function ExamPage() {
@@ -34,6 +36,12 @@ export default function ExamPage() {
   const [sheetOpen, setSheetOpen] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [showExitConfirm, setShowExitConfirm] = useState(false)
+
+  // Function to clear all timer data
+  const clearAllTimerData = () => {
+    clearExamTimerData()
+    clearAllSubtestTimerData()
+  }
 
   // Check if a question is answered
   const isAnswered = (subtest: string, questionIndex: number): boolean => {
@@ -560,8 +568,10 @@ export default function ExamPage() {
     localStorage.setItem("tryoutSession", JSON.stringify(updatedSession))
   }
 
-  // Handle time expired
+  // Update the handleTimeExpired function
   const handleTimeExpired = () => {
+    // Clear timer data before navigating
+    clearAllTimerData()
     router.push("/confirm")
   }
 
@@ -570,8 +580,10 @@ export default function ExamPage() {
     setShowExitConfirm(true)
   }
 
-  // Confirm exit and go back to home
+  // Update the confirmExit function
   const confirmExit = () => {
+    // Clear timer data before navigating
+    clearAllTimerData()
     router.push("/")
   }
 
@@ -652,11 +664,16 @@ export default function ExamPage() {
             Kembali ke Menu
           </Button>
 
+          {/* Update the "Selesai Ujian" button click handler */}
           <Button
             variant="outline"
             size="sm"
             className="flex items-center gap-1"
-            onClick={() => router.push("/confirm")}
+            onClick={() => {
+              // Clear timer data before navigating
+              clearAllTimerData()
+              router.push("/confirm")
+            }}
           >
             Selesai Ujian
           </Button>

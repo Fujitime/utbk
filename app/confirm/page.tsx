@@ -29,6 +29,29 @@ export default function ConfirmPage() {
   const [showConfirmDialog, setShowConfirmDialog] = useState(false)
   const [showEmergencyDialog, setShowEmergencyDialog] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  // Add this function to clear all timer data
+  const clearAllTimerData = () => {
+    localStorage.removeItem("examTimerStart")
+    localStorage.removeItem("examTimerEnd")
+
+    const subtests = [
+      "Penalaran Umum",
+      "Pengetahuan dan Pemahaman Umum",
+      "Kemampuan Memahami Bacaan dan Menulis",
+      "Pengetahuan Kuantitatif",
+      "Literasi dalam Bahasa Indonesia",
+      "Literasi dalam Bahasa Inggris",
+      "Penalaran Matematika",
+    ]
+
+    subtests.forEach((subtest) => {
+      localStorage.removeItem(`subtestTimer_${subtest}_start`)
+      localStorage.removeItem(`subtestTimer_${subtest}_end`)
+    })
+  }
 
   useEffect(() => {
     try {
@@ -120,13 +143,27 @@ export default function ConfirmPage() {
     }
   }, [])
 
+  // Update the handleSubmit function to clear timer data
   const handleSubmit = () => {
-    // If there are unanswered questions, show emergency dialog
-    if (stats.unanswered > 0) {
-      setShowEmergencyDialog(true)
-    } else {
-      // Otherwise show regular confirm dialog
-      setShowConfirmDialog(true)
+    if (!session) return
+
+    setSubmitting(true)
+
+    try {
+      // Clear all timer data
+      clearAllTimerData()
+
+      // Mark session as submitted
+      const updatedSession = { ...session }
+      updatedSession.submitted = true
+      localStorage.setItem("tryoutSession", JSON.stringify(updatedSession))
+
+      // Navigate to results page
+      router.push("/results")
+    } catch (error) {
+      console.error("Error submitting exam:", error)
+      setError("Terjadi kesalahan saat mengirimkan ujian. Silakan coba lagi.")
+      setSubmitting(false)
     }
   }
 
@@ -142,8 +179,45 @@ export default function ConfirmPage() {
     router.push("/results")
   }
 
+  // Update the handleContinue function to ensure timer data is preserved
   const handleContinue = () => {
     router.push("/exam")
+  }
+
+  // Update the handleRetry function to clear timer data
+  const handleRetry = () => {
+    // Clear timer data
+    clearAllTimerData()
+
+    // Clear session and start a new one
+    localStorage.removeItem("tryoutSession")
+    localStorage.removeItem("flaggedQuestions")
+    localStorage.removeItem("questionsGenerated")
+
+    // Clear all questions
+    const subtests = [
+      "Penalaran Umum",
+      "Pengetahuan dan Pemahaman Umum",
+      "Kemampuan Memahami Bacaan dan Menulis",
+      "Pengetahuan Kuantitatif",
+      "Literasi dalam Bahasa Indonesia",
+      "Literasi dalam Bahasa Inggris",
+      "Penalaran Matematika",
+    ]
+
+    subtests.forEach((subtest) => {
+      localStorage.removeItem(`questions_${subtest}`)
+    })
+
+    // Navigate to appropriate page based on session type
+    const isPracticeMode = session?.isPracticeMode === true
+    if (isPracticeMode) {
+      const mode = localStorage.getItem("questionMode") || "builtin"
+      router.push(`/mini-practice?mode=${mode}`)
+    } else {
+      // Navigate to instructions page
+      router.push("/instructions")
+    }
   }
 
   if (loading) {
@@ -210,10 +284,14 @@ export default function ConfirmPage() {
               <Button variant="outline" onClick={handleContinue}>
                 Kembali ke Ujian
               </Button>
-              <Button onClick={handleSubmit} className="bg-blue-600 hover:bg-blue-700">
-                Kumpulkan Ujian
+              <Button onClick={handleSubmit} className="bg-blue-600 hover:bg-blue-700" disabled={submitting}>
+                {submitting ? "Mengirim..." : "Kumpulkan Ujian"}
+              </Button>
+              <Button variant="destructive" onClick={handleRetry}>
+                Ulangi Ujian
               </Button>
             </div>
+            {error && <div className="text-red-500 mt-4 text-center">{error}</div>}
           </div>
         </CardContent>
       </Card>

@@ -1,100 +1,105 @@
+"use client"
+
 import { useEffect, useState, useRef } from "react"
+
+// Move the function outside the component
+export function clearExamTimerData() {
+  localStorage.removeItem("examTimerStart")
+  localStorage.removeItem("examTimerEnd")
+}
 
 interface ExamTimerProps {
   initialTime: number
   onTimeUpdate: (timeLeft: number) => void
   onTimeExpired: () => void
-  storageKey: string // 💡 new
 }
 
 export function ExamTimer({ initialTime, onTimeUpdate, onTimeExpired }: ExamTimerProps) {
   const [timeLeft, setTimeLeft] = useState(initialTime || 3600) // Default to 1 hour
   const timerRef = useRef<NodeJS.Timeout | null>(null)
-  const hasSavedToLocalRef = useRef(false) // Hindari overwrite localStorage saat re-render
+  const lastUpdateRef = useRef<number>(Date.now())
 
-  // Fungsi untuk reset timer
-  const resetTimer = () => {
-    localStorage.removeItem("examTimerStart")
-    localStorage.removeItem("examTimerEnd")
-  }
-
+  // Update the useEffect to check if initialTime has changed significantly
   useEffect(() => {
-    // Reset timer sebelum memulai
-    resetTimer()
-
-    // Clear timer sebelumnya
+    // Clear timer before setting up a new one
     if (timerRef.current) clearInterval(timerRef.current)
 
-    const validInitialTime = initialTime > 0 ? initialTime : 3600
-
+    // Get stored timer state or calculate new time
     let startTime: number
     let endTime: number
-    let initialTimeLeft: number
+    let currentTimeLeft: number
 
     const storedStartTime = localStorage.getItem("examTimerStart")
     const storedEndTime = localStorage.getItem("examTimerEnd")
+    const now = Date.now()
 
-    // Debug
-    console.log({
-      storedStartTime,
-      storedEndTime,
-      now: Date.now(),
-    })
+    // Check if we should use stored time or reset
+    // If initialTime is significantly different from stored remaining time, reset the timer
+    const shouldResetTimer = () => {
+      if (!storedStartTime || !storedEndTime) return true
 
-    if (storedStartTime && storedEndTime) {
-      startTime = Number.parseInt(storedStartTime)
-      endTime = Number.parseInt(storedEndTime)
+      const storedEndTimeNum = Number.parseInt(storedEndTime, 10)
+      const remainingTime = Math.max(0, Math.floor((storedEndTimeNum - now) / 1000))
 
-      // Jika waktunya sudah lewat, reset timer
-      if (endTime < Date.now()) {
-        localStorage.removeItem("examTimerStart")
-        localStorage.removeItem("examTimerEnd")
-
-        startTime = Date.now()
-        endTime = startTime + validInitialTime * 1000
-        initialTimeLeft = validInitialTime
-        localStorage.setItem("examTimerStart", startTime.toString())
-        localStorage.setItem("examTimerEnd", endTime.toString())
-      } else {
-        initialTimeLeft = Math.max(0, Math.floor((endTime - Date.now()) / 1000))
-      }
-    } else if (!hasSavedToLocalRef.current) {
-      // Buat timer baru
-      startTime = Date.now()
-      endTime = startTime + validInitialTime * 1000
-      initialTimeLeft = validInitialTime
-
-      localStorage.setItem("examTimerStart", startTime.toString())
-      localStorage.setItem("examTimerEnd", endTime.toString())
-      hasSavedToLocalRef.current = true
-    } else {
-      // Fallback
-      startTime = Date.now()
-      endTime = startTime + validInitialTime * 1000
-      initialTimeLeft = validInitialTime
+      // If the difference is more than 5 minutes (300 seconds), reset the timer
+      return Math.abs(remainingTime - initialTime) > 300
     }
 
-    setTimeLeft(initialTimeLeft)
+    if (storedStartTime && storedEndTime && !shouldResetTimer()) {
+      // Resume from stored state
+      startTime = Number.parseInt(storedStartTime, 10)
+      endTime = Number.parseInt(storedEndTime, 10)
 
-    // Mulai interval update tiap detik
+      // Check if timer is still valid
+      if (endTime > now) {
+        currentTimeLeft = Math.max(0, Math.floor((endTime - now) / 1000))
+      } else {
+        // Timer expired, use initial time
+        currentTimeLeft = initialTime > 0 ? initialTime : 3600
+        startTime = now
+        endTime = now + currentTimeLeft * 1000
+
+        // Save new timer state
+        localStorage.setItem("examTimerStart", startTime.toString())
+        localStorage.setItem("examTimerEnd", endTime.toString())
+      }
+    } else {
+      // No stored timer or should reset, create new one
+      currentTimeLeft = initialTime > 0 ? initialTime : 3600
+      startTime = now
+      endTime = now + currentTimeLeft * 1000
+
+      // Save new timer state
+      localStorage.setItem("examTimerStart", startTime.toString())
+      localStorage.setItem("examTimerEnd", endTime.toString())
+    }
+
+    // Set initial time left
+    setTimeLeft(currentTimeLeft)
+    lastUpdateRef.current = now
+
+    // Start interval to update timer
     timerRef.current = setInterval(() => {
-      const now = Date.now()
-      const remaining = Math.max(0, Math.floor((endTime - now) / 1000))
+      const currentTime = Date.now()
+      const elapsedSinceLastUpdate = Math.floor((currentTime - lastUpdateRef.current) / 1000)
 
-      setTimeLeft(remaining)
-      onTimeUpdate(remaining)
+      // Only update if at least 1 second has passed
+      if (elapsedSinceLastUpdate >= 1) {
+        const remaining = Math.max(0, Math.floor((endTime - currentTime) / 1000))
 
-      if (remaining <= 0) {
-        clearInterval(timerRef.current!)
-        onTimeExpired()
+        setTimeLeft(remaining)
+        onTimeUpdate(remaining)
+        lastUpdateRef.current = currentTime
+
+        if (remaining <= 0) {
+          if (timerRef.current) clearInterval(timerRef.current)
+          onTimeExpired()
+        }
       }
-    }, 1000)
+    }, 500) // Check more frequently to avoid drift
 
-    // Cleanup saat unmount
     return () => {
-      if (timerRef.current) {
-        clearInterval(timerRef.current)
-      }
+      if (timerRef.current) clearInterval(timerRef.current)
     }
   }, [initialTime, onTimeUpdate, onTimeExpired])
 
@@ -119,18 +124,20 @@ export function ExamTimer({ initialTime, onTimeUpdate, onTimeExpired }: ExamTime
   return <div className={`font-mono font-semibold ${getTimeColor()}`}>{formatTime(timeLeft)}</div>
 }
 
-// Fungsi untuk restore timer state dari localStorage
+// Improved function to restore timer state from localStorage
 export function restoreTimerState(): number {
   try {
     const storedStartTime = localStorage.getItem("examTimerStart")
     const storedEndTime = localStorage.getItem("examTimerEnd")
 
     if (storedStartTime && storedEndTime) {
-      const startTime = Number.parseInt(storedStartTime)
-      const endTime = Number.parseInt(storedEndTime)
+      const startTime = Number.parseInt(storedStartTime, 10)
+      const endTime = Number.parseInt(storedEndTime, 10)
       const now = Date.now()
-      const remaining = Math.max(0, Math.floor((endTime - now) / 1000))
-      return remaining
+
+      if (endTime > now) {
+        return Math.max(0, Math.floor((endTime - now) / 1000))
+      }
     }
   } catch (error) {
     console.error("Error restoring timer state:", error)

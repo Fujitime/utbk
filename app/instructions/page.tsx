@@ -68,6 +68,26 @@ export default function InstructionsPage() {
       return
     }
 
+    // Clear any existing timer data
+    localStorage.removeItem("examTimerStart")
+    localStorage.removeItem("examTimerEnd")
+
+    // Clear all subtest timers
+    const subtests = [
+      "Penalaran Umum",
+      "Pengetahuan dan Pemahaman Umum",
+      "Kemampuan Memahami Bacaan dan Menulis",
+      "Pengetahuan Kuantitatif",
+      "Literasi dalam Bahasa Indonesia",
+      "Literasi dalam Bahasa Inggris",
+      "Penalaran Matematika",
+    ]
+
+    subtests.forEach((subtest) => {
+      localStorage.removeItem(`subtestTimer_${subtest}_start`)
+      localStorage.removeItem(`subtestTimer_${subtest}_end`)
+    })
+
     // Use default API key if none provided for AI mode
     const finalApiKey = questionMode === "ai" && !apiKey ? DEFAULT_API_KEY : apiKey
 
